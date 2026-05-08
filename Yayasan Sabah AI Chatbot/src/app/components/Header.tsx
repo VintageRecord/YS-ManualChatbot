@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { Menu, X, ChevronDown, ChevronRight } from "lucide-react";
+import { useNavigate, useLocation } from "react-router";
+import { Menu, X, ChevronDown, ChevronRight, Bot } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import logoImg from "../../imports/image.png";
 
@@ -71,10 +72,13 @@ const menuItems = [
       { label: "Video", href: "#media" }
     ]
   },
-  { label: "HUBUNGI", href: "#hubungi" }
+  { label: "HUBUNGI", href: "#hubungi" },
+  { label: "CHATBOT AI", href: "", route: "/chatbot" },
 ];
 
 export function Header() {
+  const navigate = useNavigate();
+  const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
@@ -90,15 +94,32 @@ export function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const closeAll = () => {
+    setIsOpen(false);
+    setActiveDropdown(null);
+    setActiveSubDropdown(null);
+    setMobileDropdown(null);
+    setMobileSubDropdown(null);
+  };
+
   const scrollToSection = (href: string) => {
+    if (location.pathname !== '/') {
+      navigate('/');
+      return;
+    }
     const element = document.querySelector(href);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
-      setIsOpen(false);
-      setActiveDropdown(null);
-      setActiveSubDropdown(null);
-      setMobileDropdown(null);
-      setMobileSubDropdown(null);
+      closeAll();
+    }
+  };
+
+  const handleNavClick = (item: { label: string; href: string; route?: string; submenu?: unknown[] }) => {
+    if (item.route) {
+      navigate(item.route);
+      closeAll();
+    } else if (!item.submenu) {
+      scrollToSection(item.href);
     }
   };
 
@@ -154,15 +175,24 @@ export function Header() {
                     initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.1 }}
-                    onClick={() => !item.submenu && scrollToSection(item.href)}
-                    className="relative px-6 py-2 text-white text-sm tracking-widest overflow-hidden group flex items-center gap-1"
+                    onClick={() => handleNavClick(item)}
+                    className={`relative px-6 py-2 text-white text-sm tracking-widest overflow-hidden group flex items-center gap-1.5 ${
+                      item.route === "/chatbot"
+                        ? "bg-gradient-to-r from-[#d4340e]/80 to-[#8B1A00]/80 rounded-full border border-[#d4340e]/40 backdrop-blur-sm hover:from-[#d4340e] hover:to-[#8B1A00] transition-all"
+                        : ""
+                    }`}
                   >
+                    {item.route === "/chatbot" && <Bot className="w-4 h-4 relative z-10 drop-shadow-lg" />}
                     <span className="relative z-10 drop-shadow-lg">{item.label}</span>
                     {item.submenu && (
                       <ChevronDown className="w-4 h-4 relative z-10 drop-shadow-lg" />
                     )}
-                    <div className="absolute inset-0 bg-gradient-to-r from-[#3E2723] to-[#5D4037] translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
-                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#5D4037] group-hover:w-full transition-all duration-500"></div>
+                    {!item.route && (
+                      <>
+                        <div className="absolute inset-0 bg-gradient-to-r from-[#3E2723] to-[#5D4037] translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+                        <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#5D4037] group-hover:w-full transition-all duration-500"></div>
+                      </>
+                    )}
                   </motion.button>
 
                   {/* Dropdown Menu */}
@@ -271,15 +301,25 @@ export function Header() {
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: index * 0.05 }}
                       onClick={() => {
-                        if (item.submenu) {
+                        if (item.route) {
+                          navigate(item.route);
+                          closeAll();
+                        } else if (item.submenu) {
                           setMobileDropdown(mobileDropdown === item.label ? null : item.label);
                         } else {
                           scrollToSection(item.href);
                         }
                       }}
-                      className="w-full text-left px-4 py-3 text-white hover:bg-gradient-to-r hover:from-[#3E2723] hover:to-[#5D4037] transition-all rounded-lg border-l-4 border-transparent hover:border-white flex items-center justify-between"
+                      className={`w-full text-left px-4 py-3 text-white transition-all rounded-lg flex items-center justify-between ${
+                        item.route === "/chatbot"
+                          ? "bg-gradient-to-r from-[#d4340e]/50 to-[#8B1A00]/50 border border-[#d4340e]/30"
+                          : "hover:bg-gradient-to-r hover:from-[#3E2723] hover:to-[#5D4037] border-l-4 border-transparent hover:border-white"
+                      }`}
                     >
-                      <span>{item.label}</span>
+                      <span className="flex items-center gap-2">
+                        {item.route === "/chatbot" && <Bot className="w-4 h-4" />}
+                        {item.label}
+                      </span>
                       {item.submenu && (
                         <ChevronDown
                           className={`w-4 h-4 transition-transform ${
