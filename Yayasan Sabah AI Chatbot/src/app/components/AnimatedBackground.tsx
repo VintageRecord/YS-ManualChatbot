@@ -18,12 +18,12 @@ export function AnimatedBackground() {
 
     window.onYouTubeIframeAPIReady = () => {
       playerRef.current = new window.YT.Player('background-video', {
-        videoId: 'ExzQo7jPE4E',
+        videoId: 'OpeQnEjLwTk',
         playerVars: {
           autoplay: 1,
           mute: 1,
           loop: 1,
-          playlist: 'ExzQo7jPE4E',
+          playlist: 'OpeQnEjLwTk',
           controls: 0,
           showinfo: 0,
           rel: 0,
