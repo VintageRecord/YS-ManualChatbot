@@ -281,25 +281,21 @@ const CATEGORIES = [
   {
     icon: GraduationCap,
     label: "Biasiswa",
-    color: "from-blue-500 to-blue-700",
     query: "Tentang Biasiswa Yayasan Sabah",
   },
   {
     icon: DollarSign,
     label: "Pinjaman",
-    color: "from-green-500 to-green-700",
     query: "Pinjaman PTPTN",
   },
   {
     icon: FileText,
     label: "Dokumen",
-    color: "from-orange-500 to-orange-700",
     query: "Dokumen Diperlukan",
   },
   {
     icon: HelpCircle,
     label: "FAQ",
-    color: "from-purple-500 to-purple-700",
     query: "Beza biasiswa dan pinjaman",
   },
 ];
@@ -454,17 +450,17 @@ export default function ChatbotPage() {
           <button
             key={cat.label}
             onClick={() => sendMessage(cat.query)}
-            className={`flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r ${cat.color} text-white text-xs font-medium whitespace-nowrap hover:opacity-90 active:scale-95 transition-all`}
+            className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 hover:bg-[#1a56db]/30 border border-white/15 hover:border-[#1a56db]/60 text-white/80 hover:text-white text-xs font-medium whitespace-nowrap active:scale-95 transition-all"
           >
-            <cat.icon className="w-3.5 h-3.5" />
+            <cat.icon className="w-3.5 h-3.5 text-[#f0a500]" />
             {cat.label}
           </button>
         ))}
         <button
           onClick={() => sendMessage("tarikh permohonan")}
-          className="flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-pink-500 to-rose-700 text-white text-xs font-medium whitespace-nowrap hover:opacity-90 active:scale-95 transition-all"
+          className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 hover:bg-[#1a56db]/30 border border-white/15 hover:border-[#1a56db]/60 text-white/80 hover:text-white text-xs font-medium whitespace-nowrap active:scale-95 transition-all"
         >
-          <BookOpen className="w-3.5 h-3.5" />
+          <BookOpen className="w-3.5 h-3.5 text-[#f0a500]" />
           Tarikh Mohon
         </button>
       </motion.div>
