@@ -4,28 +4,28 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const slides = [
   {
-    image: "https://images.unsplash.com/photo-1690668107430-6529392858b0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxTYWJhaCUyMEJvcm5lbyUyMHJhaW5mb3Jlc3QlMjBuYXR1cmV8ZW58MXx8fHwxNzc3NDMzMzU2fDA&ixlib=rb-4.1.0&q=80&w=1080",
-    caption: "Konservasi Orang Utan - Memelihara spesies terancam di Borneo"
+    image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1080&q=80&fit=crop",
+    caption: "Majlis Konvokesyen — Meraikan kejayaan graduan penerima biasiswa Sabah"
   },
   {
-    image: "https://images.unsplash.com/photo-1767439737231-7b0f6d1c2478?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0cm9waWNhbCUyMG1vdW50YWluJTIwbGFuZHNjYXBlJTIwTWFsYXlzaWF8ZW58MXx8fHwxNzc3NDMzMzYwfDA&ixlib=rb-4.1.0&q=80&w=1080",
-    caption: "Gunung Kinabalu - Warisan semula jadi Sabah"
+    image: "https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=1080&q=80&fit=crop",
+    caption: "Program Pembelajaran — Pelajar cemerlang Sabah mencapai potensi terbaik mereka"
   },
   {
-    image: "https://images.unsplash.com/photo-1701289870791-594cf2ce0448?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwyfHxTYWJhaCUyMEJvcm5lbyUyMHJhaW5mb3Jlc3QlMjBuYXR1cmV8ZW58MXx8fHwxNzc3NDMzMzU2fDA&ixlib=rb-4.1.0&q=80&w=1080",
-    caption: "Hutan Hujan Tropika - Ekosistem biodiversiti yang kaya"
+    image: "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=1080&q=80&fit=crop",
+    caption: "Anugerah Biasiswa — Majlis penyampaian biasiswa kepada pelajar layak Sabah"
   },
   {
-    image: "https://images.unsplash.com/photo-1773758100787-bb4286ed45fc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwzfHx0cm9waWNhbCUyMG1vdW50YWluJTIwbGFuZHNjYXBlJTIwTWFsYXlzaWF8ZW58MXx8fHwxNzc3NDMzMzYwfDA&ixlib=rb-4.1.0&q=80&w=1080",
-    caption: "Kawasan Hijau - Pengurusan hutan mampan"
+    image: "https://images.unsplash.com/photo-1529390079861-591de354faf5?w=1080&q=80&fit=crop",
+    caption: "Kolaborasi Pelajar — Program pembangunan modal insan anak Sabah"
   },
   {
-    image: "https://images.unsplash.com/photo-1701289851874-e826fb069819?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHw1fHxTYWJhaCUyMEJvcm5lbyUyMHJhaW5mb3Jlc3QlMjBuYXR1cmV8ZW58MXx8fHwxNzc3NDMzMzU2fDA&ixlib=rb-4.1.0&q=80&w=1080",
-    caption: "Kanopi Hutan - Melindungi habitat semula jadi"
+    image: "https://images.unsplash.com/photo-1562774053-701939374585?w=1080&q=80&fit=crop",
+    caption: "Kampus Universiti — Destinasi pengajian penerima tajaan PTPS Sabah"
   },
   {
-    image: "https://images.unsplash.com/photo-1774169125786-0cb84a4912b7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHw0fHx0cm9waWNhbCUyMG1vdW50YWluJTIwbGFuZHNjYXBlJTIwTWFsYXlzaWF8ZW58MXx8fHwxNzc3NDMzMzYwfDA&ixlib=rb-4.1.0&q=80&w=1080",
-    caption: "Landskap Sabah - Keindahan alam yang terpelihara"
+    image: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=1080&q=80&fit=crop",
+    caption: "Komitmen Belajar — Pelajar Sabah memanfaatkan peluang tajaan pendidikan"
   }
 ];
 
