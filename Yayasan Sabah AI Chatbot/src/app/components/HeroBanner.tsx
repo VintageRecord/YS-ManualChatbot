@@ -32,7 +32,7 @@ export function HeroBanner() {
             className="inline-flex items-center gap-2 px-6 py-2 bg-[#1a56db]/20 border border-[#1a56db]/60 rounded-full mb-8"
           >
             <span className="w-2 h-2 rounded-full bg-[#1a56db] animate-pulse"></span>
-            <span className="text-[#1a56db] text-sm tracking-widest font-medium">PORTAL RASMI SABAH</span>
+            <span className="text-[#1a56db] text-sm tracking-widest font-medium">SELAMAT DATANG</span>
           </motion.div>
 
           {/* Main Title */}
