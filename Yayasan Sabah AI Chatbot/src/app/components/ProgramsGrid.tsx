@@ -10,8 +10,8 @@ const programs = [
       "Anugerah bergengsi Yg Dipertua Negeri Sabah untuk pelajar yang memperoleh CGPA 4.0 dalam peperiksaan pertama sahaja.",
     level: "Diploma • Ijazah • Sarjana",
     requirement: "CGPA 4.0 (Peperiksaan Pertama)",
-    color: "#d4340e",
-    bg: "from-[#d4340e]/10 to-[#8B1A00]/5",
+    color: "#1a56db",
+    bg: "from-[#1a56db]/10 to-[#1e3a8a]/5",
   },
   {
     icon: Award,
@@ -21,8 +21,8 @@ const programs = [
       "Biasiswa penuh untuk pelajar cemerlang Sabah yang melanjutkan pengajian di institusi pengajian tinggi awam dan swasta.",
     level: "Diploma • Ijazah Sarjana Muda",
     requirement: "CGPA 3.75 ke atas",
-    color: "#d4340e",
-    bg: "from-[#d4340e]/10 to-[#8B1A00]/5",
+    color: "#1a56db",
+    bg: "from-[#1a56db]/10 to-[#1e3a8a]/5",
   },
   {
     icon: Star,
@@ -80,13 +80,13 @@ export function ProgramsGrid() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <div className="inline-block px-4 py-1 bg-[#d4340e]/10 border border-[#d4340e]/30 rounded-full mb-4">
-            <span className="text-[#d4340e] text-xs tracking-widest">PROGRAM TAJAAN</span>
+          <div className="inline-block px-4 py-1 bg-[#1a56db]/10 border border-[#1a56db]/30 rounded-full mb-4">
+            <span className="text-[#1a56db] text-xs tracking-widest">PROGRAM TAJAAN</span>
           </div>
           <h2 className="text-4xl md:text-5xl text-white mb-4 tracking-tight">
-            JENIS <span className="text-[#d4340e]">TAJAAN & BANTUAN</span>
+            JENIS <span className="text-[#1a56db]">TAJAAN & BANTUAN</span>
           </h2>
-          <div className="w-32 h-1 bg-[#d4340e] mx-auto mb-6"></div>
+          <div className="w-32 h-1 bg-[#1a56db] mx-auto mb-6"></div>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
             Pelbagai bentuk bantuan kewangan pendidikan yang tersedia melalui portal PTPS
           </p>
@@ -153,7 +153,7 @@ export function ProgramsGrid() {
         >
           <button
             onClick={() => document.querySelector("#cara-mohon")?.scrollIntoView({ behavior: "smooth" })}
-            className="px-10 py-4 bg-[#d4340e] text-white tracking-widest hover:bg-[#b82d0c] transition-all transform hover:scale-105 text-sm rounded-sm"
+            className="px-10 py-4 bg-[#1a56db] text-white tracking-widest hover:bg-[#1e40af] transition-all transform hover:scale-105 text-sm rounded-sm"
           >
             MOHON SEKARANG
           </button>

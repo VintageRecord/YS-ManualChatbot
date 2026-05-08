@@ -8,7 +8,7 @@ const steps = [
     title: "Semak Kelayakan",
     description:
       "Layari portal PTPS di ptps.sabah.gov.my dan klik 'Semak Kelayakan'. Masukkan maklumat peribadi dan akademik untuk mengetahui tajaan yang sesuai.",
-    color: "#d4340e",
+    color: "#1a56db",
     tip: "Semak lebih awal — permohonan ditutup 30 Jun setiap tahun.",
   },
   {
@@ -71,13 +71,13 @@ export function CompanyShowcase() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <div className="inline-block px-4 py-1 bg-[#d4340e]/10 border border-[#d4340e]/30 rounded-full mb-4">
-            <span className="text-[#d4340e] text-xs tracking-widest">PANDUAN PERMOHONAN</span>
+          <div className="inline-block px-4 py-1 bg-[#1a56db]/10 border border-[#1a56db]/30 rounded-full mb-4">
+            <span className="text-[#1a56db] text-xs tracking-widest">PANDUAN PERMOHONAN</span>
           </div>
           <h2 className="text-4xl md:text-5xl text-white mb-4 tracking-tight">
-            CARA <span className="text-[#d4340e]">MOHON</span>
+            CARA <span className="text-[#1a56db]">MOHON</span>
           </h2>
-          <div className="w-32 h-1 bg-[#d4340e] mx-auto mb-6"></div>
+          <div className="w-32 h-1 bg-[#1a56db] mx-auto mb-6"></div>
           <p className="text-gray-300 max-w-2xl mx-auto">
             Ikuti langkah-langkah mudah ini untuk memohon tajaan melalui Portal Tajaan Pendidikan Sabah
           </p>
@@ -86,7 +86,7 @@ export function CompanyShowcase() {
         {/* Steps Timeline */}
         <div className="relative">
           {/* Connecting line (desktop) */}
-          <div className="hidden lg:block absolute top-16 left-0 right-0 h-0.5 bg-gradient-to-r from-[#d4340e] via-[#10b981] to-[#8b5cf6] opacity-30 z-0"></div>
+          <div className="hidden lg:block absolute top-16 left-0 right-0 h-0.5 bg-gradient-to-r from-[#1a56db] via-[#10b981] to-[#8b5cf6] opacity-30 z-0"></div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-6 relative z-10">
             {steps.map((step, index) => {
@@ -149,15 +149,15 @@ export function CompanyShowcase() {
         >
           <div className="bg-[#1a2942] rounded-xl p-8 border border-gray-700/50">
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-lg bg-[#d4340e]/20 flex items-center justify-center">
-                <FileText className="w-5 h-5 text-[#d4340e]" />
+              <div className="w-10 h-10 rounded-lg bg-[#1a56db]/20 flex items-center justify-center">
+                <FileText className="w-5 h-5 text-[#1a56db]" />
               </div>
               <h3 className="text-white text-xl font-semibold">Dokumen Diperlukan</h3>
             </div>
             <div className="space-y-3">
               {documents.map((doc, i) => (
                 <div key={i} className="flex items-start gap-3">
-                  <CheckCircle2 className="w-4 h-4 text-[#d4340e] flex-shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-4 h-4 text-[#1a56db] flex-shrink-0 mt-0.5" />
                   <span className="text-gray-300 text-sm">{doc}</span>
                 </div>
               ))}
@@ -165,7 +165,7 @@ export function CompanyShowcase() {
           </div>
 
           {/* CTA Card */}
-          <div className="bg-gradient-to-br from-[#d4340e] to-[#8B1A00] rounded-xl p-8 relative overflow-hidden">
+          <div className="bg-gradient-to-br from-[#1a56db] to-[#1e3a8a] rounded-xl p-8 relative overflow-hidden">
             <div className="absolute inset-0 opacity-10"
               style={{
                 backgroundImage: "radial-gradient(circle at 70% 30%, white 1px, transparent 1px)",
@@ -184,7 +184,7 @@ export function CompanyShowcase() {
                 href="https://ptps.sabah.gov.my"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 w-fit px-6 py-3 bg-white text-[#d4340e] font-semibold text-sm rounded-sm hover:bg-gray-100 transition-all hover:scale-105"
+                className="flex items-center gap-2 w-fit px-6 py-3 bg-white text-[#1a56db] font-semibold text-sm rounded-sm hover:bg-gray-100 transition-all hover:scale-105"
               >
                 Pergi ke Portal PTPS
                 <ArrowRight className="w-4 h-4" />

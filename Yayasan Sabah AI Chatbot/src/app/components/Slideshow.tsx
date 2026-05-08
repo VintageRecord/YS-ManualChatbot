@@ -167,9 +167,9 @@ export function Slideshow() {
           className="text-center mb-16"
         >
           <h2 className="text-5xl md:text-6xl text-white mb-4 tracking-tight drop-shadow-lg">
-            ACARA & <span className="text-[#d4340e]">AKTIVITI</span>
+            ACARA & <span className="text-[#1a56db]">AKTIVITI</span>
           </h2>
-          <div className="w-32 h-1 bg-[#d4340e] mx-auto mb-6"></div>
+          <div className="w-32 h-1 bg-[#1a56db] mx-auto mb-6"></div>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
             Galeri acara dan program yang telah dilaksanakan
           </p>
@@ -225,13 +225,13 @@ export function Slideshow() {
             {/* Navigation Arrows */}
             <button
               onClick={goToPrevious}
-              className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-black/40 backdrop-blur-sm hover:bg-[#5D4037] rounded-full flex items-center justify-center transition-colors border border-white/20 z-10"
+              className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-black/40 backdrop-blur-sm hover:bg-[#2563eb] rounded-full flex items-center justify-center transition-colors border border-white/20 z-10"
             >
               <ChevronLeft className="w-6 h-6 text-white drop-shadow-lg" />
             </button>
             <button
               onClick={goToNext}
-              className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-black/40 backdrop-blur-sm hover:bg-[#5D4037] rounded-full flex items-center justify-center transition-colors border border-white/20 z-10"
+              className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-black/40 backdrop-blur-sm hover:bg-[#2563eb] rounded-full flex items-center justify-center transition-colors border border-white/20 z-10"
             >
               <ChevronRight className="w-6 h-6 text-white drop-shadow-lg" />
             </button>
@@ -245,7 +245,7 @@ export function Slideshow() {
                 onClick={() => goToSlide(index)}
                 className={`transition-all ${
                   index === currentSlide
-                    ? "w-12 h-3 bg-[#5D4037]"
+                    ? "w-12 h-3 bg-[#2563eb]"
                     : "w-3 h-3 bg-white/30 hover:bg-white/50"
                 } rounded-full`}
               />
