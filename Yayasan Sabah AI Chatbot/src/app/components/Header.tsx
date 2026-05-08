@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router";
-import { Menu, X, ChevronDown, ChevronRight, Bot } from "lucide-react";
+import { Menu, X, ChevronDown, ChevronRight } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import logoImg from "../../imports/image.png";
 
@@ -73,7 +73,7 @@ const menuItems = [
     ]
   },
   { label: "HUBUNGI", href: "#hubungi" },
-  { label: "CHATBOT AI", href: "", route: "/chatbot" },
+  { label: "YS CHATBOT", href: "", route: "/chatbot" },
 ];
 
 export function Header() {
@@ -182,7 +182,7 @@ export function Header() {
                         : ""
                     }`}
                   >
-                    {item.route === "/chatbot" && <Bot className="w-4 h-4 relative z-10 drop-shadow-lg" />}
+                    {item.route === "/chatbot" && <img src={logoImg} alt="YS" className="w-5 h-5 object-contain relative z-10 drop-shadow-lg" />}
                     <span className="relative z-10 drop-shadow-lg">{item.label}</span>
                     {item.submenu && (
                       <ChevronDown className="w-4 h-4 relative z-10 drop-shadow-lg" />
@@ -317,7 +317,7 @@ export function Header() {
                       }`}
                     >
                       <span className="flex items-center gap-2">
-                        {item.route === "/chatbot" && <Bot className="w-4 h-4" />}
+                        {item.route === "/chatbot" && <img src={logoImg} alt="YS" className="w-5 h-5 object-contain" />}
                         {item.label}
                       </span>
                       {item.submenu && (

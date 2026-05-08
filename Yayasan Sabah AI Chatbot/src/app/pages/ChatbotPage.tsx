@@ -4,7 +4,6 @@ import { motion, AnimatePresence } from "motion/react";
 import {
   Send,
   ArrowLeft,
-  Bot,
   User,
   BookOpen,
   DollarSign,
@@ -308,8 +307,8 @@ const CATEGORIES = [
 function TypingIndicator() {
   return (
     <div className="flex items-end gap-3 mb-4">
-      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#d4340e] to-[#8B1A00] flex items-center justify-center flex-shrink-0">
-        <Bot className="w-4 h-4 text-white" />
+      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#d4340e] to-[#8B1A00] flex items-center justify-center flex-shrink-0 overflow-hidden p-1">
+        <img src={logoImg} alt="YS" className="w-full h-full object-contain" />
       </div>
       <div className="bg-white/10 backdrop-blur-sm border border-white/10 rounded-2xl rounded-bl-none px-4 py-3">
         <div className="flex gap-1 items-center h-4">
@@ -430,7 +429,7 @@ export default function ChatbotPage() {
             <img src={logoImg} alt="Logo" className="w-10 h-10 object-contain relative z-10" />
           </div>
           <div>
-            <div className="text-white font-semibold text-sm tracking-wide">CHATBOT KEWANGAN PENDIDIKAN</div>
+            <div className="text-white font-semibold text-sm tracking-wide">YS CHATBOT</div>
             <div className="flex items-center gap-1.5">
               <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
               <span className="text-green-400 text-xs">Dalam Talian</span>
@@ -440,7 +439,7 @@ export default function ChatbotPage() {
 
         <div className="flex items-center gap-2 bg-white/5 border border-white/10 rounded-full px-3 py-1.5">
           <Sparkles className="w-3.5 h-3.5 text-[#d4340e]" />
-          <span className="text-white/70 text-xs">AI Pembantu</span>
+          <span className="text-white/70 text-xs">YS Chatbot</span>
         </div>
       </motion.header>
 
@@ -490,7 +489,7 @@ export default function ChatbotPage() {
                 }`}
               >
                 {msg.role === "bot" ? (
-                  <Bot className="w-4 h-4 text-white" />
+                  <img src={logoImg} alt="YS" className="w-full h-full object-contain p-1" />
                 ) : (
                   <User className="w-4 h-4 text-white" />
                 )}
