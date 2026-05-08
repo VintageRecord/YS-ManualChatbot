@@ -159,7 +159,7 @@ export function Header() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="hidden lg:flex items-center gap-1"
+              className="hidden lg:flex items-center gap-0 flex-wrap justify-center"
             >
               {menuItems.map((item, index) => (
                 <div
@@ -176,9 +176,9 @@ export function Header() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.1 }}
                     onClick={() => handleNavClick(item)}
-                    className={`relative px-6 py-2 text-white text-sm tracking-widest overflow-hidden group flex items-center gap-1.5 ${
+                    className={`relative px-4 py-2 text-white text-xs tracking-wider overflow-hidden group flex items-center gap-1.5 ${
                       item.route === "/chatbot"
-                        ? "bg-gradient-to-r from-[#d4340e]/80 to-[#8B1A00]/80 rounded-full border border-[#d4340e]/40 backdrop-blur-sm hover:from-[#d4340e] hover:to-[#8B1A00] transition-all"
+                        ? "bg-gradient-to-r from-[#d4340e]/80 to-[#8B1A00]/80 rounded-full border border-[#d4340e]/40 backdrop-blur-sm hover:from-[#d4340e] hover:to-[#8B1A00] transition-all ml-2"
                         : ""
                     }`}
                   >
