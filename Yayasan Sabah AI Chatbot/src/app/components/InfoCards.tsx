@@ -9,8 +9,8 @@ const bodies = [
     description:
       "Menawarkan Anugerah Biasiswa TYT, Biasiswa Cemerlang dan Biasiswa Perdana untuk peringkat Diploma, Ijazah Sarjana Muda dan Sarjana.",
     highlight: "CGPA 4.0 ke atas",
-    gradient: "from-[#d4340e] to-[#8B1A00]",
-    border: "border-[#d4340e]/40",
+    gradient: "from-[#1a56db] to-[#1e3a8a]",
+    border: "border-[#1a56db]/40",
   },
   {
     icon: BookOpen,
@@ -64,13 +64,13 @@ export function InfoCards() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <div className="inline-block px-4 py-1 bg-[#d4340e]/10 border border-[#d4340e]/30 rounded-full mb-4">
-            <span className="text-[#d4340e] text-xs tracking-widest">BADAN-BADAN PENAJA</span>
+          <div className="inline-block px-4 py-1 bg-[#1a56db]/10 border border-[#1a56db]/30 rounded-full mb-4">
+            <span className="text-[#1a56db] text-xs tracking-widest">BADAN-BADAN PENAJA</span>
           </div>
           <h2 className="text-4xl md:text-5xl text-white mb-4 tracking-tight">
-            LIMA BADAN <span className="text-[#d4340e]">PENAJA UTAMA</span>
+            LIMA BADAN <span className="text-[#1a56db]">PENAJA UTAMA</span>
           </h2>
-          <div className="w-32 h-1 bg-[#d4340e] mx-auto mb-6"></div>
+          <div className="w-32 h-1 bg-[#1a56db] mx-auto mb-6"></div>
           <p className="text-gray-300 max-w-2xl mx-auto">
             Portal PTPS menyatukan lima badan penaja utama Sabah dalam satu platform permohonan yang mudah dan telus.
           </p>
@@ -127,7 +127,7 @@ export function InfoCards() {
           </p>
           <button
             onClick={() => document.querySelector("#cara-mohon")?.scrollIntoView({ behavior: "smooth" })}
-            className="px-8 py-3 bg-[#d4340e] text-white text-sm tracking-widest hover:bg-[#b82d0c] transition-all transform hover:scale-105 rounded-sm"
+            className="px-8 py-3 bg-[#1a56db] text-white text-sm tracking-widest hover:bg-[#1e40af] transition-all transform hover:scale-105 rounded-sm"
           >
             CARA MOHON
           </button>

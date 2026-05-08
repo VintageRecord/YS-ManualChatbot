@@ -2,7 +2,7 @@ import { motion } from "motion/react";
 import { Facebook, Instagram, Youtube, Mail, Phone, MapPin, Globe, ExternalLink } from "lucide-react";
 
 const penaja = [
-  { code: "BKNS", name: "Biasiswa Kerajaan Negeri Sabah", color: "#d4340e" },
+  { code: "BKNS", name: "Biasiswa Kerajaan Negeri Sabah", color: "#1a56db" },
   { code: "MUIS", name: "Majlis Ugama Islam Sabah", color: "#0891b2" },
   { code: "TSK", name: "Timbalan Setiausaha Kerajaan", color: "#10b981" },
   { code: "YS", name: "Kumpulan Yayasan Sabah", color: "#f59e0b" },
@@ -22,7 +22,7 @@ export function FooterSection() {
             className="text-center"
           >
             <h2 className="text-3xl text-white mb-2 drop-shadow-lg">Badan-Badan Penaja Portal PTPS</h2>
-            <div className="w-24 h-1 bg-[#d4340e] mx-auto"></div>
+            <div className="w-24 h-1 bg-[#1a56db] mx-auto"></div>
           </motion.div>
         </div>
 
@@ -57,7 +57,7 @@ export function FooterSection() {
               {
                 title: "Insentif Rebat Lump Sum",
                 desc: "Rebat 20% untuk bayaran sepenggal (lump sum) bagi pinjaman Yayasan Sabah.",
-                color: "#d4340e",
+                color: "#1a56db",
               },
               {
                 title: "Rebat Bayaran Konsisten",
@@ -98,7 +98,7 @@ export function FooterSection() {
           >
             <h2 className="text-4xl text-white mb-2 drop-shadow-lg">Hubungi Kami</h2>
             <p className="text-gray-400 text-sm mb-4">Bahagian Pelajaran & Pinjaman Pengajian (BPPP) — Yayasan Sabah</p>
-            <div className="w-32 h-1 bg-[#d4340e] mx-auto"></div>
+            <div className="w-32 h-1 bg-[#1a56db] mx-auto"></div>
           </motion.div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
@@ -111,8 +111,8 @@ export function FooterSection() {
               className="space-y-4"
             >
               <div className="flex items-start gap-3">
-                <div className="w-10 h-10 bg-[#d4340e]/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <Phone className="w-5 h-5 text-[#d4340e]" />
+                <div className="w-10 h-10 bg-[#1a56db]/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <Phone className="w-5 h-5 text-[#1a56db]" />
                 </div>
                 <div>
                   <p className="text-gray-400 text-xs mb-2 tracking-widest">TELEFON</p>
@@ -121,8 +121,8 @@ export function FooterSection() {
                 </div>
               </div>
               <div className="flex items-start gap-3">
-                <div className="w-10 h-10 bg-[#d4340e]/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <Phone className="w-5 h-5 text-[#d4340e]" />
+                <div className="w-10 h-10 bg-[#1a56db]/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <Phone className="w-5 h-5 text-[#1a56db]" />
                 </div>
                 <div>
                   <p className="text-gray-400 text-xs mb-2 tracking-widest">TALIAN PTPS</p>
@@ -141,14 +141,14 @@ export function FooterSection() {
               className="space-y-4"
             >
               <div className="flex items-start gap-3">
-                <div className="w-10 h-10 bg-[#d4340e]/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <Mail className="w-5 h-5 text-[#d4340e]" />
+                <div className="w-10 h-10 bg-[#1a56db]/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <Mail className="w-5 h-5 text-[#1a56db]" />
                 </div>
                 <div>
                   <p className="text-gray-400 text-xs mb-2 tracking-widest">E-MEL</p>
                   <a
                     href="mailto:bppysinfo@ysnet.org.my"
-                    className="text-white text-sm hover:text-[#d4340e] transition-colors"
+                    className="text-white text-sm hover:text-[#1a56db] transition-colors"
                   >
                     bppysinfo@ysnet.org.my
                   </a>
@@ -156,8 +156,8 @@ export function FooterSection() {
                 </div>
               </div>
               <div className="flex items-start gap-3">
-                <div className="w-10 h-10 bg-[#d4340e]/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <Globe className="w-5 h-5 text-[#d4340e]" />
+                <div className="w-10 h-10 bg-[#1a56db]/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <Globe className="w-5 h-5 text-[#1a56db]" />
                 </div>
                 <div>
                   <p className="text-gray-400 text-xs mb-2 tracking-widest">PORTAL RASMI</p>
@@ -165,7 +165,7 @@ export function FooterSection() {
                     href="https://ptps.sabah.gov.my"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-white text-sm hover:text-[#d4340e] transition-colors flex items-center gap-1"
+                    className="text-white text-sm hover:text-[#1a56db] transition-colors flex items-center gap-1"
                   >
                     ptps.sabah.gov.my
                     <ExternalLink className="w-3 h-3" />
@@ -174,7 +174,7 @@ export function FooterSection() {
                     href="https://www.yayasansabahgroup.org.my"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-gray-400 text-xs hover:text-[#d4340e] transition-colors flex items-center gap-1 mt-1"
+                    className="text-gray-400 text-xs hover:text-[#1a56db] transition-colors flex items-center gap-1 mt-1"
                   >
                     yayasansabahgroup.org.my
                     <ExternalLink className="w-3 h-3" />
@@ -191,8 +191,8 @@ export function FooterSection() {
               transition={{ delay: 0.3 }}
             >
               <div className="flex items-start gap-3">
-                <div className="w-10 h-10 bg-[#d4340e]/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <MapPin className="w-5 h-5 text-[#d4340e]" />
+                <div className="w-10 h-10 bg-[#1a56db]/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <MapPin className="w-5 h-5 text-[#1a56db]" />
                 </div>
                 <div>
                   <p className="text-gray-400 text-xs mb-2 tracking-widest">ALAMAT</p>
@@ -224,19 +224,19 @@ export function FooterSection() {
               <div className="flex gap-3 mb-6">
                 <a
                   href="#"
-                  className="w-11 h-11 bg-white/10 hover:bg-[#d4340e] rounded-lg flex items-center justify-center transition-colors"
+                  className="w-11 h-11 bg-white/10 hover:bg-[#1a56db] rounded-lg flex items-center justify-center transition-colors"
                 >
                   <Facebook className="w-5 h-5" />
                 </a>
                 <a
                   href="#"
-                  className="w-11 h-11 bg-white/10 hover:bg-[#d4340e] rounded-lg flex items-center justify-center transition-colors"
+                  className="w-11 h-11 bg-white/10 hover:bg-[#1a56db] rounded-lg flex items-center justify-center transition-colors"
                 >
                   <Instagram className="w-5 h-5" />
                 </a>
                 <a
                   href="#"
-                  className="w-11 h-11 bg-white/10 hover:bg-[#d4340e] rounded-lg flex items-center justify-center transition-colors"
+                  className="w-11 h-11 bg-white/10 hover:bg-[#1a56db] rounded-lg flex items-center justify-center transition-colors"
                 >
                   <Youtube className="w-5 h-5" />
                 </a>
@@ -244,7 +244,7 @@ export function FooterSection() {
 
               <div className="bg-white/5 border border-white/10 rounded-xl p-4">
                 <p className="text-gray-400 text-xs mb-1 tracking-widest">JUMLAH PELAWAT</p>
-                <p className="text-3xl text-[#d4340e] font-bold">8,888,888</p>
+                <p className="text-3xl text-[#1a56db] font-bold">8,888,888</p>
               </div>
             </motion.div>
           </div>
@@ -255,9 +255,9 @@ export function FooterSection() {
               <p>© 2026 Kumpulan Yayasan Sabah. Hak Cipta Terpelihara.</p>
             </div>
             <div className="flex gap-6">
-              <a href="#" className="hover:text-[#d4340e] transition-colors">Dasar Privasi</a>
-              <a href="#" className="hover:text-[#d4340e] transition-colors">Terma & Syarat</a>
-              <a href="#" className="hover:text-[#d4340e] transition-colors">Penafian</a>
+              <a href="#" className="hover:text-[#1a56db] transition-colors">Dasar Privasi</a>
+              <a href="#" className="hover:text-[#1a56db] transition-colors">Terma & Syarat</a>
+              <a href="#" className="hover:text-[#1a56db] transition-colors">Penafian</a>
             </div>
           </div>
         </div>

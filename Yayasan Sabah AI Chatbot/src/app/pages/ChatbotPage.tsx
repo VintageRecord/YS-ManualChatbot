@@ -307,7 +307,7 @@ const CATEGORIES = [
 function TypingIndicator() {
   return (
     <div className="flex items-end gap-3 mb-4">
-      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#d4340e] to-[#8B1A00] flex items-center justify-center flex-shrink-0 overflow-hidden p-1">
+      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#1a56db] to-[#1e3a8a] flex items-center justify-center flex-shrink-0 overflow-hidden p-1">
         <img src={logoImg} alt="YS" className="w-full h-full object-contain" />
       </div>
       <div className="bg-white/10 backdrop-blur-sm border border-white/10 rounded-2xl rounded-bl-none px-4 py-3">
@@ -389,7 +389,7 @@ export default function ChatbotPage() {
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <motion.div
           className="absolute -top-40 -left-40 w-96 h-96 rounded-full opacity-20"
-          style={{ background: "radial-gradient(circle, #d4340e, transparent)" }}
+          style={{ background: "radial-gradient(circle, #1a56db, transparent)" }}
           animate={{ scale: [1, 1.2, 1], x: [0, 30, 0], y: [0, -20, 0] }}
           transition={{ duration: 8, repeat: Infinity }}
         />
@@ -425,7 +425,7 @@ export default function ChatbotPage() {
 
         <div className="flex items-center gap-3 flex-1">
           <div className="relative">
-            <div className="absolute inset-0 bg-[#d4340e]/30 blur-lg rounded-full" />
+            <div className="absolute inset-0 bg-[#1a56db]/30 blur-lg rounded-full" />
             <img src={logoImg} alt="Logo" className="w-10 h-10 object-contain relative z-10" />
           </div>
           <div>
@@ -438,7 +438,7 @@ export default function ChatbotPage() {
         </div>
 
         <div className="flex items-center gap-2 bg-white/5 border border-white/10 rounded-full px-3 py-1.5">
-          <Sparkles className="w-3.5 h-3.5 text-[#d4340e]" />
+          <Sparkles className="w-3.5 h-3.5 text-[#1a56db]" />
           <span className="text-white/70 text-xs">YS Chatbot</span>
         </div>
       </motion.header>
@@ -484,7 +484,7 @@ export default function ChatbotPage() {
               <div
                 className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
                   msg.role === "bot"
-                    ? "bg-gradient-to-br from-[#d4340e] to-[#8B1A00]"
+                    ? "bg-gradient-to-br from-[#1a56db] to-[#1e3a8a]"
                     : "bg-gradient-to-br from-blue-500 to-blue-700"
                 }`}
               >
@@ -501,7 +501,7 @@ export default function ChatbotPage() {
                   className={`rounded-2xl px-4 py-3 text-sm leading-relaxed ${
                     msg.role === "bot"
                       ? "bg-white/10 backdrop-blur-sm border border-white/10 rounded-bl-none text-white"
-                      : "bg-gradient-to-br from-[#d4340e] to-[#8B1A00] rounded-br-none text-white"
+                      : "bg-gradient-to-br from-[#1a56db] to-[#1e3a8a] rounded-br-none text-white"
                   }`}
                 >
                   <div className="whitespace-pre-wrap">{formatText(msg.text)}</div>
@@ -555,7 +555,7 @@ export default function ChatbotPage() {
           <button
             type="submit"
             disabled={!input.trim() || isTyping}
-            className="w-11 h-11 rounded-full bg-gradient-to-br from-[#d4340e] to-[#8B1A00] text-white flex items-center justify-center hover:opacity-90 active:scale-95 transition-all disabled:opacity-40 disabled:cursor-not-allowed flex-shrink-0"
+            className="w-11 h-11 rounded-full bg-gradient-to-br from-[#1a56db] to-[#1e3a8a] text-white flex items-center justify-center hover:opacity-90 active:scale-95 transition-all disabled:opacity-40 disabled:cursor-not-allowed flex-shrink-0"
           >
             <Send className="w-4 h-4" />
           </button>

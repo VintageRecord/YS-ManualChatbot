@@ -29,10 +29,10 @@ export function HeroBanner() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="inline-flex items-center gap-2 px-6 py-2 bg-[#d4340e]/20 border border-[#d4340e]/60 rounded-full mb-8"
+            className="inline-flex items-center gap-2 px-6 py-2 bg-[#1a56db]/20 border border-[#1a56db]/60 rounded-full mb-8"
           >
-            <span className="w-2 h-2 rounded-full bg-[#d4340e] animate-pulse"></span>
-            <span className="text-[#d4340e] text-sm tracking-widest font-medium">PORTAL RASMI SABAH</span>
+            <span className="w-2 h-2 rounded-full bg-[#1a56db] animate-pulse"></span>
+            <span className="text-[#1a56db] text-sm tracking-widest font-medium">PORTAL RASMI SABAH</span>
           </motion.div>
 
           {/* Main Title */}
@@ -44,7 +44,7 @@ export function HeroBanner() {
           >
             PORTAL TAJAAN &
             <br />
-            <span className="text-[#d4340e]">PEMINJAMAN PENDIDIKAN</span>
+            <span className="text-[#1a56db]">PEMINJAMAN PENDIDIKAN</span>
             <br />
             <span className="text-3xl md:text-5xl lg:text-6xl">SABAH</span>
           </motion.h1>
@@ -77,7 +77,7 @@ export function HeroBanner() {
           >
             <button
               onClick={() => document.querySelector("#cara-mohon")?.scrollIntoView({ behavior: "smooth" })}
-              className="px-8 py-4 bg-[#d4340e] text-white text-sm tracking-widest hover:bg-[#b82d0c] transition-all transform hover:scale-105 rounded-sm font-medium"
+              className="px-8 py-4 bg-[#1a56db] text-white text-sm tracking-widest hover:bg-[#1e40af] transition-all transform hover:scale-105 rounded-sm font-medium"
             >
               SEMAK KELAYAKAN
             </button>
@@ -106,7 +106,7 @@ export function HeroBanner() {
                   transition={{ delay: 1.0 + i * 0.1 }}
                   className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-4 text-center"
                 >
-                  <Icon className="w-5 h-5 text-[#d4340e] mx-auto mb-2" />
+                  <Icon className="w-5 h-5 text-[#1a56db] mx-auto mb-2" />
                   <div className="text-2xl font-bold text-white">{stat.value}</div>
                   <div className="text-xs text-gray-300 mt-1">{stat.label}</div>
                 </motion.div>
@@ -121,7 +121,7 @@ export function HeroBanner() {
           animate={{ opacity: 1 }}
           transition={{ delay: 1.4 }}
           onClick={scrollToNext}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white hover:text-[#d4340e] transition-colors"
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white hover:text-[#1a56db] transition-colors"
         >
           <ChevronDown className="w-8 h-8 animate-bounce" />
         </motion.button>

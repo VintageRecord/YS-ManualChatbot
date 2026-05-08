@@ -8,7 +8,7 @@ const news = [
     title: "Permohonan Tajaan & Pinjaman Pendidikan 2026 Kini Dibuka",
     excerpt:
       "Portal PTPS membuka permohonan untuk semua tajaan bagi sesi akademik 2026/2027. Tarikh akhir permohonan adalah 30 Jun 2026. Pelajar Sabah yang berkelayakan dipelawa untuk memohon.",
-    image: "linear-gradient(135deg, #d4340e 0%, #8B1A00 100%)",
+    image: "linear-gradient(135deg, #1a56db 0%, #1e3a8a 100%)",
     urgent: true,
   },
   {
@@ -53,7 +53,7 @@ const news = [
     title: "Bantuan Awal Pendidikan Baitulmal Sabah 2026 Dibuka",
     excerpt:
       "Perbadanan Baitulmal Negeri Sabah menawarkan bantuan awal pendidikan kepada pelajar baharu yang menyambung pengajian di IPTA, Politeknik, Matrikulasi dan peringkat Sijil.",
-    image: "linear-gradient(135deg, #d4340e 0%, #f59e0b 100%)",
+    image: "linear-gradient(135deg, #1a56db 0%, #f59e0b 100%)",
     urgent: false,
   },
 ];
@@ -68,13 +68,13 @@ export function NewsSection() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <div className="inline-block px-4 py-1 bg-[#d4340e]/10 border border-[#d4340e]/30 rounded-full mb-4">
-            <span className="text-[#d4340e] text-xs tracking-widest">PENGUMUMAN & BERITA</span>
+          <div className="inline-block px-4 py-1 bg-[#1a56db]/10 border border-[#1a56db]/30 rounded-full mb-4">
+            <span className="text-[#1a56db] text-xs tracking-widest">PENGUMUMAN & BERITA</span>
           </div>
           <h2 className="text-4xl md:text-5xl text-white mb-4 tracking-tight">
-            BERITA & <span className="text-[#d4340e]">PENGUMUMAN</span>
+            BERITA & <span className="text-[#1a56db]">PENGUMUMAN</span>
           </h2>
-          <div className="w-32 h-1 bg-[#d4340e] mx-auto mb-6"></div>
+          <div className="w-32 h-1 bg-[#1a56db] mx-auto mb-6"></div>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
             Maklumat terkini mengenai tajaan, pinjaman dan pengumuman portal PTPS
           </p>
@@ -89,7 +89,7 @@ export function NewsSection() {
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
               className={`group bg-[#1a2942] rounded-xl overflow-hidden border transition-all cursor-pointer hover:-translate-y-1 duration-300 ${
-                item.urgent ? "border-[#d4340e]/60 shadow-lg shadow-[#d4340e]/10" : "border-gray-700/50 hover:border-[#d4340e]/40"
+                item.urgent ? "border-[#1a56db]/60 shadow-lg shadow-[#1a56db]/10" : "border-gray-700/50 hover:border-[#1a56db]/40"
               }`}
             >
               <div
@@ -112,12 +112,12 @@ export function NewsSection() {
                     <Calendar className="w-3.5 h-3.5 text-gray-400" />
                     <span className="text-xs text-gray-400">{item.date}</span>
                   </div>
-                  <span className="px-2.5 py-0.5 bg-[#d4340e]/20 text-[#d4340e] rounded-full text-xs font-medium">
+                  <span className="px-2.5 py-0.5 bg-[#1a56db]/20 text-[#1a56db] rounded-full text-xs font-medium">
                     {item.category}
                   </span>
                 </div>
 
-                <h3 className="text-base text-white font-semibold mb-3 group-hover:text-[#d4340e] transition-colors leading-snug line-clamp-2">
+                <h3 className="text-base text-white font-semibold mb-3 group-hover:text-[#1a56db] transition-colors leading-snug line-clamp-2">
                   {item.title}
                 </h3>
 
@@ -125,7 +125,7 @@ export function NewsSection() {
                   {item.excerpt}
                 </p>
 
-                <button className="flex items-center gap-2 text-[#d4340e] text-sm hover:gap-3 transition-all font-medium">
+                <button className="flex items-center gap-2 text-[#1a56db] text-sm hover:gap-3 transition-all font-medium">
                   <span>Baca Selanjutnya</span>
                   <ArrowRight className="w-4 h-4" />
                 </button>
@@ -140,7 +140,7 @@ export function NewsSection() {
           viewport={{ once: true }}
           className="text-center mt-12"
         >
-          <button className="px-10 py-4 bg-transparent border-2 border-[#d4340e] text-[#d4340e] hover:bg-[#d4340e] hover:text-white transition-all transform hover:scale-105 text-sm tracking-widest rounded-sm">
+          <button className="px-10 py-4 bg-transparent border-2 border-[#1a56db] text-[#1a56db] hover:bg-[#1a56db] hover:text-white transition-all transform hover:scale-105 text-sm tracking-widest rounded-sm">
             LIHAT SEMUA PENGUMUMAN
           </button>
         </motion.div>

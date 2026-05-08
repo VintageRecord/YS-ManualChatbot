@@ -121,7 +121,7 @@ export function Header() {
               className="flex items-center gap-3"
             >
               <div className="relative group">
-                <div className="absolute inset-0 bg-[#d4340e]/20 blur-xl group-hover:blur-2xl transition-all"></div>
+                <div className="absolute inset-0 bg-[#1a56db]/20 blur-xl group-hover:blur-2xl transition-all"></div>
                 <img
                   src={logoImg}
                   alt="Logo"
@@ -129,14 +129,13 @@ export function Header() {
                 />
               </div>
               <div className="text-center md:text-left">
-                <div className="text-white text-[10px] tracking-[0.3em] opacity-80 drop-shadow-lg">LAMAN WEB RASMI</div>
+                <div className="text-white text-[10px] tracking-[0.3em] opacity-70 drop-shadow-lg">LAMAN WEB RASMI</div>
                 <div className="text-white text-sm font-semibold tracking-[0.15em] drop-shadow-lg leading-tight">
                   PORTAL TAJAAN & PEMINJAMAN
                 </div>
-                <div className="text-[#d4340e] text-sm font-semibold tracking-[0.15em] drop-shadow-lg leading-tight">
+                <div className="text-[#f0a500] text-sm font-semibold tracking-[0.15em] drop-shadow-lg leading-tight">
                   PENDIDIKAN SABAH
                 </div>
-                <div className="text-white/50 text-[10px] tracking-[0.2em]">ptps.sabah.gov.my</div>
               </div>
             </motion.div>
 
@@ -163,7 +162,7 @@ export function Header() {
                     onClick={() => handleNavClick(item)}
                     className={`relative px-4 py-2 text-white text-xs tracking-wider overflow-hidden group flex items-center gap-1.5 ${
                       item.route === "/chatbot"
-                        ? "bg-gradient-to-r from-[#d4340e]/80 to-[#8B1A00]/80 rounded-full border border-[#d4340e]/40 backdrop-blur-sm hover:from-[#d4340e] hover:to-[#8B1A00] transition-all ml-2"
+                        ? "bg-gradient-to-r from-[#1a56db]/80 to-[#1e3a8a]/80 rounded-full border border-[#1a56db]/40 backdrop-blur-sm hover:from-[#1a56db] hover:to-[#1e3a8a] transition-all ml-2"
                         : ""
                     }`}
                   >
@@ -176,8 +175,8 @@ export function Header() {
                     )}
                     {!item.route && (
                       <>
-                        <div className="absolute inset-0 bg-gradient-to-r from-[#3E2723] to-[#5D4037] translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
-                        <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#d4340e] group-hover:w-full transition-all duration-500"></div>
+                        <div className="absolute inset-0 bg-gradient-to-r from-[#1e3a8a] to-[#2563eb] translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+                        <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#1a56db] group-hover:w-full transition-all duration-500"></div>
                       </>
                     )}
                   </motion.button>
@@ -207,7 +206,7 @@ export function Header() {
                                     setActiveDropdown(null);
                                   }
                                 }}
-                                className={`w-full text-left px-5 py-3 text-white text-xs hover:bg-gradient-to-r hover:from-[#3E2723] hover:to-[#5D4037] transition-all border-b border-white/5 flex items-center justify-between ${
+                                className={`w-full text-left px-5 py-3 text-white text-xs hover:bg-gradient-to-r hover:from-[#1e3a8a] hover:to-[#2563eb] transition-all border-b border-white/5 flex items-center justify-between ${
                                   subIndex === 0 ? "rounded-t-lg" : ""
                                 } ${
                                   subIndex === item.submenu.length - 1 ? "rounded-b-lg border-b-0" : ""
@@ -235,7 +234,7 @@ export function Header() {
                                             setActiveDropdown(null);
                                             setActiveSubDropdown(null);
                                           }}
-                                          className={`w-full text-left px-5 py-3 text-white text-xs hover:bg-gradient-to-r hover:from-[#3E2723] hover:to-[#5D4037] transition-all border-b border-white/5 ${
+                                          className={`w-full text-left px-5 py-3 text-white text-xs hover:bg-gradient-to-r hover:from-[#1e3a8a] hover:to-[#2563eb] transition-all border-b border-white/5 ${
                                             subSubIndex === 0 ? "rounded-t-lg" : ""
                                           } ${
                                             subSubIndex === subItem.submenu.length - 1 ? "rounded-b-lg border-b-0" : ""
@@ -296,8 +295,8 @@ export function Header() {
                       }}
                       className={`w-full text-left px-4 py-3 text-white text-sm transition-all rounded-lg flex items-center justify-between ${
                         item.route === "/chatbot"
-                          ? "bg-gradient-to-r from-[#d4340e]/50 to-[#8B1A00]/50 border border-[#d4340e]/30"
-                          : "hover:bg-gradient-to-r hover:from-[#3E2723] hover:to-[#5D4037] border-l-4 border-transparent hover:border-[#d4340e]"
+                          ? "bg-gradient-to-r from-[#1a56db]/50 to-[#1e3a8a]/50 border border-[#1a56db]/30"
+                          : "hover:bg-gradient-to-r hover:from-[#1e3a8a] hover:to-[#2563eb] border-l-4 border-transparent hover:border-[#1a56db]"
                       }`}
                     >
                       <span className="flex items-center gap-2">
@@ -336,7 +335,7 @@ export function Header() {
                                       setIsOpen(false);
                                     }
                                   }}
-                                  className="w-full text-left px-4 py-2 text-white text-xs bg-white/5 hover:bg-gradient-to-r hover:from-[#3E2723] hover:to-[#5D4037] transition-all rounded-lg flex items-center justify-between"
+                                  className="w-full text-left px-4 py-2 text-white text-xs bg-white/5 hover:bg-gradient-to-r hover:from-[#1e3a8a] hover:to-[#2563eb] transition-all rounded-lg flex items-center justify-between"
                                 >
                                   <span>{subItem.label}</span>
                                   {subItem.submenu && (
@@ -366,7 +365,7 @@ export function Header() {
                                               setMobileDropdown(null);
                                               setIsOpen(false);
                                             }}
-                                            className="w-full text-left px-4 py-2 text-white text-xs bg-white/10 hover:bg-gradient-to-r hover:from-[#3E2723] hover:to-[#5D4037] transition-all rounded-lg"
+                                            className="w-full text-left px-4 py-2 text-white text-xs bg-white/10 hover:bg-gradient-to-r hover:from-[#1e3a8a] hover:to-[#2563eb] transition-all rounded-lg"
                                           >
                                             {subSubItem.label}
                                           </button>
