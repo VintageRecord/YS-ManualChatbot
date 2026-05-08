@@ -428,7 +428,7 @@ export default function ChatbotPage() {
             <div className="text-white font-semibold text-sm tracking-wide">YS CHATBOT</div>
             <div className="flex items-center gap-1.5">
               <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-              <span className="text-green-400 text-xs">Pembantu PTPS Sabah</span>
+              <span className="text-green-400 text-xs">Online</span>
             </div>
           </div>
         </div>
