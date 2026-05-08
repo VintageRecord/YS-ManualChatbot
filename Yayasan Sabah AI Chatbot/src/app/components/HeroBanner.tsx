@@ -42,11 +42,11 @@ export function HeroBanner() {
             transition={{ delay: 0.4 }}
             className="text-4xl md:text-6xl lg:text-7xl text-white mb-4 tracking-tight leading-tight"
           >
-            PORTAL TAJAAN &
+            Portal
             <br />
-            <span className="text-[#1a56db]">PEMINJAMAN PENDIDIKAN</span>
+            <span className="text-[#1a56db]">Tajaan & Peminjaman</span>
             <br />
-            <span className="text-3xl md:text-5xl lg:text-6xl">SABAH</span>
+            Pendidikan Sabah
           </motion.h1>
 
           {/* Subtitle */}
