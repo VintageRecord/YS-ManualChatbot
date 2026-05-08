@@ -265,7 +265,7 @@ function findResponse(input: string): Pick<KnowledgeEntry, "response" | "quickRe
 const INITIAL_MESSAGE: Message = {
   id: "welcome",
   role: "bot",
-  text: "Selamat datang ke Pembantu Kewangan Pendidikan Yayasan Sabah! 🎓\n\nSaya boleh membantu anda dengan maklumat tentang biasiswa, pinjaman pelajar, dan bantuan kewangan pendidikan. Pilih topik di bawah atau taip soalan anda:",
+  text: "Selamat datang ke YS Chatbot — Pembantu Kewangan Pendidikan Portal PTPS Sabah! 🎓\n\nSaya boleh membantu anda dengan maklumat tentang:\n• Lima badan penaja PTPS (BKNS, MUIS, TSK, YS, Baitulmal)\n• Biasiswa, geran dan pinjaman pengajian\n• Kriteria kelayakan & cara mohon\n• Dokumen diperlukan\n\nPilih topik di bawah atau taip soalan anda:",
   timestamp: new Date(),
   quickReplies: [
     "Tentang Biasiswa Yayasan Sabah",
@@ -432,7 +432,7 @@ export default function ChatbotPage() {
             <div className="text-white font-semibold text-sm tracking-wide">YS CHATBOT</div>
             <div className="flex items-center gap-1.5">
               <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-              <span className="text-green-400 text-xs">Dalam Talian</span>
+              <span className="text-green-400 text-xs">Pembantu PTPS Sabah</span>
             </div>
           </div>
         </div>
