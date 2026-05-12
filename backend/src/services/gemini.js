@@ -23,11 +23,10 @@ export async function generateEmbedding(text) {
 export async function generateResponse(userMessage, context, chatHistory = []) {
   // Try models in order of preference
   const chatModels = [
+    "gemini-2.5-flash",
+    "gemini-2.5-flash-preview-05-20",
     "gemini-2.0-flash",
-    "gemini-2.0-flash-exp",
     "gemini-1.5-flash",
-    "gemini-1.5-flash-latest",
-    "gemini-pro",
   ];
 
   const systemInstruction = `Anda adalah pembantu AI untuk Yayasan Sabah yang membantu pelajar mendapatkan maklumat tentang biasiswa, pinjaman, dan peluang pendidikan di Sabah, Malaysia.
