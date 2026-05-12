@@ -13,17 +13,26 @@ router.post("/", async (req, res) => {
       return res.status(400).json({ error: "Message is required" });
     }
 
-    // Step 1: Search local documents (vector search)
-    const embedding = await generateEmbedding(message);
-    const localResults = await searchDocuments(embedding, 5);
-
-    // Step 2: Search web if query seems time-sensitive
-    let webResults = [];
-    if (needsWebSearch(message)) {
-      webResults = await searchWeb(message);
+    // Step 1: Search local documents (vector search) — fail silently if Supabase not ready
+    let localResults = [];
+    try {
+      const embedding = await generateEmbedding(message);
+      localResults = await searchDocuments(embedding, 5);
+    } catch (err) {
+      console.warn("Vector search skipped:", err.message);
     }
 
-    // Step 3: Combine context from both sources
+    // Step 2: Search web if query seems time-sensitive — fail silently
+    let webResults = [];
+    try {
+      if (needsWebSearch(message)) {
+        webResults = await searchWeb(message);
+      }
+    } catch (err) {
+      console.warn("Web search skipped:", err.message);
+    }
+
+    // Step 3: Combine context
     const context = [
       ...localResults.map((r) => ({
         content: r.content,
@@ -46,9 +55,10 @@ router.post("/", async (req, res) => {
       },
     });
   } catch (error) {
-    console.error("Chat error:", error);
-    res.status(500).json({ error: "Failed to generate response" });
+    console.error("Chat error:", error.message);
+    res.status(500).json({ error: error.message });
   }
 });
 
 export default router;
+
