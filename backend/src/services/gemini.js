@@ -4,7 +4,7 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 // Generate embeddings for text (768 dimensions)
 export async function generateEmbedding(text) {
-  const model = genAI.getGenerativeModel({ model: "text-embedding-004" });
+  const model = genAI.getGenerativeModel({ model: "models/text-embedding-004" });
   const result = await model.embedContent(text);
   return result.embedding.values;
 }
