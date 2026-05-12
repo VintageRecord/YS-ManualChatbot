@@ -9,6 +9,7 @@ import { CompanyShowcase } from "./components/CompanyShowcase";
 import { NewsSection } from "./components/NewsSection";
 import { FooterSection } from "./components/FooterSection";
 import ChatbotPage from "./pages/ChatbotPage";
+import AdminPage from "./pages/AdminPage";
 
 function HomePage() {
   return (
@@ -33,6 +34,7 @@ export default function App() {
     <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/chatbot" element={<ChatbotPage />} />
+      <Route path="/admin" element={<AdminPage />} />
     </Routes>
   );
 }
