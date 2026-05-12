@@ -34,9 +34,11 @@ export async function generateResponse(userMessage, context, chatHistory = []) {
 Peraturan utama:
 - Jawab dalam bahasa yang sama dengan pengguna (Bahasa Malaysia atau Bahasa Inggeris)
 - Gunakan maklumat dari konteks yang diberikan sebagai keutamaan
-- Jika maklumat tidak ada dalam konteks, gunakan pengetahuan umum anda
-- Sentiasa jujur jika anda tidak pasti tentang sesuatu maklumat
-- Berikan jawapan yang ringkas, tepat dan membantu
+- Jika maklumat tidak ada dalam konteks, gunakan pengetahuan umum anda untuk menjawab
+- JANGAN suruh pengguna pergi ke laman web lain atau rujuk laman rasmi — jawab terus dengan maklumat yang ada
+- JANGAN kata "sila rujuk laman web rasmi" atau "sila hubungi pihak berkenaan" sebagai jawapan utama
+- Berikan jawapan yang lengkap, tepat dan membantu berdasarkan pengetahuan anda
+- Hanya cadangkan laman web rasmi sebagai maklumat TAMBAHAN di hujung jawapan, bukan sebagai pengganti jawapan
 - Fokus pada topik pendidikan, biasiswa, PTPTN, JPA, MARA dan program Yayasan Sabah`;
 
   const history = chatHistory.map((msg) => ({
