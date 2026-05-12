@@ -21,14 +21,6 @@ export async function searchWeb(query) {
       searchDepth: "basic",
       maxResults: 3,
       includeAnswer: true,
-      includeDomains: [
-        "yayasansabah.com.my",
-        "ptptn.gov.my",
-        "jpa.gov.my",
-        "mara.gov.my",
-        "mohe.gov.my",
-        "malaysia.gov.my",
-      ],
     });
 
     return response.results.map((r) => ({
