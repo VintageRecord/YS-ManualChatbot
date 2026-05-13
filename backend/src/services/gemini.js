@@ -21,7 +21,6 @@ export async function generateEmbedding(text) {
 
 // Generate AI response with context
 export async function generateResponse(userMessage, context, chatHistory = []) {
-  // Try models in order of preference
   const chatModels = [
     "gemini-2.5-flash",
     "gemini-2.5-flash-preview-05-20",
@@ -39,25 +38,36 @@ Peraturan utama:
 - JANGAN kata "sila rujuk laman web rasmi" atau "sila hubungi pihak berkenaan" sebagai jawapan utama
 - Berikan jawapan yang lengkap, tepat dan membantu berdasarkan pengetahuan anda
 - Hanya cadangkan laman web rasmi sebagai maklumat TAMBAHAN di hujung jawapan, bukan sebagai pengganti jawapan
+- Ingat konteks perbualan sebelum ini dan jawab berdasarkan keseluruhan perbualan
 - Fokus pada topik pendidikan, biasiswa, PTPTN, JPA, MARA dan program Yayasan Sabah`;
-
-  const history = chatHistory.map((msg) => ({
-    role: msg.role === "assistant" ? "model" : "user",
-    parts: [{ text: msg.content }],
-  }));
 
   const contextSection =
     context.length > 0
-      ? `\nMaklumat Relevan:\n${context.map((c, i) => `[${i + 1}] ${c.content}`).join("\n\n")}\n`
+      ? `\nMaklumat Relevan dari dokumen dan web:\n${context.map((c, i) => `[${i + 1}] ${c.content}`).join("\n\n")}\n`
       : "";
 
-  const prompt = `${contextSection}\nSoalan: ${userMessage}`;
+  // Build full conversation history as Contents array
+  // This preserves memory across all previous turns
+  const contents = [
+    // All previous exchanges
+    ...chatHistory.map((msg) => ({
+      role: msg.role === "assistant" ? "model" : "user",
+      parts: [{ text: msg.content }],
+    })),
+    // Current user message with RAG context injected
+    {
+      role: "user",
+      parts: [{ text: `${contextSection}\nSoalan: ${userMessage}` }],
+    },
+  ];
 
   for (const modelName of chatModels) {
     try {
-      const model = genAI.getGenerativeModel({ model: modelName, systemInstruction });
-      const chat = model.startChat({ history });
-      const result = await chat.sendMessage(prompt);
+      const model = genAI.getGenerativeModel({
+        model: modelName,
+        systemInstruction,
+      });
+      const result = await model.generateContent({ contents });
       console.log(`✅ Using model: ${modelName}`);
       return result.response.text();
     } catch (err) {
