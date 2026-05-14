@@ -24,14 +24,16 @@ async function probeEmbeddingConfig(apiKey) {
 
   // Try every known embedding model on both API versions
   const candidates = [
-    { model: "gemini-embedding-exp-03-07", apiVersion: "v1beta", body: { content: { parts: [{ text: "probe" }] }, outputDimensionality: 768 } },
-    { model: "text-embedding-005",         apiVersion: "v1beta", body: { content: { parts: [{ text: "probe" }] } } },
+    // Current production model (3072 dims, truncated to 768 to match Supabase schema)
+    { model: "gemini-embedding-001",       apiVersion: "v1beta", body: { content: { parts: [{ text: "probe" }] }, outputDimensionality: 768 } },
+    // Legacy models (native 768 dims)
     { model: "text-embedding-004",         apiVersion: "v1beta", body: { content: { parts: [{ text: "probe" }] } } },
-    { model: "embedding-001",              apiVersion: "v1beta", body: { content: { parts: [{ text: "probe" }] } } },
-    { model: "gemini-embedding-exp-03-07", apiVersion: "v1",     body: { content: { parts: [{ text: "probe" }] }, outputDimensionality: 768 } },
-    { model: "text-embedding-005",         apiVersion: "v1",     body: { content: { parts: [{ text: "probe" }] } } },
+    { model: "text-embedding-005",         apiVersion: "v1beta", body: { content: { parts: [{ text: "probe" }] } } },
+    // Experimental model (deprecated Aug 2025 but may still work)
+    { model: "gemini-embedding-exp-03-07", apiVersion: "v1beta", body: { content: { parts: [{ text: "probe" }] }, outputDimensionality: 768 } },
+    // v1 fallbacks
+    { model: "gemini-embedding-001",       apiVersion: "v1",     body: { content: { parts: [{ text: "probe" }] }, outputDimensionality: 768 } },
     { model: "text-embedding-004",         apiVersion: "v1",     body: { content: { parts: [{ text: "probe" }] } } },
-    { model: "embedding-001",              apiVersion: "v1",     body: { content: { parts: [{ text: "probe" }] } } },
   ];
 
   for (const { model, apiVersion, body } of candidates) {
