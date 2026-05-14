@@ -2,16 +2,32 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
-// Generate embeddings for text
+// Generate embeddings for text using the v1 REST API directly
+// (the @google/generative-ai SDK uses v1beta which no longer exposes embedding models)
 export async function generateEmbedding(text) {
-  const embeddingModels = ["text-embedding-005", "text-embedding-004", "embedding-001"];
+  const apiKey = process.env.GEMINI_API_KEY;
+  if (!apiKey) throw new Error("GEMINI_API_KEY is not set in .env");
 
+  const embeddingModels = ["text-embedding-004", "embedding-001"];
   let lastError;
+
   for (const modelName of embeddingModels) {
     try {
-      const model = genAI.getGenerativeModel({ model: modelName });
-      const result = await model.embedContent(text);
-      return result.embedding.values;
+      const response = await fetch(
+        `https://generativelanguage.googleapis.com/v1/models/${modelName}:embedContent?key=${apiKey}`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ content: { parts: [{ text }] } }),
+        }
+      );
+      if (!response.ok) {
+        const err = await response.json();
+        throw new Error(err.error?.message ?? `HTTP ${response.status}`);
+      }
+      const data = await response.json();
+      console.log(`✅ Using embedding model: ${modelName}`);
+      return data.embedding.values;
     } catch (err) {
       console.warn(`Embedding model ${modelName} failed: ${err.message}`);
       lastError = err;
