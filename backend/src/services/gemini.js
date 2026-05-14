@@ -4,26 +4,27 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 // Generate embeddings for text
 export async function generateEmbedding(text) {
-  // Try newer models first, fall back if not available
-  const embeddingModels = ["text-embedding-005", "text-embedding-004"];
+  const embeddingModels = ["text-embedding-005", "text-embedding-004", "embedding-001"];
 
+  let lastError;
   for (const modelName of embeddingModels) {
     try {
       const model = genAI.getGenerativeModel({ model: modelName });
       const result = await model.embedContent(text);
       return result.embedding.values;
-    } catch {
-      continue;
+    } catch (err) {
+      console.warn(`Embedding model ${modelName} failed: ${err.message}`);
+      lastError = err;
     }
   }
-  throw new Error("No embedding model available");
+  throw new Error(`No embedding model available: ${lastError?.message ?? "unknown error"}`);
 }
 
 // Generate AI response with context
 export async function generateResponse(userMessage, context, chatHistory = []) {
   const chatModels = [
     "gemini-2.5-flash",
-    "gemini-3.0-flash",,
+    "gemini-3.0-flash",
     "gemini-3.1-flash-lite",
     "gemini-2.5-flash-lite",
   ];
