@@ -53,7 +53,7 @@ const INITIAL_MESSAGE: Message = {
   role: "bot",
   text: "Selamat datang ke YS Chatbot! 👋\n\nSaya pembantu AI untuk maklumat tajaan dan pinjaman pendidikan Sabah melalui Portal Tajaan Pendidikan Sabah (PTPS).\n\nSila pilih **Badan Penaja** yang ingin anda ketahui:",
   timestamp: new Date(),
-  quickReplies: BADAN_PENAJA.map((bp) => ({ label: bp.label, query: bp.query })),
+  quickReplies: BADAN_PENAJA.map((bp) => ({ label: bp.full, query: bp.query })),
 };
 
 // ── Sub-components ────────────────────────────────────────────────────────────
@@ -157,7 +157,7 @@ export default function ChatbotPage() {
         role: "bot",
         text: "Maaf, berlaku masalah sambungan. Sila pastikan pelayan berjalan dan cuba semula.",
         timestamp: new Date(),
-        quickReplies: BADAN_PENAJA.map((bp) => ({ label: bp.label, query: bp.query })),
+        quickReplies: BADAN_PENAJA.map((bp) => ({ label: bp.full, query: bp.query })),
       };
       setMessages((prev) => [...prev, errMsg]);
     } finally {
