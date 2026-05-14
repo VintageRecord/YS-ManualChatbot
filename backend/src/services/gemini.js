@@ -2,38 +2,86 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
-// Generate embeddings for text using the v1 REST API directly
-// (the @google/generative-ai SDK uses v1beta which no longer exposes embedding models)
+// Cached working embedding config — probed once, reused for all chunks
+let embeddingConfig = null;
+
+async function probeEmbeddingConfig(apiKey) {
+  // List available models so we can see exactly what this key supports
+  try {
+    const listRes = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models?key=${apiKey}&pageSize=100`
+    );
+    if (listRes.ok) {
+      const { models = [] } = await listRes.json();
+      const available = models
+        .filter((m) => m.supportedGenerationMethods?.includes("embedContent"))
+        .map((m) => m.name);
+      console.log("📋 Embedding models available for your key:", available.join(", ") || "(none found — check your API key restrictions)");
+    }
+  } catch (e) {
+    console.warn("Could not list models:", e.message);
+  }
+
+  // Try every known embedding model on both API versions
+  const candidates = [
+    { model: "gemini-embedding-exp-03-07", apiVersion: "v1beta", body: { content: { parts: [{ text: "probe" }] }, outputDimensionality: 768 } },
+    { model: "text-embedding-005",         apiVersion: "v1beta", body: { content: { parts: [{ text: "probe" }] } } },
+    { model: "text-embedding-004",         apiVersion: "v1beta", body: { content: { parts: [{ text: "probe" }] } } },
+    { model: "embedding-001",              apiVersion: "v1beta", body: { content: { parts: [{ text: "probe" }] } } },
+    { model: "gemini-embedding-exp-03-07", apiVersion: "v1",     body: { content: { parts: [{ text: "probe" }] }, outputDimensionality: 768 } },
+    { model: "text-embedding-005",         apiVersion: "v1",     body: { content: { parts: [{ text: "probe" }] } } },
+    { model: "text-embedding-004",         apiVersion: "v1",     body: { content: { parts: [{ text: "probe" }] } } },
+    { model: "embedding-001",              apiVersion: "v1",     body: { content: { parts: [{ text: "probe" }] } } },
+  ];
+
+  for (const { model, apiVersion, body } of candidates) {
+    try {
+      const res = await fetch(
+        `https://generativelanguage.googleapis.com/${apiVersion}/models/${model}:embedContent?key=${apiKey}`,
+        { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) }
+      );
+      if (res.ok) {
+        const data = await res.json();
+        if (data.embedding?.values?.length) {
+          console.log(`✅ Embedding resolved: ${model} (${apiVersion})`);
+          return { model, apiVersion, useOutputDimensionality: !!body.outputDimensionality };
+        }
+      }
+    } catch {}
+  }
+  return null;
+}
+
 export async function generateEmbedding(text) {
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) throw new Error("GEMINI_API_KEY is not set in .env");
 
-  const embeddingModels = ["text-embedding-004", "embedding-001"];
-  let lastError;
-
-  for (const modelName of embeddingModels) {
-    try {
-      const response = await fetch(
-        `https://generativelanguage.googleapis.com/v1/models/${modelName}:embedContent?key=${apiKey}`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ content: { parts: [{ text }] } }),
-        }
+  if (!embeddingConfig) {
+    embeddingConfig = await probeEmbeddingConfig(apiKey);
+    if (!embeddingConfig) {
+      throw new Error(
+        "No embedding model is available for your GEMINI_API_KEY. " +
+        "Check the '📋 Embedding models' log above. If it shows '(none found)', " +
+        "go to aistudio.google.com/apikey, create a new unrestricted key, and update your .env file."
       );
-      if (!response.ok) {
-        const err = await response.json();
-        throw new Error(err.error?.message ?? `HTTP ${response.status}`);
-      }
-      const data = await response.json();
-      console.log(`✅ Using embedding model: ${modelName}`);
-      return data.embedding.values;
-    } catch (err) {
-      console.warn(`Embedding model ${modelName} failed: ${err.message}`);
-      lastError = err;
     }
   }
-  throw new Error(`No embedding model available: ${lastError?.message ?? "unknown error"}`);
+
+  const { model, apiVersion, useOutputDimensionality } = embeddingConfig;
+  const body = { content: { parts: [{ text }] } };
+  if (useOutputDimensionality) body.outputDimensionality = 768;
+
+  const response = await fetch(
+    `https://generativelanguage.googleapis.com/${apiVersion}/models/${model}:embedContent?key=${apiKey}`,
+    { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) }
+  );
+  if (!response.ok) {
+    const err = await response.json();
+    embeddingConfig = null; // reset so next call re-probes
+    throw new Error(err.error?.message ?? `HTTP ${response.status}`);
+  }
+  const data = await response.json();
+  return data.embedding.values;
 }
 
 // Generate AI response with context
