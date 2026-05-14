@@ -2,25 +2,26 @@ import { tavily } from "@tavily/core";
 
 const client = tavily({ apiKey: process.env.TAVILY_API_KEY });
 
-// Determine if a query needs web search
+// Determine if a query needs web search.
+// Only trigger for genuinely time-sensitive questions — topic keywords like
+// "biasiswa" or "syarat" are handled by the PDF knowledge base, not the web.
 export function needsWebSearch(query) {
-  const webKeywords = [
-    // Time-sensitive
-    "terkini", "baru", "2024", "2025", "2026",
-    "tarikh", "deadline", "bila", "when", "latest",
-    "recent", "semasa", "sekarang", "now", "current",
-    "berita", "news", "announce", "pengumuman",
-    // Scholarship specific
-    "biasiswa", "scholarship", "ptptn", "jpa", "mara",
-    "yayasan sabah", "permohonan", "apply", "mohon",
-    "kelayakan", "syarat", "eligibility", "nilai",
-    "elaun", "allowance", "amount", "berapa",
-    "cara", "how", "langkah", "step", "proses",
-    "dokumen", "document", "required", "diperlukan",
-    "hubungi", "contact", "telefon", "alamat",
+  const timeSensitiveKeywords = [
+    // Recency signals
+    "terkini", "terbaru", "latest", "recent", "current", "now",
+    "semasa", "sekarang", "masa kini",
+    // Specific years
+    "2024", "2025", "2026", "2027",
+    // Dates & deadlines
+    "tarikh", "deadline", "due date", "closing date",
+    "tutup permohonan", "buka permohonan",
+    "bila", "when", "bilakah",
+    // News & announcements
+    "berita", "news", "announcement", "pengumuman",
+    "keputusan", "result", "announced",
   ];
   const lower = query.toLowerCase();
-  return webKeywords.some((kw) => lower.includes(kw));
+  return timeSensitiveKeywords.some((kw) => lower.includes(kw));
 }
 
 // Search the web for relevant info

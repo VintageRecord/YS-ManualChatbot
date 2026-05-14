@@ -22,11 +22,15 @@ router.post("/", async (req, res) => {
       console.warn("Vector search skipped:", err.message);
     }
 
-    // Step 2: Search web if query seems time-sensitive — fail silently
+    // Step 2: Search web if:
+    //   - Query is time-sensitive (live data needed regardless of PDFs), OR
+    //   - PDF search returned nothing (knowledge base doesn't cover this topic)
     let webResults = [];
     try {
-      if (needsWebSearch(message)) {
+      const noLocalContext = localResults.length === 0;
+      if (needsWebSearch(message) || noLocalContext) {
         webResults = await searchWeb(message);
+        console.log(`🌐 Web search triggered — reason: ${needsWebSearch(message) ? "time-sensitive query" : "no PDF context found"}`);
       }
     } catch (err) {
       console.warn("Web search skipped:", err.message);
