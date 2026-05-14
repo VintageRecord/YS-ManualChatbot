@@ -33,7 +33,7 @@ interface ChatHistoryEntry {
 const INITIAL_MESSAGE: Message = {
   id: "welcome",
   role: "bot",
-  text: "Selamat datang ke YS Chatbot — Pembantu Kewangan Pendidikan Portal PTPS Sabah! 🎓\n\nSaya AI yang boleh membantu anda dengan maklumat tentang:\n• Lima badan penaja PTPS (BKNS, MUIS, TSK, YS, Baitulmal)\n• Biasiswa, geran dan pinjaman pengajian\n• Kriteria kelayakan & cara mohon\n• Dokumen diperlukan\n\nPilih topik di bawah atau taip soalan anda:",
+  text: "Selamat datang ke YS Chatbot — Pembantu Maklumat Tajaan dan Pinjaman Pendidikan Sabah! 🎓\n\nSaya AI yang boleh membantu anda dengan maklumat tentang:\n• Lima badan penaja PTPS (BKNS, MUIS, TSK, YS, Baitulmal)\n• Biasiswa, geran dan pinjaman pengajian\n• Kriteria kelayakan & cara mohon\n• Dokumen diperlukan\n\nPilih topik di bawah atau taip soalan anda:",
   timestamp: new Date(),
   quickReplies: [
     "Tentang Biasiswa Yayasan Sabah",

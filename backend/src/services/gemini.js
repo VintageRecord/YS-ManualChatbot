@@ -5,7 +5,7 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 // Generate embeddings for text
 export async function generateEmbedding(text) {
   // Try newer models first, fall back if not available
-  const embeddingModels = ["text-embedding-004", "embedding-001"];
+  const embeddingModels = ["text-embedding-005", "text-embedding-004"];
 
   for (const modelName of embeddingModels) {
     try {
@@ -23,9 +23,9 @@ export async function generateEmbedding(text) {
 export async function generateResponse(userMessage, context, chatHistory = []) {
   const chatModels = [
     "gemini-2.5-flash",
-    "gemini-2.5-flash-preview-05-20",
-    "gemini-2.0-flash",
-    "gemini-1.5-flash",
+    "gemini-3.0-flash",,
+    "gemini-3.1-flash-lite",
+    "gemini-2.5-flash-lite",
   ];
 
   const systemInstruction = `Anda adalah pembantu AI untuk Yayasan Sabah yang membantu pelajar mendapatkan maklumat tentang biasiswa, pinjaman, dan peluang pendidikan di Sabah, Malaysia.
