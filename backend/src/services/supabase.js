@@ -9,7 +9,7 @@ const supabase = createClient(
 export async function searchDocuments(embedding, matchCount = 5) {
   const { data, error } = await supabase.rpc("match_documents", {
     query_embedding: embedding,
-    match_threshold: 0.5,
+    match_threshold: 0.3,
     match_count: matchCount,
   });
 

@@ -18,6 +18,7 @@ router.post("/", async (req, res) => {
     try {
       const embedding = await generateEmbedding(message);
       localResults = await searchDocuments(embedding, 5);
+      console.log(`📄 PDF search: ${localResults.length} chunks found${localResults.length > 0 ? ` (top similarity: ${localResults[0].similarity?.toFixed(3)})` : ""}`);
     } catch (err) {
       console.warn("Vector search skipped:", err.message);
     }
