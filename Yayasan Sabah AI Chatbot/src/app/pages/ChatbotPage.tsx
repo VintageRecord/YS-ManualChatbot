@@ -16,6 +16,8 @@ const BADAN_PENAJA = [
   { label: "BUDI",      full: "Bantuan Tunai Pendaftaran IPT",         query: "Terangkan mengenai BUDI — Bantuan Tunai Pendaftaran IPT, termasuk kelayakan dan cara permohonan." },
 ];
 
+const PILIH_PENAJA_LAIN = "__PILIH_PENAJA_LAIN__";
+
 // Topic chips shown after a Badan Penaja is selected
 function getTopicChips(bp: typeof BADAN_PENAJA[0]): QuickReply[] {
   return [
@@ -25,6 +27,7 @@ function getTopicChips(bp: typeof BADAN_PENAJA[0]): QuickReply[] {
     { label: "Jumlah Elaun / Nilai",  query: `Berapakah jumlah elaun atau nilai tajaan ${bp.full}?` },
     { label: "Tarikh Permohonan",     query: `Bilakah tarikh permohonan ${bp.full} dibuka dan ditutup?` },
     { label: "Semak Kelayakan Saya",  query: `Saya ingin semak sama ada saya layak untuk ${bp.full}. Sila tanya saya tentang status akademik dan keputusan semasa saya supaya anda boleh bantu menentukan kelayakan saya.` },
+    { label: "↩ Pilih Penaja Lain",   query: PILIH_PENAJA_LAIN },
   ];
 }
 
@@ -106,6 +109,24 @@ export default function ChatbotPage() {
 
   const sendMessage = async (text: string) => {
     if (!text.trim() || isTyping) return;
+
+    // Handle "Pilih Penaja Lain" client-side — no backend call needed
+    if (text === PILIH_PENAJA_LAIN) {
+      const otherBPs = BADAN_PENAJA.filter((bp) => bp !== activeBP);
+      setActiveBP(null);
+      setMessages((prev) => [
+        ...prev,
+        { id: Date.now().toString(), role: "user", text: "Pilih Penaja Lain", timestamp: new Date() },
+        {
+          id: (Date.now() + 1).toString(),
+          role: "bot",
+          text: "Baik! Sila pilih Badan Penaja lain yang ingin anda ketahui:",
+          timestamp: new Date(),
+          quickReplies: otherBPs.map((bp) => ({ label: bp.full, query: bp.query })),
+        },
+      ]);
+      return;
+    }
 
     // Detect Badan Penaja selection and update active BP
     const matchedBP = BADAN_PENAJA.find((bp) => bp.query === text);
