@@ -1,28 +1,45 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import { useNavigate } from "react-router";
 import { motion, AnimatePresence } from "motion/react";
-import {
-  Send,
-  ArrowLeft,
-  User,
-  BookOpen,
-  DollarSign,
-  FileText,
-  HelpCircle,
-  ChevronRight,
-  GraduationCap,
-  Sparkles,
-} from "lucide-react";
+import { Send, ArrowLeft, User, ChevronRight, Sparkles } from "lucide-react";
 import logoImg from "../../imports/image.png";
 
 const BACKEND_URL = "http://localhost:3001";
+
+// ── Badan Penaja ──────────────────────────────────────────────────────────────
+const BADAN_PENAJA = [
+  { label: "BKNS",      full: "Biasiswa Kerajaan Negeri Sabah",       query: "Terangkan mengenai Biasiswa Kerajaan Negeri Sabah (BKNS) — jenis tajaan, kelayakan umum dan cara permohonan." },
+  { label: "KYS",       full: "Kumpulan Yayasan Sabah",               query: "Terangkan mengenai Biasiswa Kumpulan Yayasan Sabah (KYS) — jenis tajaan, kelayakan umum dan cara permohonan." },
+  { label: "MUIS",      full: "Majlis Ugama Islam Sabah",              query: "Terangkan mengenai Dermasiswa Majlis Ugama Islam Sabah (MUIS) — jenis tajaan, kelayakan umum dan cara permohonan." },
+  { label: "Baitulmal", full: "Perbadanan Baitulmal Negeri Sabah",     query: "Terangkan mengenai Biasiswa Perbadanan Baitulmal Negeri Sabah — jenis tajaan, kelayakan umum dan cara permohonan." },
+  { label: "TSK",       full: "Timbalan Setiausaha Kerajaan",          query: "Terangkan mengenai Tajaan Timbalan Setiausaha Kerajaan Negeri Sabah (TSK) — jenis tajaan, kelayakan umum dan cara permohonan." },
+  { label: "BUDI",      full: "Bantuan Tunai Pendaftaran IPT",         query: "Terangkan mengenai BUDI — Bantuan Tunai Pendaftaran IPT, termasuk kelayakan dan cara permohonan." },
+];
+
+// Topic chips shown after a Badan Penaja is selected
+function getTopicChips(bp: typeof BADAN_PENAJA[0]): QuickReply[] {
+  return [
+    { label: "Kelayakan & Syarat",    query: `Apakah kelayakan dan syarat untuk ${bp.full}?` },
+    { label: "Cara Mohon",            query: `Bagaimana cara memohon ${bp.full}? Terangkan langkah-langkah permohonan.` },
+    { label: "Dokumen Diperlukan",    query: `Apakah dokumen yang diperlukan untuk memohon ${bp.full}?` },
+    { label: "Jumlah Elaun / Nilai",  query: `Berapakah jumlah elaun atau nilai tajaan ${bp.full}?` },
+    { label: "Tarikh Permohonan",     query: `Bilakah tarikh permohonan ${bp.full} dibuka dan ditutup?` },
+    { label: "Semak Kelayakan Saya",  query: `Saya ingin semak sama ada saya layak untuk ${bp.full}. Sila tanya saya tentang status akademik dan keputusan semasa saya supaya anda boleh bantu menentukan kelayakan saya.` },
+  ];
+}
+
+// ── Types ─────────────────────────────────────────────────────────────────────
+interface QuickReply {
+  label: string;
+  query: string;
+}
 
 interface Message {
   id: string;
   role: "bot" | "user";
   text: string;
   timestamp: Date;
-  quickReplies?: string[];
+  quickReplies?: QuickReply[];
 }
 
 interface ChatHistoryEntry {
@@ -30,28 +47,16 @@ interface ChatHistoryEntry {
   content: string;
 }
 
+// ── Welcome message ───────────────────────────────────────────────────────────
 const INITIAL_MESSAGE: Message = {
   id: "welcome",
   role: "bot",
-  text: "Selamat datang ke YS Chatbot — Pembantu Maklumat Tajaan dan Pinjaman Pendidikan Sabah! 🎓\n\nSaya AI yang boleh membantu anda dengan maklumat tentang:\n• Lima badan penaja PTPS (BKNS, MUIS, TSK, YS, Baitulmal)\n• Biasiswa, geran dan pinjaman pengajian\n• Kriteria kelayakan & cara mohon\n• Dokumen diperlukan\n\nPilih topik di bawah atau taip soalan anda:",
+  text: "Selamat datang ke YS Chatbot! 👋\n\nSaya pembantu AI untuk maklumat tajaan dan pinjaman pendidikan Sabah melalui Portal Tajaan Pendidikan Sabah (PTPS).\n\nSila pilih **Badan Penaja** yang ingin anda ketahui:",
   timestamp: new Date(),
-  quickReplies: [
-    "Tentang Biasiswa Yayasan Sabah",
-    "Pinjaman PTPTN",
-    "Biasiswa JPA",
-    "Pinjaman MARA",
-    "Dokumen Diperlukan",
-    "Tips Permohonan",
-  ],
+  quickReplies: BADAN_PENAJA.map((bp) => ({ label: bp.full, query: bp.query })),
 };
 
-const CATEGORIES = [
-  { icon: GraduationCap, label: "Biasiswa", query: "Tentang Biasiswa Yayasan Sabah" },
-  { icon: DollarSign, label: "Pinjaman", query: "Apakah pinjaman PTPTN?" },
-  { icon: FileText, label: "Dokumen", query: "Dokumen apa yang diperlukan untuk memohon biasiswa?" },
-  { icon: HelpCircle, label: "FAQ", query: "Apakah beza biasiswa dan pinjaman pendidikan?" },
-];
-
+// ── Sub-components ────────────────────────────────────────────────────────────
 function TypingIndicator() {
   return (
     <div className="flex items-end gap-3 mb-4">
@@ -75,17 +80,18 @@ function TypingIndicator() {
 }
 
 function formatText(text: string) {
-  return text.split("\n").map((line, i) => {
+  return text.split("\n").map((line, i, arr) => {
     const bold = line.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
     return (
       <span key={i}>
         <span dangerouslySetInnerHTML={{ __html: bold }} />
-        {i < text.split("\n").length - 1 && <br />}
+        {i < arr.length - 1 && <br />}
       </span>
     );
   });
 }
 
+// ── Main component ────────────────────────────────────────────────────────────
 export default function ChatbotPage() {
   const navigate = useNavigate();
   const [messages, setMessages] = useState<Message[]>([INITIAL_MESSAGE]);
@@ -93,25 +99,29 @@ export default function ChatbotPage() {
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
+  const pendingBP = useRef<typeof BADAN_PENAJA[0] | null>(null);
 
-  useEffect(() => {
+  const scrollToBottom = () =>
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages, isTyping]);
 
   const sendMessage = async (text: string) => {
     if (!text.trim() || isTyping) return;
 
+    // Track if this message is a Badan Penaja selection
+    const matchedBP = BADAN_PENAJA.find((bp) => bp.query === text);
+    if (matchedBP) pendingBP.current = matchedBP;
+
     const userMsg: Message = {
       id: Date.now().toString(),
       role: "user",
-      text: text.trim(),
+      text: matchedBP ? matchedBP.label : text.trim(),
       timestamp: new Date(),
     };
 
     setMessages((prev) => [...prev, userMsg]);
     setInput("");
     setIsTyping(true);
+    setTimeout(scrollToBottom, 50);
 
     try {
       const res = await fetch(`${BACKEND_URL}/api/chat`, {
@@ -121,14 +131,17 @@ export default function ChatbotPage() {
       });
 
       if (!res.ok) throw new Error("Backend error");
-
       const data = await res.json();
+
+      const bp = pendingBP.current;
+      pendingBP.current = null;
 
       const botMsg: Message = {
         id: (Date.now() + 1).toString(),
         role: "bot",
         text: data.response,
         timestamp: new Date(),
+        quickReplies: bp ? getTopicChips(bp) : undefined,
       };
 
       setMessages((prev) => [...prev, botMsg]);
@@ -138,16 +151,18 @@ export default function ChatbotPage() {
         { role: "assistant", content: data.response },
       ]);
     } catch {
+      pendingBP.current = null;
       const errMsg: Message = {
         id: (Date.now() + 1).toString(),
         role: "bot",
-        text: "Maaf, berlaku masalah sambungan. Sila pastikan backend berjalan dan cuba semula.",
+        text: "Maaf, berlaku masalah sambungan. Sila pastikan pelayan berjalan dan cuba semula.",
         timestamp: new Date(),
-        quickReplies: ["Cuba lagi", "Tentang Biasiswa Yayasan Sabah"],
+        quickReplies: BADAN_PENAJA.map((bp) => ({ label: bp.full, query: bp.query })),
       };
       setMessages((prev) => [...prev, errMsg]);
     } finally {
       setIsTyping(false);
+      setTimeout(scrollToBottom, 100);
     }
   };
 
@@ -157,8 +172,11 @@ export default function ChatbotPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col" style={{ background: "linear-gradient(135deg, #0a1628 0%, #1a0a08 50%, #0a1628 100%)" }}>
-      {/* Animated background blobs */}
+    <div
+      className="min-h-screen flex flex-col"
+      style={{ background: "linear-gradient(135deg, #0a1628 0%, #1a0a08 50%, #0a1628 100%)" }}
+    >
+      {/* Background blobs */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <motion.div
           className="absolute -top-40 -left-40 w-96 h-96 rounded-full opacity-20"
@@ -216,33 +234,7 @@ export default function ChatbotPage() {
         </div>
       </motion.header>
 
-      {/* Category quick-access bar */}
-      <motion.div
-        initial={{ opacity: 0, y: -10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.2 }}
-        className="relative z-10 flex gap-2 px-4 md:px-8 py-3 overflow-x-auto scrollbar-hide border-b border-white/5 bg-black/20"
-      >
-        {CATEGORIES.map((cat) => (
-          <button
-            key={cat.label}
-            onClick={() => sendMessage(cat.query)}
-            className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 hover:bg-[#1a56db]/30 border border-white/15 hover:border-[#1a56db]/60 text-white/80 hover:text-white text-xs font-medium whitespace-nowrap active:scale-95 transition-all"
-          >
-            <cat.icon className="w-3.5 h-3.5 text-[#f0a500]" />
-            {cat.label}
-          </button>
-        ))}
-        <button
-          onClick={() => sendMessage("Bila tarikh permohonan biasiswa dibuka?")}
-          className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 hover:bg-[#1a56db]/30 border border-white/15 hover:border-[#1a56db]/60 text-white/80 hover:text-white text-xs font-medium whitespace-nowrap active:scale-95 transition-all"
-        >
-          <BookOpen className="w-3.5 h-3.5 text-[#f0a500]" />
-          Tarikh Mohon
-        </button>
-      </motion.div>
-
-      {/* Messages area */}
+      {/* Messages */}
       <div className="relative z-10 flex-1 overflow-y-auto px-4 md:px-8 py-6 space-y-1">
         <AnimatePresence initial={false}>
           {messages.map((msg) => (
@@ -268,7 +260,11 @@ export default function ChatbotPage() {
                 )}
               </div>
 
-              <div className={`flex flex-col gap-2 max-w-[80%] md:max-w-[65%] ${msg.role === "user" ? "items-end" : "items-start"}`}>
+              <div
+                className={`flex flex-col gap-2 max-w-[82%] md:max-w-[65%] ${
+                  msg.role === "user" ? "items-end" : "items-start"
+                }`}
+              >
                 {/* Bubble */}
                 <div
                   className={`rounded-2xl px-4 py-3 text-sm leading-relaxed ${
@@ -285,17 +281,18 @@ export default function ChatbotPage() {
                   {msg.timestamp.toLocaleTimeString("ms-MY", { hour: "2-digit", minute: "2-digit" })}
                 </span>
 
-                {/* Quick replies */}
+                {/* Quick reply chips */}
                 {msg.quickReplies && msg.role === "bot" && (
                   <div className="flex flex-wrap gap-2 mt-1">
                     {msg.quickReplies.map((qr) => (
                       <button
-                        key={qr}
-                        onClick={() => sendMessage(qr)}
-                        className="flex items-center gap-1 px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/15 border border-white/20 hover:border-white/40 text-white text-xs transition-all active:scale-95"
+                        key={qr.label}
+                        onClick={() => sendMessage(qr.query)}
+                        disabled={isTyping}
+                        className="flex items-center gap-1 px-3 py-1.5 rounded-full bg-white/5 hover:bg-[#1a56db]/25 border border-white/20 hover:border-[#1a56db]/50 text-white text-xs font-medium transition-all active:scale-95 disabled:opacity-40"
                       >
-                        {qr}
-                        <ChevronRight className="w-3 h-3 opacity-60" />
+                        {qr.label}
+                        <ChevronRight className="w-3 h-3 opacity-50" />
                       </button>
                     ))}
                   </div>
@@ -309,7 +306,7 @@ export default function ChatbotPage() {
         <div ref={messagesEndRef} />
       </div>
 
-      {/* Input area */}
+      {/* Input */}
       <motion.div
         initial={{ y: 60, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
@@ -318,11 +315,10 @@ export default function ChatbotPage() {
       >
         <form onSubmit={handleSubmit} className="flex gap-3 items-center">
           <input
-            ref={inputRef}
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="Taip soalan anda di sini... (cth: 'Bagaimana nak mohon PTPTN?')"
+            placeholder="Taip soalan anda di sini..."
             className="flex-1 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-5 py-3 text-white text-sm placeholder:text-white/40 focus:outline-none focus:border-white/40 focus:bg-white/15 transition-all"
           />
           <button
