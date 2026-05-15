@@ -98,8 +98,8 @@ export default function ChatbotPage() {
   const [chatHistory, setChatHistory] = useState<ChatHistoryEntry[]>([]);
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
+  const [activeBP, setActiveBP] = useState<typeof BADAN_PENAJA[0] | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const pendingBP = useRef<typeof BADAN_PENAJA[0] | null>(null);
 
   const scrollToBottom = () =>
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -107,14 +107,15 @@ export default function ChatbotPage() {
   const sendMessage = async (text: string) => {
     if (!text.trim() || isTyping) return;
 
-    // Track if this message is a Badan Penaja selection
+    // Detect Badan Penaja selection and update active BP
     const matchedBP = BADAN_PENAJA.find((bp) => bp.query === text);
-    if (matchedBP) pendingBP.current = matchedBP;
+    const currentBP = matchedBP ?? activeBP;
+    if (matchedBP) setActiveBP(matchedBP);
 
     const userMsg: Message = {
       id: Date.now().toString(),
       role: "user",
-      text: matchedBP ? matchedBP.label : text.trim(),
+      text: matchedBP ? matchedBP.full : text.trim(),
       timestamp: new Date(),
     };
 
@@ -133,15 +134,12 @@ export default function ChatbotPage() {
       if (!res.ok) throw new Error("Backend error");
       const data = await res.json();
 
-      const bp = pendingBP.current;
-      pendingBP.current = null;
-
       const botMsg: Message = {
         id: (Date.now() + 1).toString(),
         role: "bot",
         text: data.response,
         timestamp: new Date(),
-        quickReplies: bp ? getTopicChips(bp) : undefined,
+        quickReplies: currentBP ? getTopicChips(currentBP) : undefined,
       };
 
       setMessages((prev) => [...prev, botMsg]);
@@ -151,7 +149,6 @@ export default function ChatbotPage() {
         { role: "assistant", content: data.response },
       ]);
     } catch {
-      pendingBP.current = null;
       const errMsg: Message = {
         id: (Date.now() + 1).toString(),
         role: "bot",
