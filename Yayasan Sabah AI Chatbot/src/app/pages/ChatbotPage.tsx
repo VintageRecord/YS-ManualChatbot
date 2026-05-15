@@ -51,7 +51,7 @@ interface ChatHistoryEntry {
 const INITIAL_MESSAGE: Message = {
   id: "welcome",
   role: "bot",
-  text: "Selamat datang ke YS Chatbot! 👋\n\nSaya pembantu AI untuk maklumat tajaan dan pinjaman pendidikan Sabah melalui Portal Tajaan Pendidikan Sabah (PTPS).\n\nSila pilih **Badan Penaja** yang ingin anda ketahui:",
+  text: "Selamat datang ke YS Chatbot! 👋\n\nSaya pembantu AI untuk maklumat tajaan dan pinjaman pendidikan di Sabah.\n\nSila pilih **Badan Penaja** yang ingin anda ketahui:",
   timestamp: new Date(),
   quickReplies: BADAN_PENAJA.map((bp) => ({ label: bp.full, query: bp.query })),
 };
