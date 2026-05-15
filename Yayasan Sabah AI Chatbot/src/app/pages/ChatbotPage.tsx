@@ -8,13 +8,23 @@ const BACKEND_URL = "http://localhost:3001";
 
 // ── Badan Penaja ──────────────────────────────────────────────────────────────
 const BADAN_PENAJA = [
-  { label: "BKNS",      full: "Biasiswa Kerajaan Negeri Sabah",       query: "Terangkan mengenai Biasiswa Kerajaan Negeri Sabah (BKNS) — jenis tajaan, kelayakan umum dan cara permohonan." },
-  { label: "KYS",       full: "Kumpulan Yayasan Sabah",               query: "Terangkan mengenai Biasiswa Kumpulan Yayasan Sabah (KYS) — jenis tajaan, kelayakan umum dan cara permohonan." },
-  { label: "MUIS",      full: "Majlis Ugama Islam Sabah",              query: "Terangkan mengenai Dermasiswa Majlis Ugama Islam Sabah (MUIS) — jenis tajaan, kelayakan umum dan cara permohonan." },
-  { label: "Baitulmal", full: "Perbadanan Baitulmal Negeri Sabah",     query: "Terangkan mengenai Biasiswa Perbadanan Baitulmal Negeri Sabah — jenis tajaan, kelayakan umum dan cara permohonan." },
-  { label: "TSK",       full: "Timbalan Setiausaha Kerajaan",          query: "Terangkan mengenai Tajaan Timbalan Setiausaha Kerajaan Negeri Sabah (TSK) — jenis tajaan, kelayakan umum dan cara permohonan." },
-  { label: "BUDI",      full: "Bantuan Tunai Pendaftaran IPT",         query: "Terangkan mengenai BUDI — Bantuan Tunai Pendaftaran IPT, termasuk kelayakan dan cara permohonan." },
+  { label: "BKNS",      full: "Biasiswa Kerajaan Negeri Sabah",       keywords: ["bkns", "biasiswa kerajaan negeri"],         query: "Terangkan mengenai Biasiswa Kerajaan Negeri Sabah (BKNS) — jenis tajaan, kelayakan umum dan cara permohonan." },
+  { label: "KYS",       full: "Kumpulan Yayasan Sabah",               keywords: ["kys", "kumpulan yayasan", "yayasan sabah"], query: "Terangkan mengenai Biasiswa Kumpulan Yayasan Sabah (KYS) — jenis tajaan, kelayakan umum dan cara permohonan." },
+  { label: "MUIS",      full: "Majlis Ugama Islam Sabah",              keywords: ["muis", "dermasiswa", "ugama islam sabah"],  query: "Terangkan mengenai Dermasiswa Majlis Ugama Islam Sabah (MUIS) — jenis tajaan, kelayakan umum dan cara permohonan." },
+  { label: "Baitulmal", full: "Perbadanan Baitulmal Negeri Sabah",     keywords: ["baitulmal"],                                query: "Terangkan mengenai Biasiswa Perbadanan Baitulmal Negeri Sabah — jenis tajaan, kelayakan umum dan cara permohonan." },
+  { label: "TSK",       full: "Timbalan Setiausaha Kerajaan",          keywords: ["tsk", "timbalan setiausaha"],               query: "Terangkan mengenai Tajaan Timbalan Setiausaha Kerajaan Negeri Sabah (TSK) — jenis tajaan, kelayakan umum dan cara permohonan." },
+  { label: "BUDI",      full: "Bantuan Tunai Pendaftaran IPT",         keywords: ["budi", "bantuan tunai", "pendaftaran ipt"], query: "Terangkan mengenai BUDI — Bantuan Tunai Pendaftaran IPT, termasuk kelayakan dan cara permohonan." },
 ];
+
+// Detect which Badan Penaja is referenced in a message using full name, label, or keywords
+function detectBPFromText(text: string): typeof BADAN_PENAJA[0] | null {
+  const lower = text.toLowerCase();
+  for (const bp of BADAN_PENAJA) {
+    const terms = [bp.full, bp.label, ...bp.keywords];
+    if (terms.some((t) => lower.includes(t.toLowerCase()))) return bp;
+  }
+  return null;
+}
 
 const PILIH_PENAJA_LAIN = "__PILIH_PENAJA_LAIN__";
 
@@ -128,10 +138,11 @@ export default function ChatbotPage() {
       return;
     }
 
-    // Detect Badan Penaja selection and update active BP
+    // Detect which BP this message is about from the text itself —
+    // avoids stale activeBP state polluting topic chips for free-text queries.
     const matchedBP = BADAN_PENAJA.find((bp) => bp.query === text);
-    const currentBP = matchedBP ?? activeBP;
-    if (matchedBP) setActiveBP(matchedBP);
+    const currentBP = matchedBP ?? detectBPFromText(text);
+    if (currentBP) setActiveBP(currentBP);
 
     const userMsg: Message = {
       id: Date.now().toString(),
