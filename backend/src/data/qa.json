@@ -1,0 +1,242 @@
+[
+  {
+    "id": "bkns-overview",
+    "category": "BKNS",
+    "question": "Apakah itu BKNS?",
+    "answer": "**Biasiswa Kerajaan Negeri Sabah (BKNS)** ialah biasiswa yang ditawarkan oleh Kerajaan Negeri Sabah kepada pelajar bumiputera Sabah yang berkelayakan untuk melanjutkan pelajaran di peringkat ijazah sarjana muda, sarjana, dan doktor falsafah di universiti tempatan dan luar negara yang diiktiraf.\n\nBiasiswa ini bertujuan melahirkan graduan berkualiti yang dapat menyumbang kepada pembangunan negeri Sabah.",
+    "keywords": ["bkns", "biasiswa kerajaan negeri sabah", "biasiswa kerajaan negeri", "kerajaan negeri sabah"],
+    "followUps": ["bkns-eligibility", "bkns-how-to-apply", "bkns-documents", "bkns-allowance"]
+  },
+  {
+    "id": "bkns-eligibility",
+    "category": "BKNS",
+    "question": "Apakah kelayakan untuk BKNS?",
+    "answer": "Kelayakan untuk memohon **Biasiswa Kerajaan Negeri Sabah (BKNS)**:\n\n• Warganegara Malaysia dan anak negeri Sabah\n• Bermastautin di Sabah\n• Memperoleh keputusan akademik yang cemerlang (CGPA 3.00 ke atas bagi peringkat ijazah)\n• Tidak menerima biasiswa atau tajaan lain pada masa yang sama\n• Had umur: 45 tahun ke bawah (bergantung kepada program)",
+    "keywords": ["bkns kelayakan", "layak bkns", "syarat bkns", "kriteria bkns", "kelayakan biasiswa kerajaan negeri"],
+    "followUps": ["bkns-how-to-apply", "bkns-documents", "bkns-allowance"]
+  },
+  {
+    "id": "bkns-how-to-apply",
+    "category": "BKNS",
+    "question": "Bagaimana cara memohon BKNS?",
+    "answer": "Cara memohon **Biasiswa Kerajaan Negeri Sabah (BKNS)**:\n\n1. Layari portal rasmi Jabatan Perkhidmatan Awam Sabah\n2. Daftar akaun atau log masuk jika sudah ada akaun\n3. Isi borang permohonan dalam talian dengan lengkap\n4. Muat naik dokumen sokongan yang diperlukan\n5. Semak dan hantar permohonan\n6. Simpan nombor rujukan permohonan anda\n\nPermohonan hanya diterima melalui sistem dalam talian. Sila semak portal rasmi untuk tarikh pembukaan permohonan.",
+    "keywords": ["cara mohon bkns", "permohonan bkns", "apply bkns", "mohon biasiswa kerajaan negeri", "langkah bkns"],
+    "followUps": ["bkns-documents", "bkns-eligibility", "bkns-allowance"]
+  },
+  {
+    "id": "bkns-documents",
+    "category": "BKNS",
+    "question": "Dokumen apa yang diperlukan untuk BKNS?",
+    "answer": "Dokumen yang diperlukan untuk memohon **BKNS**:\n\n• Salinan kad pengenalan pemohon\n• Sijil kelahiran\n• Sijil akademik terkini (SPM, STPM, Diploma, atau Ijazah)\n• Transkrip keputusan peperiksaan\n• Surat tawaran universiti (jika ada)\n• Penyata pendapatan ibu bapa / penjaga\n• Gambar passport terbaru\n• Salinan dokumen kewarganegaraan anak negeri Sabah (jika berkaitan)\n\nSemua dokumen hendaklah disahkan oleh pegawai bertauliah.",
+    "keywords": ["dokumen bkns", "dokumen diperlukan bkns", "senarai dokumen bkns", "bkns dokumen"],
+    "followUps": ["bkns-how-to-apply", "bkns-allowance"]
+  },
+  {
+    "id": "bkns-allowance",
+    "category": "BKNS",
+    "question": "Berapakah elaun atau nilai tajaan BKNS?",
+    "answer": "Elaun **Biasiswa Kerajaan Negeri Sabah (BKNS)** merangkumi:\n\n• **Yuran pengajian**: Ditanggung sepenuhnya\n• **Elaun sara hidup**: Bergantung kepada peringkat pengajian dan lokasi universiti\n• **Elaun buku**: Diberikan setiap semester\n• **Elaun pakaian**: Sekali sahaja\n\nJumlah tepat elaun berbeza mengikut program dan peringkat pengajian. Sila hubungi Jabatan Perkhidmatan Awam Sabah atau semak portal rasmi untuk maklumat terkini.",
+    "keywords": ["elaun bkns", "nilai bkns", "berapa bkns", "jumlah bkns", "wang bkns", "bayaran bkns"],
+    "followUps": ["bkns-eligibility", "bkns-how-to-apply"]
+  },
+  {
+    "id": "kys-overview",
+    "category": "KYS",
+    "question": "Apakah itu KYS?",
+    "answer": "**Biasiswa Kumpulan Yayasan Sabah (KYS)** ialah program tajaan pendidikan yang ditawarkan oleh Yayasan Sabah kepada pelajar yang berkelayakan untuk melanjutkan pengajian di peringkat pra-universiti, ijazah sarjana muda, dan pascasiswazah.\n\nYayasan Sabah komited dalam melabur dalam modal insan Sabah bagi memastikan generasi akan datang bersedia untuk menyumbang kepada kemajuan negeri.",
+    "keywords": ["kys", "kumpulan yayasan sabah", "yayasan sabah", "biasiswa yayasan"],
+    "followUps": ["kys-eligibility", "kys-how-to-apply", "kys-documents", "kys-allowance"]
+  },
+  {
+    "id": "kys-eligibility",
+    "category": "KYS",
+    "question": "Apakah kelayakan untuk KYS?",
+    "answer": "Kelayakan memohon **Biasiswa Kumpulan Yayasan Sabah (KYS)**:\n\n• Warganegara Malaysia\n• Anak negeri Sabah atau bermastautin di Sabah\n• Keputusan akademik cemerlang\n• Aktif dalam ko-kurikulum dan kepimpinan\n• Tidak sedang menerima biasiswa atau tajaan lain\n• Memenuhi had pendapatan isi rumah yang ditetapkan\n\nKeutamaan diberikan kepada pelajar dari keluarga berpendapatan rendah dan sederhana.",
+    "keywords": ["kys kelayakan", "layak kys", "syarat kys", "kriteria kys", "kelayakan yayasan sabah"],
+    "followUps": ["kys-how-to-apply", "kys-documents", "kys-allowance"]
+  },
+  {
+    "id": "kys-how-to-apply",
+    "category": "KYS",
+    "question": "Bagaimana cara memohon KYS?",
+    "answer": "Cara memohon **Biasiswa Kumpulan Yayasan Sabah (KYS)**:\n\n1. Layari laman web rasmi Yayasan Sabah\n2. Klik pada bahagian 'Biasiswa & Tajaan'\n3. Daftar akaun pemohon baru\n4. Lengkapkan borang permohonan dalam talian\n5. Muat naik semua dokumen yang diperlukan\n6. Semak maklumat dan hantar permohonan\n7. Cetak / simpan resit penerimaan\n\nTarikh permohonan dibuka biasanya selepas keputusan peperiksaan diumumkan. Sila semak portal Yayasan Sabah untuk tarikh terkini.",
+    "keywords": ["cara mohon kys", "permohonan kys", "apply kys", "mohon yayasan sabah", "langkah kys"],
+    "followUps": ["kys-documents", "kys-eligibility", "kys-allowance"]
+  },
+  {
+    "id": "kys-documents",
+    "category": "KYS",
+    "question": "Dokumen apa yang diperlukan untuk KYS?",
+    "answer": "Dokumen yang diperlukan untuk memohon **KYS**:\n\n• Salinan kad pengenalan pemohon dan ibu bapa / penjaga\n• Sijil kelahiran pemohon\n• Transkrip / sijil akademik terkini\n• Surat tawaran universiti atau institusi pengajian\n• Slip gaji / penyata pendapatan ibu bapa atau penjaga\n• Gambar passport saiz terkini\n• Dokumen sokongan tambahan (sijil ko-kurikulum, anugerah, dll.)\n\nSemua dokumen perlu disahkan benar.",
+    "keywords": ["dokumen kys", "dokumen diperlukan kys", "senarai dokumen kys", "kys dokumen", "dokumen yayasan sabah"],
+    "followUps": ["kys-how-to-apply", "kys-allowance"]
+  },
+  {
+    "id": "kys-allowance",
+    "category": "KYS",
+    "question": "Berapakah elaun atau nilai tajaan KYS?",
+    "answer": "Tajaan **Biasiswa Kumpulan Yayasan Sabah (KYS)** merangkumi:\n\n• **Yuran pengajian**: Ditanggung sepenuhnya oleh Yayasan Sabah\n• **Elaun sara hidup bulanan**: Diberikan mengikut peringkat pengajian\n• **Elaun buku dan alat tulis**: Setiap semester\n• **Elaun perumahan**: Untuk pelajar luar negara\n\nJumlah tepat elaun ditentukan berdasarkan program pengajian dan lokasi universiti. Hubungi Yayasan Sabah untuk maklumat terperinci.",
+    "keywords": ["elaun kys", "nilai kys", "berapa kys", "jumlah kys", "wang kys", "bayaran kys"],
+    "followUps": ["kys-eligibility", "kys-how-to-apply"]
+  },
+  {
+    "id": "muis-overview",
+    "category": "MUIS",
+    "question": "Apakah itu MUIS?",
+    "answer": "**Dermasiswa Majlis Ugama Islam Sabah (MUIS)** ialah program biasiswa yang ditawarkan oleh Majlis Ugama Islam Sabah kepada pelajar Islam Sabah yang berkelayakan untuk melanjutkan pengajian di peringkat diploma, ijazah, dan pascasiswazah.\n\nDermasiswa ini membantu pelajar Muslim Sabah dalam mendapatkan pendidikan tinggi bagi melahirkan profesional Muslim yang berakhlak mulia.",
+    "keywords": ["muis", "majlis ugama islam sabah", "dermasiswa muis", "ugama islam", "biasiswa islam sabah"],
+    "followUps": ["muis-eligibility", "muis-how-to-apply", "muis-documents", "muis-allowance"]
+  },
+  {
+    "id": "muis-eligibility",
+    "category": "MUIS",
+    "question": "Apakah kelayakan untuk MUIS?",
+    "answer": "Kelayakan memohon **Dermasiswa MUIS**:\n\n• Warganegara Malaysia beragama Islam\n• Anak negeri Sabah atau bermastautin di Sabah\n• Keputusan akademik yang baik\n• Berakhlak mulia dan aktif dalam aktiviti keagamaan\n• Tidak menerima biasiswa lain\n• Memenuhi syarat pendapatan isi rumah yang ditetapkan\n\nKeutamaan kepada pelajar dari keluarga asnaf dan berpendapatan rendah.",
+    "keywords": ["muis kelayakan", "layak muis", "syarat muis", "kriteria muis", "kelayakan dermasiswa muis"],
+    "followUps": ["muis-how-to-apply", "muis-documents", "muis-allowance"]
+  },
+  {
+    "id": "muis-how-to-apply",
+    "category": "MUIS",
+    "question": "Bagaimana cara memohon MUIS?",
+    "answer": "Cara memohon **Dermasiswa MUIS**:\n\n1. Dapatkan borang permohonan dari pejabat MUIS atau laman web rasmi\n2. Isi borang dengan lengkap dan betul\n3. Kumpulkan semua dokumen yang diperlukan\n4. Serahkan permohonan ke pejabat MUIS sebelum tarikh tutup\n5. Tunggu pemberitahuan temuduga atau keputusan\n\nHubungi Majlis Ugama Islam Sabah terus untuk maklumat tarikh permohonan terkini.",
+    "keywords": ["cara mohon muis", "permohonan muis", "apply muis", "mohon dermasiswa muis", "langkah muis"],
+    "followUps": ["muis-documents", "muis-eligibility", "muis-allowance"]
+  },
+  {
+    "id": "muis-documents",
+    "category": "MUIS",
+    "question": "Dokumen apa yang diperlukan untuk MUIS?",
+    "answer": "Dokumen yang diperlukan untuk **Dermasiswa MUIS**:\n\n• Salinan kad pengenalan\n• Sijil kelahiran\n• Sijil / transkrip akademik terkini\n• Surat tawaran pengajian\n• Penyata pendapatan ibu bapa / penjaga\n• Gambar passport terbaru\n• Surat akuan beragama Islam (jika diperlukan)\n• Surat sokongan dari imam atau pemimpin komuniti (jika berkaitan)\n\nSemua salinan perlu disahkan.",
+    "keywords": ["dokumen muis", "dokumen diperlukan muis", "senarai dokumen muis", "muis dokumen"],
+    "followUps": ["muis-how-to-apply", "muis-allowance"]
+  },
+  {
+    "id": "muis-allowance",
+    "category": "MUIS",
+    "question": "Berapakah elaun atau nilai tajaan MUIS?",
+    "answer": "Tajaan **Dermasiswa MUIS** merangkumi bantuan kewangan untuk:\n\n• Yuran pengajian (sebahagian atau sepenuhnya)\n• Elaun sara hidup bulanan\n• Elaun buku\n\nJumlah bantuan berbeza mengikut program dan keperluan pemohon. Hubungi pejabat MUIS untuk maklumat terperinci tentang kadar semasa.",
+    "keywords": ["elaun muis", "nilai muis", "berapa muis", "jumlah muis", "wang muis", "bayaran muis"],
+    "followUps": ["muis-eligibility", "muis-how-to-apply"]
+  },
+  {
+    "id": "baitulmal-overview",
+    "category": "Baitulmal",
+    "question": "Apakah itu Biasiswa Baitulmal?",
+    "answer": "**Biasiswa Perbadanan Baitulmal Negeri Sabah** ialah program bantuan pendidikan yang disalurkan melalui dana zakat untuk membantu pelajar Islam Sabah yang berkelayakan dan memerlukan bantuan kewangan untuk melanjutkan pengajian mereka.\n\nBaitulmal memberi tumpuan kepada golongan asnaf terutamanya fakir, miskin, dan fi sabilillah dalam sektor pendidikan.",
+    "keywords": ["baitulmal", "perbadanan baitulmal", "biasiswa baitulmal", "baitulmal sabah", "zakat pendidikan"],
+    "followUps": ["baitulmal-eligibility", "baitulmal-how-to-apply", "baitulmal-documents", "baitulmal-allowance"]
+  },
+  {
+    "id": "baitulmal-eligibility",
+    "category": "Baitulmal",
+    "question": "Apakah kelayakan untuk Baitulmal?",
+    "answer": "Kelayakan memohon **Biasiswa Baitulmal**:\n\n• Warganegara Malaysia beragama Islam\n• Penduduk Sabah\n• Daripada golongan asnaf (fakir, miskin, atau fi sabilillah)\n• Keputusan akademik yang memuaskan\n• Tidak menerima bantuan kewangan lain yang mencukupi\n• Surat pengesahan asnaf dari Lembaga Zakat Sabah\n\nKeutamaan diberikan kepada pelajar daripada keluarga berpendapatan rendah.",
+    "keywords": ["baitulmal kelayakan", "layak baitulmal", "syarat baitulmal", "kriteria baitulmal"],
+    "followUps": ["baitulmal-how-to-apply", "baitulmal-documents", "baitulmal-allowance"]
+  },
+  {
+    "id": "baitulmal-how-to-apply",
+    "category": "Baitulmal",
+    "question": "Bagaimana cara memohon Baitulmal?",
+    "answer": "Cara memohon **Biasiswa Baitulmal**:\n\n1. Hubungi pejabat Perbadanan Baitulmal Negeri Sabah\n2. Dapatkan dan isi borang permohonan\n3. Lampirkan semua dokumen yang diperlukan\n4. Serahkan permohonan ke pejabat Baitulmal\n5. Sertai temuduga jika dipanggil\n6. Tunggu keputusan rasmi\n\nHubungi Perbadanan Baitulmal Negeri Sabah terus untuk maklumat terkini tentang tarikh permohonan.",
+    "keywords": ["cara mohon baitulmal", "permohonan baitulmal", "apply baitulmal", "mohon biasiswa baitulmal", "langkah baitulmal"],
+    "followUps": ["baitulmal-documents", "baitulmal-eligibility", "baitulmal-allowance"]
+  },
+  {
+    "id": "baitulmal-documents",
+    "category": "Baitulmal",
+    "question": "Dokumen apa yang diperlukan untuk Baitulmal?",
+    "answer": "Dokumen yang diperlukan untuk **Biasiswa Baitulmal**:\n\n• Salinan kad pengenalan pemohon dan ibu bapa\n• Sijil kelahiran\n• Sijil / transkrip akademik\n• Surat tawaran pengajian\n• Surat pengesahan asnaf dari Lembaga Zakat Sabah\n• Penyata pendapatan isi rumah\n• Gambar passport terbaru\n• Dokumen sokongan tambahan (surat doktor, dll. jika berkaitan)\n\nSemua salinan perlu disahkan oleh pegawai bertauliah.",
+    "keywords": ["dokumen baitulmal", "dokumen diperlukan baitulmal", "senarai dokumen baitulmal"],
+    "followUps": ["baitulmal-how-to-apply", "baitulmal-allowance"]
+  },
+  {
+    "id": "baitulmal-allowance",
+    "category": "Baitulmal",
+    "question": "Berapakah elaun atau nilai tajaan Baitulmal?",
+    "answer": "Bantuan **Biasiswa Baitulmal** merangkumi:\n\n• Bantuan yuran pengajian\n• Elaun sara hidup bulanan mengikut keperluan\n• Bantuan buku dan alat tulis\n\nJumlah bantuan ditentukan berdasarkan keperluan pemohon dan baki agihan zakat. Hubungi Perbadanan Baitulmal Negeri Sabah untuk maklumat kadar terkini.",
+    "keywords": ["elaun baitulmal", "nilai baitulmal", "berapa baitulmal", "jumlah baitulmal", "wang baitulmal"],
+    "followUps": ["baitulmal-eligibility", "baitulmal-how-to-apply"]
+  },
+  {
+    "id": "tsk-overview",
+    "category": "TSK",
+    "question": "Apakah itu TSK?",
+    "answer": "**Tajaan Timbalan Setiausaha Kerajaan Negeri Sabah (TSK)** ialah program tajaan pendidikan di bawah kendalian Pejabat Setiausaha Kerajaan Negeri Sabah untuk membantu pelajar bumiputera Sabah dalam melanjutkan pengajian di peringkat diploma dan ijazah sarjana muda.\n\nTajaan ini memberi peluang kepada pelajar yang berkelayakan namun memerlukan bantuan kewangan untuk mencapai cita-cita akademik mereka.",
+    "keywords": ["tsk", "timbalan setiausaha kerajaan", "tajaan tsk", "setiausaha kerajaan sabah"],
+    "followUps": ["tsk-eligibility", "tsk-how-to-apply", "tsk-documents", "tsk-allowance"]
+  },
+  {
+    "id": "tsk-eligibility",
+    "category": "TSK",
+    "question": "Apakah kelayakan untuk TSK?",
+    "answer": "Kelayakan memohon **Tajaan TSK**:\n\n• Warganegara Malaysia dan bumiputera Sabah\n• Bermastautin di Sabah\n• Keputusan akademik yang baik\n• Tidak menerima tajaan atau biasiswa lain\n• Memenuhi syarat pendapatan isi rumah yang ditetapkan\n\nSila semak dengan Pejabat Setiausaha Kerajaan Negeri Sabah untuk syarat terkini.",
+    "keywords": ["tsk kelayakan", "layak tsk", "syarat tsk", "kriteria tsk"],
+    "followUps": ["tsk-how-to-apply", "tsk-documents", "tsk-allowance"]
+  },
+  {
+    "id": "tsk-how-to-apply",
+    "category": "TSK",
+    "question": "Bagaimana cara memohon TSK?",
+    "answer": "Cara memohon **Tajaan TSK**:\n\n1. Hubungi Pejabat Setiausaha Kerajaan Negeri Sabah\n2. Dapatkan borang permohonan rasmi\n3. Isi borang dengan teliti dan lengkap\n4. Kumpulkan dan lampirkan dokumen yang diperlukan\n5. Serahkan permohonan sebelum tarikh tutup\n6. Tunggu tawaran atau panggilan temuduga\n\nHubungi terus Pejabat Setiausaha Kerajaan Negeri Sabah untuk maklumat tarikh permohonan.",
+    "keywords": ["cara mohon tsk", "permohonan tsk", "apply tsk", "mohon tajaan tsk", "langkah tsk"],
+    "followUps": ["tsk-documents", "tsk-eligibility", "tsk-allowance"]
+  },
+  {
+    "id": "tsk-documents",
+    "category": "TSK",
+    "question": "Dokumen apa yang diperlukan untuk TSK?",
+    "answer": "Dokumen yang diperlukan untuk **Tajaan TSK**:\n\n• Salinan kad pengenalan\n• Sijil kelahiran\n• Transkrip / sijil akademik\n• Surat tawaran pengajian\n• Penyata pendapatan ibu bapa atau penjaga\n• Gambar passport terkini\n• Dokumen bumiputera Sabah (jika diperlukan)\n\nSemua salinan perlu disahkan oleh pegawai bertauliah.",
+    "keywords": ["dokumen tsk", "dokumen diperlukan tsk", "senarai dokumen tsk"],
+    "followUps": ["tsk-how-to-apply", "tsk-allowance"]
+  },
+  {
+    "id": "tsk-allowance",
+    "category": "TSK",
+    "question": "Berapakah elaun atau nilai tajaan TSK?",
+    "answer": "Tajaan **TSK** merangkumi:\n\n• Yuran pengajian (bergantung kepada program)\n• Elaun sara hidup bulanan\n• Elaun buku\n\nHubungi Pejabat Setiausaha Kerajaan Negeri Sabah untuk kadar elaun terkini kerana jumlah boleh berubah mengikut peruntukan tahunan.",
+    "keywords": ["elaun tsk", "nilai tsk", "berapa tsk", "jumlah tsk", "wang tsk"],
+    "followUps": ["tsk-eligibility", "tsk-how-to-apply"]
+  },
+  {
+    "id": "budi-overview",
+    "category": "BUDI",
+    "question": "Apakah itu BUDI?",
+    "answer": "**BUDI (Bantuan Tunai Pendaftaran IPT)** ialah bantuan kewangan satu kali yang diberikan kepada pelajar baru yang berjaya mendaftar di Institusi Pengajian Tinggi (IPT) bagi membantu menanggung kos pendaftaran awal seperti bayaran pendaftaran, deposit, uniform, dan keperluan asas lain.\n\nBantuan ini bertujuan meringankan beban kewangan keluarga semasa peringkat awal pengajian anak mereka di IPT.",
+    "keywords": ["budi", "bantuan tunai pendaftaran ipt", "bantuan tunai", "pendaftaran ipt", "bantuan ipt"],
+    "followUps": ["budi-eligibility", "budi-how-to-apply", "budi-documents", "budi-allowance"]
+  },
+  {
+    "id": "budi-eligibility",
+    "category": "BUDI",
+    "question": "Apakah kelayakan untuk BUDI?",
+    "answer": "Kelayakan memohon **BUDI**:\n\n• Warganegara Malaysia\n• Pelajar baru yang telah diterima masuk ke IPT awam atau swasta yang diiktiraf\n• Daripada keluarga berpendapatan rendah atau sederhana\n• Tidak menerima bantuan tunai permulaan yang sama dari sumber lain\n\nSila semak garis panduan BUDI terkini melalui portal rasmi yang berkaitan.",
+    "keywords": ["budi kelayakan", "layak budi", "syarat budi", "kriteria budi", "kelayakan bantuan tunai"],
+    "followUps": ["budi-how-to-apply", "budi-documents", "budi-allowance"]
+  },
+  {
+    "id": "budi-how-to-apply",
+    "category": "BUDI",
+    "question": "Bagaimana cara memohon BUDI?",
+    "answer": "Cara memohon **BUDI**:\n\n1. Semak portal rasmi atau hubungi pihak IPT untuk maklumat permohonan BUDI\n2. Dapatkan borang permohonan\n3. Isi borang dengan lengkap dan tepat\n4. Sertakan semua dokumen yang diperlukan\n5. Hantar permohonan melalui saluran yang ditetapkan\n6. Tunggu pengesahan dan pembayaran bantuan\n\nTarikh permohonan biasanya seiring dengan tarikh pendaftaran IPT.",
+    "keywords": ["cara mohon budi", "permohonan budi", "apply budi", "mohon bantuan tunai", "langkah budi"],
+    "followUps": ["budi-documents", "budi-eligibility", "budi-allowance"]
+  },
+  {
+    "id": "budi-documents",
+    "category": "BUDI",
+    "question": "Dokumen apa yang diperlukan untuk BUDI?",
+    "answer": "Dokumen yang diperlukan untuk **BUDI**:\n\n• Salinan kad pengenalan pemohon\n• Surat tawaran / pendaftaran IPT\n• Penyata pendapatan ibu bapa atau penjaga\n• Sijil kelahiran\n• Gambar passport terkini\n• Resit pembayaran pendaftaran IPT (jika ada)\n\nSemak dengan pihak berkaitan untuk senarai dokumen lengkap.",
+    "keywords": ["dokumen budi", "dokumen diperlukan budi", "senarai dokumen budi"],
+    "followUps": ["budi-how-to-apply", "budi-allowance"]
+  },
+  {
+    "id": "budi-allowance",
+    "category": "BUDI",
+    "question": "Berapakah jumlah bantuan BUDI?",
+    "answer": "**BUDI** ialah bantuan tunai satu kali untuk menanggung kos pendaftaran awal di IPT.\n\nJumlah bantuan ditetapkan oleh pihak berkuasa berkaitan dan boleh berubah dari semasa ke semasa. Sila semak portal rasmi atau hubungi pihak IPT / agensi berkaitan untuk maklumat jumlah semasa.",
+    "keywords": ["jumlah budi", "berapa budi", "nilai budi", "wang budi", "bantuan berapa"],
+    "followUps": ["budi-eligibility", "budi-how-to-apply"]
+  }
+]
