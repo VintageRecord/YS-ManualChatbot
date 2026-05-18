@@ -10,6 +10,7 @@ import { NewsSection } from "./components/NewsSection";
 import { FooterSection } from "./components/FooterSection";
 import ChatbotPage from "./pages/ChatbotPage";
 import AdminPage from "./pages/AdminPage";
+import { ChatWidget } from "./components/ChatWidget";
 
 function HomePage() {
   return (
@@ -25,6 +26,7 @@ function HomePage() {
         <NewsSection />
       </main>
       <FooterSection />
+      <ChatWidget />
     </div>
   );
 }
