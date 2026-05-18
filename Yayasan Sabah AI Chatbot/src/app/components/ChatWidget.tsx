@@ -144,9 +144,9 @@ export function ChatWidget() {
       if (!res.ok) throw new Error("Backend error");
       const data = await res.json();
 
-      const followUpChips: Chip[] = (data.followUps || []).map(
-        (fu: { label: string; id: string }) => ({ label: fu.label, qaId: fu.id })
-      );
+      const followUpChips: Chip[] = (data.followUps || [])
+        .filter((fu: { label: string; id: string }) => fu.id !== data.id)
+        .map((fu: { label: string; id: string }) => ({ label: fu.label, qaId: fu.id }));
 
       const botMsg: Message = {
         id: (Date.now() + 1).toString(),
