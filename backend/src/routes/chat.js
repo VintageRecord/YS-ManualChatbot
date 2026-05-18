@@ -30,7 +30,6 @@ function findBestMatch(message, qaList) {
   for (const qa of qaList) {
     let score = 0;
 
-    // Score by keyword phrases (longer phrases score higher)
     for (const kw of qa.keywords) {
       const normKw = normalize(kw);
       if (norm.includes(normKw)) {
@@ -38,7 +37,6 @@ function findBestMatch(message, qaList) {
       }
     }
 
-    // Score by individual word overlap with the stored question
     const qWords = normalize(qa.question)
       .split(" ")
       .filter((w) => w.length > 3);
@@ -55,14 +53,34 @@ function findBestMatch(message, qaList) {
   return bestScore > 0 ? best : null;
 }
 
-router.post("/", (req, res) => {
-  const { message } = req.body;
+function buildResponse(match, qaList) {
+  const followUps = (match.followUps || [])
+    .map((fid) => qaList.find((q) => q.id === fid))
+    .filter(Boolean)
+    .map((q) => ({ label: q.question, id: q.id }));
 
-  if (!message?.trim()) {
-    return res.status(400).json({ error: "Message is required" });
+  return {
+    response: match.answer,
+    matched: true,
+    category: match.category,
+    followUps,
+  };
+}
+
+router.post("/", (req, res) => {
+  const { message, id } = req.body;
+  const qaList = loadQA();
+
+  // Direct ID lookup from chip buttons — bypasses keyword matching entirely
+  if (id) {
+    const entry = qaList.find((q) => q.id === id);
+    if (entry) return res.json(buildResponse(entry, qaList));
   }
 
-  const qaList = loadQA();
+  if (!message?.trim()) {
+    return res.status(400).json({ error: "Message or id is required" });
+  }
+
   const match = findBestMatch(message.trim(), qaList);
 
   if (!match) {
@@ -74,18 +92,7 @@ router.post("/", (req, res) => {
     });
   }
 
-  // Resolve follow-up IDs to labels + queries
-  const followUps = (match.followUps || [])
-    .map((fid) => qaList.find((q) => q.id === fid))
-    .filter(Boolean)
-    .map((q) => ({ label: q.question, id: q.id }));
-
-  res.json({
-    response: match.answer,
-    matched: true,
-    category: match.category,
-    followUps,
-  });
+  res.json(buildResponse(match, qaList));
 });
 
 export default router;
