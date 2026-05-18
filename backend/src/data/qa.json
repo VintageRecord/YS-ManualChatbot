@@ -5,7 +5,7 @@
     "question": "Apakah itu BKNS?",
     "answer": "**Biasiswa Kerajaan Negeri Sabah (BKNS)** Tahun 2026 mempelawa permohonan biasiswa untuk mengikuti pengajian di peringkat **Diploma, Sarjana Muda dan Sarjana**.\n\nSyarat utama: Pemohon warganegara Malaysia dan **salah satu ibu bapanya** hendaklah warganegara Malaysia yang berasal dan bermastautin di Sabah.\n\nBidang kursus yang ditaja: **STEM**, Sastera Ikhtisas, Sains Sosial dan Sains Gunaan.\n\nBKNS membiayai Yuran Pengajian mengikut kadar Universiti Awam (UA) sahaja. Pengajian tanpa subsidi yuran adalah tidak ditaja.",
     "keywords": ["bkns", "biasiswa kerajaan negeri sabah", "biasiswa kerajaan negeri", "kerajaan negeri sabah", "biasiswa negeri sabah"],
-    "followUps": ["bkns-jenis-tajaan", "bkns-eligibility", "bkns-how-to-apply", "bkns-documents"]
+    "followUps": ["bkns-jenis-tajaan", "bkns-eligibility", "bkns-how-to-apply", "bkns-documents", "bkns-allowance"]
   },
   {
     "id": "bkns-jenis-tajaan",
@@ -13,31 +13,39 @@
     "question": "Apakah jenis-jenis tajaan BKNS?",
     "answer": "Terdapat 3 jenis tajaan di bawah **BKNS 2026**:\n\n**1. Anugerah Biasiswa TYT Yang Dipertua Negeri Sabah**\n• Peringkat: Sarjana Muda\n• Kelayakan: SPM min 9A (termasuk BM) ATAU Matrikulasi/Asasi/Foundation/A-Level CGPA 4.0\n• Tempat: Luar Negara\n\n**2. Biasiswa Cemerlang Kerajaan Negeri Sabah**\n• Peringkat: Sarjana Muda\n• Kelayakan: STPM CGPA 4.0 (sekali menduduki sahaja)\n• Tempat: Dalam Negeri dan Luar Negara\n\n**3. Biasiswa Perdana**\n• Diploma: SPM min 5 kredit (termasuk BM), kepujian BI untuk universiti bahasa Inggeris\n• Sarjana Muda: Diploma/STPM/Matrikulasi/Asasi/Foundation/A-Level CGPA min 3.0 ATAU STAM min Jayyid\n• Sarjana: Sarjana Muda CGPA min 3.5\n• Perubatan/Pergigian/Farmasi: CGPA min 3.8 di STPM/Diploma/Matrikulasi (dalam negeri sahaja)\n• Tempat: Institut Pengajian Tinggi Tempatan",
     "keywords": ["jenis tajaan bkns", "jenis biasiswa bkns", "jenis bkns", "anugerah tyt", "biasiswa cemerlang kerajaan", "biasiswa perdana bkns"],
-    "followUps": ["bkns-eligibility", "bkns-how-to-apply", "bkns-documents"]
+    "followUps": ["bkns-eligibility", "bkns-how-to-apply", "bkns-documents", "bkns-allowance"]
   },
   {
     "id": "bkns-eligibility",
     "category": "BKNS",
     "question": "Apakah kelayakan dan syarat untuk BKNS?",
-    "answer": "**Syarat Kelayakan BKNS 2026:**\n\n**Kewarganegaraan:**\n• Warganegara Malaysia\n• Salah satu ibu bapa warganegara Malaysia yang berasal dan bermastautin di Sabah\n\n**Had Umur:**\n• Diploma: tidak melebihi 20 tahun\n• Sarjana Muda: tidak melebihi 25 tahun\n• Sarjana: tidak melebihi 28 tahun\n\n**Kelayakan Akademik (mengikut jenis tajaan):**\n• Anugerah TYT: SPM min 9A atau Matrikulasi/Asasi CGPA 4.0\n• Biasiswa Cemerlang: STPM CGPA 4.0\n• Biasiswa Perdana (Diploma): SPM min 5 kredit termasuk BM\n• Biasiswa Perdana (Sarjana Muda): Diploma/STPM/Matrikulasi CGPA min 3.0\n• Biasiswa Perdana (Sarjana): Sarjana Muda CGPA min 3.5\n• Perubatan/Pergigian/Farmasi: CGPA min 3.8",
-    "keywords": ["kelayakan bkns", "syarat bkns", "kriteria bkns", "layak bkns", "umur bkns", "cgpa bkns"],
-    "followUps": ["bkns-jenis-tajaan", "bkns-how-to-apply", "bkns-documents"]
+    "answer": "**Syarat Kelayakan BKNS 2026:**\n\n**Kewarganegaraan:**\n• Warganegara Malaysia\n• Salah satu ibu bapa warganegara Malaysia yang berasal dan bermastautin di Sabah\n\n**Had Umur:**\n• Diploma: tidak melebihi **20 tahun**\n• Sarjana Muda: tidak melebihi **25 tahun**\n• Sarjana: tidak melebihi **28 tahun**\n\n**Kelayakan Akademik (mengikut jenis tajaan):**\n• Anugerah TYT: SPM min 9A atau Matrikulasi/Asasi CGPA 4.0\n• Biasiswa Cemerlang: STPM CGPA 4.0 (sekali menduduki)\n• Biasiswa Perdana (Diploma): SPM min 5 kredit termasuk BM\n• Biasiswa Perdana (Sarjana Muda): CGPA min 3.0 atau STAM Jayyid\n• Biasiswa Perdana (Sarjana): Sarjana Muda CGPA min 3.5\n• Perubatan/Pergigian/Farmasi: CGPA min 3.8\n\n**Bidang Kursus:** STEM, Sastera Ikhtisas, Sains Sosial, Sains Gunaan",
+    "keywords": ["kelayakan bkns", "syarat bkns", "kriteria bkns", "layak bkns", "umur bkns", "cgpa bkns", "spm bkns"],
+    "followUps": ["bkns-jenis-tajaan", "bkns-how-to-apply", "bkns-documents", "bkns-allowance"]
   },
   {
     "id": "bkns-how-to-apply",
     "category": "BKNS",
     "question": "Bagaimana cara memohon BKNS?",
     "answer": "**Cara Memohon BKNS 2026:**\n\n1. Layari portal rasmi: **https://ptps.sabah.gov.my**\n2. Daftar menggunakan **alamat e-mel peribadi yang masih aktif**\n3. Isi borang permohonan dalam talian dengan lengkap\n4. Muat naik dokumen sokongan yang diperlukan\n5. Semak dan hantar permohonan\n\n**Perhatian penting:**\n• Tarikh tutup permohonan akan dimaklumkan kelak\n• Permohonan yang tidak lengkap atau tidak memenuhi syarat tidak akan dipertimbangkan\n• Keputusan permohonan akan dimaklumkan melalui **e-mel pemohon**\n• Permohonan dianggap tidak berjaya sekiranya tiada maklum balas selepas **30 November 2026**\n\n*Bahagian Biasiswa Kerajaan Negeri Sabah, Jabatan Perkhidmatan Awam Negeri*",
-    "keywords": ["cara mohon bkns", "permohonan bkns", "apply bkns", "portal bkns", "ptps bkns", "hantar bkns"],
-    "followUps": ["bkns-documents", "bkns-eligibility"]
+    "keywords": ["cara mohon bkns", "permohonan bkns", "apply bkns", "portal bkns", "ptps bkns", "hantar bkns", "daftar bkns"],
+    "followUps": ["bkns-documents", "bkns-eligibility", "bkns-allowance"]
   },
   {
     "id": "bkns-documents",
     "category": "BKNS",
     "question": "Dokumen apa yang diperlukan untuk BKNS?",
-    "answer": "Permohonan BKNS dibuat **dalam talian** di https://ptps.sabah.gov.my. Dokumen sokongan dimuat naik melalui sistem tersebut.\n\n**Dokumen yang lazimnya diperlukan:**\n• Salinan kad pengenalan pemohon\n• Sijil kelahiran pemohon\n• Sijil akademik terkini (SPM / STPM / Matrikulasi / Diploma)\n• Surat tawaran universiti / institusi pengajian (jika ada)\n• Bukti kewarganegaraan ibu / bapa bermastautin di Sabah\n\nPermohonan yang tidak lengkap tidak akan dipertimbangkan. Semak portal **https://ptps.sabah.gov.my** untuk senarai dokumen terkini.",
+    "answer": "Permohonan BKNS dibuat **dalam talian** di https://ptps.sabah.gov.my. Dokumen sokongan dimuat naik melalui sistem tersebut.\n\n**Dokumen yang lazimnya diperlukan:**\n• Salinan kad pengenalan pemohon\n• Sijil kelahiran pemohon\n• Sijil akademik terkini (SPM / STPM / Matrikulasi / Diploma)\n• Transkrip / keputusan peperiksaan terkini\n• Surat tawaran universiti / institusi pengajian (jika ada)\n• Bukti kewarganegaraan ibu / bapa bermastautin di Sabah\n\nSemua salinan perlu disahkan. Permohonan yang tidak lengkap tidak akan dipertimbangkan.\n\nSemak portal **https://ptps.sabah.gov.my** untuk senarai dokumen terkini.",
     "keywords": ["dokumen bkns", "dokumen diperlukan bkns", "senarai dokumen bkns", "bkns dokumen sokongan"],
-    "followUps": ["bkns-how-to-apply", "bkns-eligibility"]
+    "followUps": ["bkns-how-to-apply", "bkns-eligibility", "bkns-allowance"]
+  },
+  {
+    "id": "bkns-allowance",
+    "category": "BKNS",
+    "question": "Apakah elaun atau liputan tajaan BKNS?",
+    "answer": "**Liputan Tajaan BKNS:**\n\n• **Yuran Pengajian** — ditanggung mengikut kadar **Universiti Awam (UA) sahaja**\n• Pengajian di Government-Linked Universities (GLU) — tertakluk kepada inbois yang dikeluarkan oleh GLU\n• Pengajian tanpa subsidi yuran **tidak** akan ditaja\n\n**Bidang yang layak ditaja:**\nSTEM (Sains, Teknologi, Kejuruteraan, Matematik), Sastera Ikhtisas, Sains Sosial dan Sains Gunaan\n\n**Nota:** BKNS tidak menyatakan kadar elaun sara hidup secara khusus dalam iklan rasmi. Untuk maklumat terperinci mengenai elaun, hubungi terus:\n\nBahagian Biasiswa Kerajaan Negeri Sabah\nJabatan Perkhidmatan Awam Negeri Sabah\nPortal: **https://ptps.sabah.gov.my**",
+    "keywords": ["elaun bkns", "jumlah bkns", "nilai bkns", "berapa bkns", "liputan bkns", "yuran bkns", "wang bkns"],
+    "followUps": ["bkns-eligibility", "bkns-how-to-apply", "bkns-jenis-tajaan"]
   },
   {
     "id": "kys-overview",
@@ -45,47 +53,55 @@
     "question": "Apakah itu KYS?",
     "answer": "**Iklan Tawaran Tajaan Biasiswa/Pinjaman Pengajian Tinggi Yayasan Sabah 2026**\n\nYayasan Sabah mempelawa pemohon yang berkelayakan untuk memohon tajaan **Dermasiswa / Biasiswa / Pinjaman Pengajian Tinggi** bagi mengikuti pengajian di peringkat **Sijil, Diploma, Ijazah Sarjana Muda, Ijazah Sarjana dan PhD** bagi sesi 2026.\n\n**Kriteria asas pemohon (salah satu):**\n• Pemohon, ibu dan bapa warganegara Malaysia yang berasal dari Sabah; atau\n• Pemohon, ibu dan bapa warganegara Malaysia tetapi salah seorang ibu atau bapa berasal dari Sabah; atau\n• Pemohon, ibu atau bapa warganegara Malaysia tetapi salah seorang mempunyai status Penduduk Tetap di Sabah\n\n*Keutamaan diberikan kepada mereka yang berasal dan menetap di Sabah.*",
     "keywords": ["kys", "kumpulan yayasan sabah", "yayasan sabah", "biasiswa yayasan", "tajaan yayasan sabah"],
-    "followUps": ["kys-jenis-biasiswa", "kys-dermasiswa-pinjaman", "kys-eligibility", "kys-how-to-apply", "kys-documents"]
+    "followUps": ["kys-jenis-biasiswa", "kys-dermasiswa-pinjaman", "kys-eligibility", "kys-how-to-apply", "kys-documents", "kys-allowance"]
   },
   {
     "id": "kys-jenis-biasiswa",
     "category": "KYS",
     "question": "Apakah jenis-jenis biasiswa KYS?",
-    "answer": "Yayasan Sabah menawarkan **19 jenis Biasiswa** untuk sesi 2026:\n\n**Biasiswa Utama:**\n• **BCNS** — Biasiswa Cemerlang Negeri Sabah (min 5A+ dalam SPM 2025 termasuk BM) — Dalam/Luar Negara\n• **BCPLB** — Biasiswa Cemerlang Pelajar Luar Bandar (min 5A SPM 2025, golongan B40) — IPTA dalam negara\n• **Biasiswa Pengajian Tinggi IPTA/IPTS** — min 5 kredit SPM, CGPA 3.00 bagi Ijazah — Pertanian, Veterinar, Perakaunan, Seni Bina, Ukur Bahan, Keusahawanan, Pengajian Islam\n\n**Biasiswa Khusus:**\n• Biasiswa Asean/Timur Tengah (Pengajian Islam & Perubatan di Indonesia/Mesir)\n• Biasiswa Sarjana Komputer dan Informatik — UMS\n• Biasiswa Perubatan Veterinar — UMK\n• Biasiswa Seni Bina — UCSF\n• Biasiswa Pelancongan/Perhotelan — UCSF\n• Biasiswa Teknologi Pembinaan — KTYS\n• Biasiswa Pendidikan Awal Kanak-Kanak — KTYS\n• Biasiswa Pengajian Ilmu Islam — KTYS\n• Biasiswa Asasi Sains — KTYS/UMP\n• Biasiswa Kejuruteraan Jerman — UMPSA (Mekatronik, Automotif, Perniagaan, Elektrik & Elektronik, Kimia, Bioteknologi)\n• Biasiswa Kepakaran (Specialist) Dalam Negeri — Sarjana/PhD di IPTA\n• Biasiswa Ulum Islamiah Mesir — Universiti Al-Azhar\n• Biasiswa Perubatan Mesir — Universiti Al-Azhar\n• Biasiswa Perubatan Russia — Kursk State Medical University\n• Biasiswa Kerjasama YS & AIU — Albukhary International University\n• Biasiswa Amalan Kehakiman & Guaman Syarie — Diploma Lepasan Ijazah, UMS",
+    "answer": "Yayasan Sabah menawarkan **19 jenis Biasiswa** untuk sesi 2026:\n\n**Biasiswa Utama:**\n• **BCNS** — Biasiswa Cemerlang Negeri Sabah (min 5A+ dalam SPM 2025 termasuk BM) — Dalam/Luar Negara\n• **BCPLB** — Biasiswa Cemerlang Pelajar Luar Bandar (min 5A SPM 2025, golongan B40) — IPTA dalam negara\n• **Biasiswa Pengajian Tinggi IPTA/IPTS** — min 5 kredit SPM, CGPA 3.00 bagi Ijazah — Pertanian, Veterinar, Perakaunan, Seni Bina, Ukur Bahan, Keusahawanan, Pengajian Islam\n\n**Biasiswa Khusus:**\n• Biasiswa Asean/Timur Tengah — Pengajian Islam & Perubatan di Indonesia/Mesir\n• Biasiswa Sarjana Komputer dan Informatik — UMS\n• Biasiswa Perubatan Veterinar — UMK\n• Biasiswa Seni Bina — UCSF\n• Biasiswa Pelancongan/Perhotelan — UCSF\n• Biasiswa Teknologi Pembinaan — KTYS\n• Biasiswa Pendidikan Awal Kanak-Kanak — KTYS\n• Biasiswa Pengajian Ilmu Islam — KTYS\n• Biasiswa Asasi Sains — KTYS/UMP\n• Biasiswa Kejuruteraan Jerman — UMPSA\n• Biasiswa Kepakaran (Specialist) Dalam Negeri — Sarjana/PhD di IPTA\n• Biasiswa Ulum Islamiah Mesir — Universiti Al-Azhar\n• Biasiswa Perubatan Mesir — Universiti Al-Azhar\n• Biasiswa Perubatan Russia — Kursk State Medical University\n• Biasiswa Kerjasama YS & AIU — Albukhary International University\n• Biasiswa Amalan Kehakiman & Guaman Syarie — Diploma Lepasan Ijazah, UMS",
     "keywords": ["jenis biasiswa kys", "senarai biasiswa yayasan sabah", "biasiswa yayasan sabah 2026", "bcns", "bcplb", "biasiswa cemerlang yayasan"],
-    "followUps": ["kys-dermasiswa-pinjaman", "kys-eligibility", "kys-how-to-apply", "kys-documents"]
+    "followUps": ["kys-dermasiswa-pinjaman", "kys-eligibility", "kys-how-to-apply", "kys-documents", "kys-allowance"]
   },
   {
     "id": "kys-dermasiswa-pinjaman",
     "category": "KYS",
     "question": "Apakah dermasiswa dan pinjaman yang ditawarkan KYS?",
-    "answer": "Selain biasiswa, Yayasan Sabah juga menawarkan **Dermasiswa** dan **Pinjaman Pengajian**:\n\n**Dermasiswa:**\n• **Dermasiswa KTYS/Politeknik/UiTM** — kursus Sijil di KTYS, Diploma & Ijazah di Politeknik, Pra-Diploma/Diploma/Ijazah di UiTM — kelayakan min SPM 3 kredit termasuk BM\n\n**Pinjaman Pengajian** (untuk kursus yang tidak tersenarai dalam biasiswa):\n• Pinjaman IPTA — Diploma dan Ijazah\n• Pinjaman IPTS — Diploma dan Ijazah\n• Pinjaman KTYS — Diploma\n• Pinjaman UCSF — Diploma dan Ijazah\n• Pinjaman ASEAN/Timur Tengah — Diploma dan Ijazah (perlukan surat tawaran JPT bagi Timur Tengah)\n• Pinjaman Pendidikan Jarak Jauh (PJJ) — Diploma, Ijazah, Sarjana, PhD\n• Pinjaman Luar Negara — Ijazah, Sarjana, PhD",
+    "answer": "Selain biasiswa, Yayasan Sabah juga menawarkan **Dermasiswa** dan **Pinjaman Pengajian**:\n\n**Dermasiswa:**\n• **Dermasiswa KTYS/Politeknik/UiTM** — Sijil di KTYS, Diploma & Ijazah di Politeknik, Pra-Diploma/Diploma/Ijazah di UiTM — kelayakan min SPM 3 kredit termasuk BM\n\n**Pinjaman Pengajian** (untuk kursus yang tidak tersenarai dalam biasiswa):\n• Pinjaman IPTA — Diploma dan Ijazah\n• Pinjaman IPTS — Diploma dan Ijazah\n• Pinjaman KTYS — Diploma\n• Pinjaman UCSF — Diploma dan Ijazah\n• Pinjaman ASEAN/Timur Tengah — Diploma dan Ijazah (perlukan surat tawaran JPT bagi Timur Tengah)\n• Pinjaman Pendidikan Jarak Jauh (PJJ) — Diploma, Ijazah, Sarjana, PhD\n• Pinjaman Luar Negara — Ijazah, Sarjana, PhD",
     "keywords": ["dermasiswa kys", "pinjaman yayasan sabah", "pinjaman kys", "pinjaman ipta kys", "pinjaman ipts kys", "dermasiswa ktys"],
-    "followUps": ["kys-jenis-biasiswa", "kys-how-to-apply", "kys-documents"]
+    "followUps": ["kys-jenis-biasiswa", "kys-how-to-apply", "kys-documents", "kys-allowance"]
   },
   {
     "id": "kys-eligibility",
     "category": "KYS",
     "question": "Apakah kelayakan dan syarat untuk KYS?",
-    "answer": "**Syarat Kelayakan KYS 2026:**\n\n**Kewarganegaraan (salah satu):**\n• Pemohon, ibu & bapa warganegara Malaysia berasal dari Sabah; atau\n• Salah seorang ibu/bapa berasal dari Sabah; atau\n• Salah seorang ibu/bapa mempunyai status Penduduk Tetap di Sabah\n\n**Had Umur:**\n• Sijil / Diploma / Ijazah: tidak melebihi **35 tahun**\n• Sarjana / PhD: tidak melebihi **45 tahun**\n\n**Kelayakan Akademik (mengikut tajaan):**\n• BCNS: min 5A+ dalam SPM 2025 termasuk BM\n• BCPLB: min 5A dalam SPM 2025 termasuk BM (golongan B40)\n• Biasiswa Pengajian Tinggi: min 5 kredit SPM; CGPA 3.00 bagi Ijazah\n• Biasiswa Seni Bina/Pelancongan/Teknologi Pembinaan/Awal Kanak-Kanak/Islam/Asasi Sains: min 5 kredit SPM\n• Biasiswa Kepakaran: Sarjana & PhD di IPTA\n\nKeutamaan diberikan kepada yang berasal dan menetap di Sabah.",
-    "keywords": ["kelayakan kys", "syarat kys", "kriteria kys", "layak kys", "umur kys", "cgpa kys"],
-    "followUps": ["kys-jenis-biasiswa", "kys-how-to-apply", "kys-documents"]
+    "answer": "**Syarat Kelayakan KYS 2026:**\n\n**Kewarganegaraan (salah satu):**\n• Pemohon, ibu & bapa warganegara Malaysia berasal dari Sabah; atau\n• Salah seorang ibu/bapa berasal dari Sabah; atau\n• Salah seorang ibu/bapa mempunyai status Penduduk Tetap di Sabah\n\n**Had Umur:**\n• Sijil / Diploma / Ijazah: tidak melebihi **35 tahun**\n• Sarjana / PhD: tidak melebihi **45 tahun**\n\n**Kelayakan Akademik (mengikut tajaan):**\n• BCNS: min 5A+ dalam SPM 2025 termasuk BM\n• BCPLB: min 5A dalam SPM 2025 termasuk BM (golongan B40)\n• Biasiswa Pengajian Tinggi: min 5 kredit SPM; CGPA 3.00 bagi Ijazah\n• Biasiswa Seni Bina/Pelancongan/Teknologi Pembinaan/Awal Kanak-Kanak/Islam/Asasi Sains: min 5 kredit SPM\n• Biasiswa Kepakaran: Sarjana & PhD di IPTA\n• Dermasiswa KTYS/Politeknik/UiTM: min 3 kredit SPM termasuk BM\n\nKeutamaan diberikan kepada yang berasal dan menetap di Sabah.",
+    "keywords": ["kelayakan kys", "syarat kys", "kriteria kys", "layak kys", "umur kys", "cgpa kys", "spm kys"],
+    "followUps": ["kys-jenis-biasiswa", "kys-how-to-apply", "kys-documents", "kys-allowance"]
   },
   {
     "id": "kys-how-to-apply",
     "category": "KYS",
     "question": "Bagaimana cara memohon KYS?",
-    "answer": "**Cara Memohon KYS 2026:**\n\n1. Layari portal: **https://ptps.sabah.gov.my**\n2. Daftar dan isi borang permohonan dalam talian\n3. **Cetak** borang yang telah dilengkapkan\n4. Hantar bersama **salinan dokumen sokongan yang disahkan** ke:\n\n> Unit Pentadbiran\n> Bahagian Pembangunan Pendidikan, Kumpulan Yayasan Sabah\n> Aras 5, Menara Tun Mustapha, Teluk Likas\n> Peti Surat 11201, 88813 Kota Kinabalu\n\n**Tarikh tutup: 6 Mei 2026 (Rabu)**\n\n**Hubungi Yayasan Sabah:**\n• Telefon: 088-421128 / 421123\n• WhatsApp Biasiswa: 017-9958910\n• WhatsApp Pinjaman: 012-2428910\n• Online PTPS: 014-9550702 / 017-8370094\n\nPermohonan dianggap tidak berjaya sekiranya tiada jawapan selepas **30 September 2026**.",
-    "keywords": ["cara mohon kys", "permohonan kys", "apply kys", "tarikh tutup kys", "portal kys", "hantar kys", "6 mei 2026"],
-    "followUps": ["kys-documents", "kys-eligibility"]
+    "answer": "**Cara Memohon KYS 2026:**\n\n1. Layari portal: **https://ptps.sabah.gov.my**\n2. Daftar dan isi borang permohonan dalam talian\n3. **Cetak** borang yang telah dilengkapkan\n4. Hantar bersama **salinan dokumen sokongan yang disahkan** ke:\n\n> Unit Pentadbiran, Bahagian Pembangunan Pendidikan\n> Kumpulan Yayasan Sabah\n> Aras 5, Menara Tun Mustapha, Teluk Likas\n> Peti Surat 11201, 88813 Kota Kinabalu\n\n**Tarikh tutup: 6 Mei 2026 (Rabu)**\n\n**Hubungi Yayasan Sabah:**\n• Telefon: 088-421128 / 421123\n• WhatsApp Biasiswa: 017-9958910\n• WhatsApp Pinjaman: 012-2428910\n• Online PTPS: 014-9550702 / 017-8370094\n\nPermohonan dianggap tidak berjaya sekiranya tiada jawapan selepas **30 September 2026**.",
+    "keywords": ["cara mohon kys", "permohonan kys", "apply kys", "tarikh tutup kys", "portal kys", "hantar kys", "6 mei 2026", "ptps yayasan"],
+    "followUps": ["kys-documents", "kys-eligibility", "kys-allowance"]
   },
   {
     "id": "kys-documents",
     "category": "KYS",
     "question": "Dokumen apa yang diperlukan untuk KYS?",
-    "answer": "Semua dokumen hendaklah **DISAHKAN BENAR** sebelum dihantar.\n\n**Dokumen Pemohon:**\n• Salinan Sijil Kelahiran / Surat Sumpah\n• Salinan Kad Pengenalan\n• Salinan Akaun Bank (Aktif)\n• Salinan surat penerimaan masuk universiti/kolej (jika ada)\n• Sijil persekolahan berkaitan: SPM / SVM / STPM / A-Levels / Matrikulasi / Asasi / Diploma / Ijazah\n• Salinan keputusan peperiksaan terakhir (CGPA) — jika sudah tamat atau sedang belajar\n• Salinan penyata gaji terkini (bagi yang bekerja)\n\n**Dokumen Bapa/Penjaga:**\n• Salinan Sijil Kelahiran / Surat Sumpah\n• Salinan Kad Pengenalan\n• Salinan penyata gaji terkini\n• Salinan Sijil Kematian (jika bapa telah meninggal)\n\n**Dokumen Ibu/Penjaga:**\n• Salinan Sijil Kelahiran / Surat Sumpah\n• Salinan Kad Pengenalan\n• Salinan penyata gaji terkini\n• Salinan Sijil Kematian (jika ibu telah meninggal)",
-    "keywords": ["dokumen kys", "dokumen yayasan sabah", "dokumen diperlukan kys", "senarai dokumen kys", "disahkan benar"],
-    "followUps": ["kys-how-to-apply", "kys-eligibility"]
+    "answer": "Semua dokumen hendaklah **DISAHKAN BENAR** sebelum dihantar.\n\n**Dokumen Pemohon:**\n• Salinan Sijil Kelahiran / Surat Sumpah\n• Salinan Kad Pengenalan\n• Salinan Akaun Bank (Aktif)\n• Salinan surat penerimaan masuk universiti/kolej (jika ada)\n• Sijil persekolahan: SPM / SVM / STPM / A-Levels / Matrikulasi / Asasi / Diploma / Ijazah\n• Salinan keputusan peperiksaan terakhir / CGPA (jika sudah tamat atau sedang belajar)\n• Salinan penyata gaji terkini (bagi yang bekerja)\n\n**Dokumen Bapa/Penjaga:**\n• Salinan Sijil Kelahiran / Surat Sumpah\n• Salinan Kad Pengenalan\n• Salinan penyata gaji terkini\n• Salinan Sijil Kematian (jika bapa telah meninggal)\n\n**Dokumen Ibu/Penjaga:**\n• Salinan Sijil Kelahiran / Surat Sumpah\n• Salinan Kad Pengenalan\n• Salinan penyata gaji terkini\n• Salinan Sijil Kematian (jika ibu telah meninggal)",
+    "keywords": ["dokumen kys", "dokumen yayasan sabah", "dokumen diperlukan kys", "senarai dokumen kys", "disahkan benar kys"],
+    "followUps": ["kys-how-to-apply", "kys-eligibility", "kys-allowance"]
+  },
+  {
+    "id": "kys-allowance",
+    "category": "KYS",
+    "question": "Apakah elaun atau liputan tajaan KYS?",
+    "answer": "**Liputan Tajaan Yayasan Sabah (KYS):**\n\nJenis dan kadar elaun bergantung kepada **jenis tajaan** yang diterima:\n\n**Biasiswa** — merangkumi:\n• Yuran pengajian (bergantung kepada program)\n• Elaun sara hidup (kadar mengikut peringkat pengajian)\n• Elaun buku dan keperluan pengajian\n• Elaun tambahan untuk tajaan luar negara (tiket penerbangan dll.)\n\n**Biasiswa Kerjasama YS & AIU** — merangkumi tiket penerbangan pergi & balik setelah tamat pengajian dan bantuan one-off\n\n**Dermasiswa** — merangkumi bantuan yuran dan sara hidup pada kadar yang ditetapkan\n\n**Pinjaman Pengajian** — perlu dibayar balik setelah tamat pengajian\n\nUntuk kadar elaun terperinci mengikut program, hubungi:\n• WhatsApp Biasiswa: **017-9958910**\n• WhatsApp Pinjaman: **012-2428910**\n• Telefon: **088-421128 / 421123**",
+    "keywords": ["elaun kys", "jumlah kys", "nilai kys", "berapa kys", "liputan kys", "yuran kys", "elaun yayasan sabah"],
+    "followUps": ["kys-jenis-biasiswa", "kys-eligibility", "kys-how-to-apply"]
   },
   {
     "id": "muis-overview",
@@ -93,39 +109,47 @@
     "question": "Apakah itu MUIS?",
     "answer": "**Dermasiswa Pengajian Tinggi MUIS** ditawarkan oleh **Bahagian Zakat dan Fitrah, Majlis Ugama Islam Sabah (MUIS)** kepada pelajar yang mengikuti pengajian di IPTA/IPTS tempatan.\n\nMUIS menawarkan tiga (3) jenis bantuan:\n1. **Dermasiswa Pengajian Tinggi** — untuk kursus **selain Pengajian Islam**\n2. **Dermasiswa Pengajian Tinggi** — untuk kursus **Pengajian Islam**\n3. **Bantuan Yuran Pendaftaran Awal & Tiket Penerbangan (One-Off)** — untuk pelajar yang mendaftar tahun semasa\n\nSemua bantuan adalah sepenuh masa di IPTA/IPTS tempatan yang mendapat pengiktirafan **MQA**.",
     "keywords": ["muis", "majlis ugama islam sabah", "dermasiswa muis", "zakat muis", "biasiswa muis", "bahagian zakat fitrah"],
-    "followUps": ["muis-jenis-dermasiswa", "muis-eligibility", "muis-how-to-apply", "muis-documents"]
+    "followUps": ["muis-jenis-dermasiswa", "muis-eligibility", "muis-how-to-apply", "muis-documents", "muis-allowance"]
   },
   {
     "id": "muis-jenis-dermasiswa",
     "category": "MUIS",
     "question": "Apakah jenis-jenis dermasiswa MUIS?",
-    "answer": "**Jenis Dermasiswa MUIS:**\n\n**1. Dermasiswa Pengajian Tinggi (Selain Pengajian Islam)**\n• Untuk kursus selain Pengajian Islam di IPTA/IPTS tempatan\n• Peringkat: Sijil/Asasi, Diploma, Ijazah Sarjana Muda (sepenuh masa)\n• Keutamaan: **Asnaf Fakir, Miskin dan Mualaf sahaja**\n• Keutamaan: Warganegara Malaysia berasal dari Sabah\n• Kursus mestilah menepati hukum syarak dan pasaran kerja\n\n**2. Dermasiswa Pengajian Tinggi (Pengajian Islam)**\n• Untuk kursus Pengajian Islam di IPTA/IPTS tempatan\n• Peringkat: Sijil/Asasi, Diploma, Ijazah Sarjana Muda (sepenuh masa)\n• Keutamaan: Warganegara Malaysia berasal dari Sabah\n\n**3. Bantuan Yuran Pendaftaran Awal & Tiket Penerbangan (One-Off)**\n• Untuk pelajar yang baru mendaftar pada tahun semasa\n• Permohonan tidak melebihi **6 bulan** dari tarikh pendaftaran Semester 1\n• Tidak layak: Diploma Lanjutan, separuh masa/PJJ, kursus yang tidak menurut hukum syarak",
+    "answer": "**Jenis Dermasiswa MUIS:**\n\n**1. Dermasiswa Pengajian Tinggi (Selain Pengajian Islam)**\n• Untuk kursus selain Pengajian Islam di IPTA/IPTS tempatan\n• Peringkat: Sijil/Asasi, Diploma, Ijazah Sarjana Muda (sepenuh masa)\n• Keutamaan: **Asnaf Fakir, Miskin dan Mualaf sahaja**\n• Keutamaan: Warganegara Malaysia berasal dari Sabah\n• Kursus mestilah menepati hukum syarak dan pasaran kerja\n\n**2. Dermasiswa Pengajian Tinggi (Pengajian Islam)**\n• Untuk kursus Pengajian Islam di IPTA/IPTS tempatan\n• Peringkat: Sijil/Asasi, Diploma, Ijazah Sarjana Muda (sepenuh masa)\n• Keutamaan: Warganegara Malaysia berasal dari Sabah\n\n**3. Bantuan Yuran Pendaftaran Awal & Tiket Penerbangan (One-Off)**\n• Untuk pelajar yang baru mendaftar pada tahun semasa\n• Permohonan tidak melebihi **6 bulan** dari tarikh pendaftaran Semester 1\n• Tidak layak: Diploma Lanjutan, separuh masa/PJJ, kursus tidak menurut hukum syarak",
     "keywords": ["jenis dermasiswa muis", "jenis muis", "dermasiswa pengajian islam", "dermasiswa bukan islam muis", "bantuan tiket penerbangan muis", "yuran pendaftaran muis"],
-    "followUps": ["muis-eligibility", "muis-how-to-apply", "muis-documents"]
+    "followUps": ["muis-eligibility", "muis-how-to-apply", "muis-documents", "muis-allowance"]
   },
   {
     "id": "muis-eligibility",
     "category": "MUIS",
     "question": "Apakah kelayakan dan syarat untuk MUIS?",
-    "answer": "**Syarat Kelayakan Dermasiswa MUIS:**\n\n**Syarat Umum (semua jenis):**\n• Warganegara Malaysia (keutamaan berasal dari Sabah)\n• Bermastautin (tinggal tetap) di Negeri Sabah\n• Had umur: **minimum 18 tahun, maksimum 28 tahun**\n• Hanya IPTA/IPTS yang mendapat **pengiktirafan MQA**\n• Pengajian Sepenuh Masa sahaja\n\n**Tambahan untuk Dermasiswa (Selain Pengajian Islam):**\n• Keutamaan kepada **asnaf Fakir, Miskin dan Mualaf sahaja**\n• Kursus mestilah menepati hukum syarak dan pasaran kerja\n\n**Tambahan untuk Bantuan Yuran/Tiket (One-Off):**\n• Pelajar yang mendaftar untuk tahun semasa sahaja\n• Permohonan tidak melebihi 6 bulan dari pendaftaran Semester 1\n• Tidak layak: Diploma Lanjutan, separuh masa/PJJ",
+    "answer": "**Syarat Kelayakan Dermasiswa MUIS:**\n\n**Syarat Umum (semua jenis):**\n• Warganegara Malaysia (keutamaan berasal dari Sabah)\n• Bermastautin (tinggal tetap) di Negeri Sabah\n• Had umur: **minimum 18 tahun, maksimum 28 tahun**\n• Hanya IPTA/IPTS yang mendapat **pengiktirafan MQA**\n• Pengajian Sepenuh Masa sahaja\n\n**Tambahan untuk Dermasiswa (Selain Pengajian Islam):**\n• Keutamaan kepada **asnaf Fakir, Miskin dan Mualaf sahaja**\n• Kursus mestilah menepati hukum syarak dan pasaran kerja\n\n**Tambahan untuk Bantuan Yuran/Tiket (One-Off):**\n• Pelajar yang mendaftar untuk tahun semasa sahaja\n• Permohonan tidak melebihi **6 bulan** dari pendaftaran Semester 1\n• Tidak layak: Diploma Lanjutan, separuh masa/PJJ",
     "keywords": ["kelayakan muis", "syarat muis", "kriteria muis", "layak muis", "umur muis", "asnaf muis", "mqa muis"],
-    "followUps": ["muis-jenis-dermasiswa", "muis-how-to-apply", "muis-documents"]
+    "followUps": ["muis-jenis-dermasiswa", "muis-how-to-apply", "muis-documents", "muis-allowance"]
   },
   {
     "id": "muis-how-to-apply",
     "category": "MUIS",
     "question": "Bagaimana cara memohon MUIS?",
-    "answer": "**Cara Memohon Dermasiswa MUIS:**\n\n**Untuk Dermasiswa Pengajian Tinggi:**\n1. Isi borang secara **online** di: **appszakat.sabah.gov.my**\n2. Hantar dokumen yang diperlukan melalui email: **dermasiswa.zakatsabah@gmail.com**\n3. Borang yang lengkap sahaja akan diproses dan dibawa ke Mesyuarat Jawatankuasa Dermasiswa Pengajian Tinggi MUIS\n\n**Untuk Bantuan Yuran Pendaftaran Awal & Tiket Penerbangan (One-Off):**\n1. Isi borang secara **online** di: **appszakat.sabah.gov.my**\n2. Hantar dokumen melalui email: **pendidikan.zakatsabah@gmail.com**\n3. Lengkapkan Bahagian A, B, C, D dan E dalam borang\n\n**Perhatian:** Hanya borang yang lengkap akan diproses.",
-    "keywords": ["cara mohon muis", "permohonan muis", "apply muis", "portal muis", "appszakat", "email muis", "hantar muis"],
-    "followUps": ["muis-documents", "muis-eligibility"]
+    "answer": "**Cara Memohon Dermasiswa MUIS:**\n\n**Untuk Dermasiswa Pengajian Tinggi (Islam & Bukan Islam):**\n1. Isi borang secara **online** di: **appszakat.sabah.gov.my**\n2. Hantar dokumen yang diperlukan melalui e-mel: **dermasiswa.zakatsabah@gmail.com**\n3. Borang yang lengkap sahaja akan diproses dan dibawa ke Mesyuarat Jawatankuasa Dermasiswa MUIS\n\n**Untuk Bantuan Yuran Pendaftaran Awal & Tiket Penerbangan (One-Off):**\n1. Isi borang secara **online** di: **appszakat.sabah.gov.my**\n2. Hantar dokumen melalui e-mel: **pendidikan.zakatsabah@gmail.com**\n3. Lengkapkan Bahagian A, B, C, D dan E dalam borang\n\n**Perhatian:** Hanya borang yang **lengkap** sahaja akan diproses.",
+    "keywords": ["cara mohon muis", "permohonan muis", "apply muis", "portal muis", "appszakat", "email muis", "hantar muis", "daftar muis"],
+    "followUps": ["muis-documents", "muis-eligibility", "muis-allowance"]
   },
   {
     "id": "muis-documents",
     "category": "MUIS",
     "question": "Dokumen apa yang diperlukan untuk MUIS?",
-    "answer": "**Dokumen untuk Dermasiswa Pengajian Tinggi MUIS (Selain Pengajian Islam):**\n1. Gambar berukuran passport\n2. Salinan surat tawaran\n3. Surat pengesahan pelajar terkini dari kolej/universiti\n4. Salinan Kad Pengenalan pemohon + Sijil Lahir\n5. Salinan Kad Pengenalan ibu & bapa/penjaga + Sijil Lahir\n6. Sijil persekolahan: SPM / STPM / STAM / O-Levels / Diploma\n7. Slip gaji ibu & bapa terkini (atau baucer gaji)\n8. Surat pengesahan pendapatan (bekerja sendiri/tidak bekerja) dari Ketua Kampung/JKKK/KAN/WKAN\n9. Surat pengesahan dari kolej/universiti bahawa pemohon **tidak mendapat tajaan lain**\n10. Salinan akaun bank yang dikemaskini dan masih aktif\n11. Alamat email pelajar yang aktif *(tambahan untuk Pengajian Islam)*\n\n**Dokumen untuk Bantuan Yuran/Tiket (One-Off):**\n1. Salinan KP pemohon, ibu dan bapa\n2. Surat tawaran kursus/pengajian\n3. Slip gaji ibu & bapa (atau pengesahan dari Ketua Daerah/JKKK/Ketua Kampung)\n4. Salinan tiket penerbangan yang lengkap beserta **harga pembelian tiket**\n5. Salinan buku akaun bank pemohon yang masih aktif",
+    "answer": "**Dokumen untuk Dermasiswa Pengajian Tinggi MUIS:**\n1. Gambar berukuran passport\n2. Salinan surat tawaran\n3. Surat pengesahan pelajar terkini dari kolej/universiti\n4. Salinan Kad Pengenalan pemohon + Sijil Lahir\n5. Salinan Kad Pengenalan ibu & bapa/penjaga + Sijil Lahir\n6. Sijil persekolahan: SPM / STPM / STAM / O-Levels / Diploma\n7. Slip gaji ibu & bapa terkini (atau baucer gaji)\n8. Surat pengesahan pendapatan (bekerja sendiri/tidak bekerja) dari Ketua Kampung/JKKK/KAN/WKAN\n9. Surat pengesahan dari kolej/universiti bahawa pemohon **tidak mendapat tajaan lain**\n10. Salinan akaun bank yang dikemaskini dan masih aktif\n11. Alamat email pelajar yang aktif\n\n**Dokumen tambahan untuk Bantuan Yuran/Tiket (One-Off):**\n1. Salinan KP pemohon, ibu dan bapa\n2. Surat tawaran kursus/pengajian\n3. Slip gaji ibu & bapa (atau pengesahan dari Ketua Daerah/JKKK/Ketua Kampung)\n4. Salinan tiket penerbangan yang lengkap beserta **harga pembelian tiket**\n5. Salinan buku akaun bank pemohon yang masih aktif",
     "keywords": ["dokumen muis", "dokumen dermasiswa muis", "senarai dokumen muis", "appszakat dokumen", "muis dokumen sokongan"],
-    "followUps": ["muis-how-to-apply", "muis-eligibility"]
+    "followUps": ["muis-how-to-apply", "muis-eligibility", "muis-allowance"]
+  },
+  {
+    "id": "muis-allowance",
+    "category": "MUIS",
+    "question": "Apakah elaun atau liputan dermasiswa MUIS?",
+    "answer": "**Liputan Dermasiswa MUIS:**\n\n**Dermasiswa Pengajian Tinggi (Islam & Bukan Islam):**\n• Bantuan yuran pengajian\n• Elaun sara hidup bulanan\n• Kadar elaun ditetapkan oleh Jawatankuasa Dermasiswa Pengajian Tinggi MUIS\n\n**Bantuan Yuran Pendaftaran Awal & Tiket Penerbangan (One-Off):**\n• Bantuan yuran pendaftaran awal (one-off) untuk pelajar yang baru mendaftar\n• Bantuan tiket penerbangan (one-off) — sertakan salinan tiket + harga semasa memohon\n\n**Nota:** Kadar elaun terperinci tidak dinyatakan secara terbuka dalam iklan rasmi MUIS. Untuk maklumat terkini, hubungi terus:\n• E-mel Dermasiswa: **dermasiswa.zakatsabah@gmail.com**\n• E-mel Pendidikan: **pendidikan.zakatsabah@gmail.com**\n• Portal: **appszakat.sabah.gov.my**",
+    "keywords": ["elaun muis", "jumlah muis", "nilai muis", "berapa muis", "liputan muis", "yuran muis", "bantuan muis"],
+    "followUps": ["muis-eligibility", "muis-how-to-apply", "muis-jenis-dermasiswa"]
   },
   {
     "id": "baitulmal-overview",
@@ -133,7 +157,7 @@
     "question": "Apakah itu Biasiswa Baitulmal?",
     "answer": "**Perbadanan Baitulmal Negeri Sabah (PBNS)** menawarkan bantuan kewangan kepada rakyat Sabah yang layak melalui dana zakat.\n\nTerdapat tiga (3) jenis bantuan:\n1. **Bantuan Am** — bantuan kewangan am untuk golongan yang memerlukan\n2. **Bantuan Awal Pendidikan** — bantuan sekali sahaja untuk pelajar Islam yang baru mendaftar ke IPT\n3. **Bantuan Masjid/Surau/Institusi** — untuk pertubuhan Islam yang berdaftar\n\nPortal rasmi: **https://bantuanpbns.sabah.gov.my**",
     "keywords": ["baitulmal", "perbadanan baitulmal", "bantuan baitulmal", "baitulmal sabah", "pbns", "zakat pendidikan sabah"],
-    "followUps": ["baitulmal-jenis-bantuan", "baitulmal-eligibility", "baitulmal-documents"]
+    "followUps": ["baitulmal-jenis-bantuan", "baitulmal-eligibility", "baitulmal-how-to-apply", "baitulmal-documents", "baitulmal-allowance"]
   },
   {
     "id": "baitulmal-jenis-bantuan",
@@ -141,31 +165,87 @@
     "question": "Apakah jenis-jenis bantuan Baitulmal?",
     "answer": "**Jenis Bantuan Perbadanan Baitulmal Negeri Sabah:**\n\n**1. Bantuan Am**\n• Bantuan kewangan am kepada golongan yang memerlukan\n• Syarat: Warganegara Malaysia berasal dari Sabah, salah satu ibu/bapa berasal dan dilahirkan di Sabah\n\n**2. Bantuan Awal Pendidikan**\n• Bantuan sekali sahaja untuk pelajar Islam yang baru mendaftar ke IPT\n• Terbuka kepada semua bidang pengajian (IPTA dan IPTS)\n• Peringkat: Sijil/Sijil Kemahiran/Asasi/Matrikulasi/Politeknik/Diploma/Ijazah Sarjana Muda dan Tradisi\n• Had pendapatan isi rumah: di bawah **RM3,000 sebulan**\n• Atau RM3,001–RM6,000 dengan tanggungan **4 orang ke atas**\n• Bantuan ini diberikan **sekali sahaja**\n\n**3. Bantuan Masjid/Surau/Institusi**\n• Untuk Masjid/Surau yang berdaftar di bawah MUIS/JHEAINS\n• Institusi/organisasi Islam yang mempunyai akaun bank",
     "keywords": ["jenis bantuan baitulmal", "bantuan am baitulmal", "bantuan pendidikan baitulmal", "bantuan awal pendidikan baitulmal", "bantuan masjid baitulmal"],
-    "followUps": ["baitulmal-eligibility", "baitulmal-documents"]
+    "followUps": ["baitulmal-eligibility", "baitulmal-how-to-apply", "baitulmal-documents", "baitulmal-allowance"]
   },
   {
     "id": "baitulmal-eligibility",
     "category": "Baitulmal",
     "question": "Apakah kelayakan dan syarat untuk Baitulmal?",
-    "answer": "**Syarat Kelayakan Bantuan Awal Pendidikan Baitulmal:**\n\n• Warganegara Malaysia berasal dari Sabah\n• Salah seorang ibu atau bapa berasal dan dilahirkan di Sabah\n• **Beragama Islam**\n• Pengajian Sepenuh Masa sahaja\n• Terbuka kepada semua bidang pengajian\n• IPT/IPTS perlu mendapat perakuan **Agensi Kelayakan Malaysia (MQA)**\n• Tarikh permohonan tidak melebihi **2 bulan** dari tarikh surat tawaran belajar\n• Pendapatan kasar isi rumah di bawah **RM3,000/bulan**; atau RM3,001–RM6,000 dengan tanggungan 4 orang ke atas\n• Bantuan diberikan **sekali sahaja**\n\n**Syarat Bantuan Am:**\n• Warganegara Malaysia berasal dari Sabah\n• Salah satu ibu/bapa berasal dan dilahirkan di Sabah",
-    "keywords": ["kelayakan baitulmal", "syarat baitulmal", "layak baitulmal", "pendapatan baitulmal", "rm3000 baitulmal", "mqa baitulmal"],
-    "followUps": ["baitulmal-jenis-bantuan", "baitulmal-documents"]
+    "answer": "**Syarat Kelayakan Bantuan Awal Pendidikan Baitulmal:**\n\n• Warganegara Malaysia berasal dari Sabah\n• Salah seorang ibu atau bapa berasal dan dilahirkan di Sabah\n• **Beragama Islam**\n• Pengajian Sepenuh Masa sahaja\n• Terbuka kepada semua bidang pengajian\n• IPT/IPTS perlu mendapat perakuan **Agensi Kelayakan Malaysia (MQA)**\n• Tarikh permohonan tidak melebihi **2 bulan** dari tarikh surat tawaran belajar dikeluarkan\n• Pendapatan kasar isi rumah di bawah **RM3,000/bulan**\n• Atau RM3,001–RM6,000 dengan tanggungan **4 orang ke atas**\n• Bantuan diberikan **sekali sahaja**\n\n**Syarat Bantuan Am:**\n• Warganegara Malaysia berasal dari Sabah\n• Salah satu ibu/bapa berasal dan dilahirkan di Sabah",
+    "keywords": ["kelayakan baitulmal", "syarat baitulmal", "layak baitulmal", "pendapatan baitulmal", "rm3000 baitulmal", "mqa baitulmal", "islam baitulmal"],
+    "followUps": ["baitulmal-jenis-bantuan", "baitulmal-how-to-apply", "baitulmal-documents", "baitulmal-allowance"]
+  },
+  {
+    "id": "baitulmal-how-to-apply",
+    "category": "Baitulmal",
+    "question": "Bagaimana cara memohon Baitulmal?",
+    "answer": "**Cara Memohon Bantuan Baitulmal:**\n\n1. Layari portal rasmi: **https://bantuanpbns.sabah.gov.my**\n2. Klik **Mohon Bantuan** di laman utama\n3. Isi borang permohonan dengan lengkap beserta salinan dokumen yang diperlukan\n4. Semua salinan dokumen hendaklah **DISAHKAN BENAR** oleh:\n   Pesuruhjaya Sumpah / Pegawai Kumpulan A / JKKK / Ketua Kampung\n5. Serahkan permohonan sebelum tarikh tutup\n\n**Perhatian penting:**\n• Tarikh permohonan **tidak melebihi 2 bulan** dari tarikh surat tawaran belajar dikeluarkan\n• Hanya **pengajian sepenuh masa** yang layak\n• Perlu mempunyai perakuan **MQA**\n• Bantuan diberikan **sekali sahaja**\n\nUntuk pertanyaan lanjut, layari: **https://bantuanpbns.sabah.gov.my**",
+    "keywords": ["cara mohon baitulmal", "permohonan baitulmal", "apply baitulmal", "portal baitulmal", "hantar baitulmal", "bantuanpbns"],
+    "followUps": ["baitulmal-documents", "baitulmal-eligibility", "baitulmal-allowance"]
   },
   {
     "id": "baitulmal-documents",
     "category": "Baitulmal",
     "question": "Dokumen apa yang diperlukan untuk Baitulmal?",
-    "answer": "Semua salinan dokumen hendaklah **DISAHKAN BENAR** oleh Pesuruhjaya Sumpah / Pegawai Kumpulan A / JKK / Ketua Kampung.\n\n**Dokumen Bantuan Awal Pendidikan:**\n1. Salinan Kad Pengenalan Pemohon\n2. Salinan Kad Pengenalan Ibu dan Bapa/Penjaga\n3. Salinan Sijil Lahir Pemohon\n4. Salinan Sijil Lahir Ibu dan Bapa/Penjaga\n5. Salinan Slip Gaji / Pengesahan Pendapatan / Akuan Sumpah Pendapatan (Pemohon & Ibu/Bapa)\n6. Salinan Surat Tawaran atau Pengesahan dari Pusat Pengajian\n7. Salinan Penyata Bank Pemohon (aktif)\n8. Salinan Sijil Memeluk Islam / Kad Mualaf (jika berkenaan)\n9. Salinan Sijil Nikah / Cerai / Kematian (jika berkenaan)\n\n**Dokumen Bantuan Am (tambahan):**\n• Surat Pengesahan dari Hospital / Kad Temujanji / Kad OKU (jika berkenaan)\n• Laporan Polis / Balai Bomba / Pengesahan JKM / Ketua Kampung (jika berkenaan)\n\n**Cara mohon:** Layari **https://bantuanpbns.sabah.gov.my**",
-    "keywords": ["dokumen baitulmal", "dokumen bantuan baitulmal", "senarai dokumen baitulmal", "disahkan benar baitulmal", "baitulmal cara mohon"],
-    "followUps": ["baitulmal-eligibility", "baitulmal-jenis-bantuan"]
+    "answer": "Semua salinan dokumen hendaklah **DISAHKAN BENAR** oleh Pesuruhjaya Sumpah / Pegawai Kumpulan A / JKK / Ketua Kampung.\n\n**Dokumen Bantuan Awal Pendidikan:**\n1. Salinan Kad Pengenalan Pemohon\n2. Salinan Kad Pengenalan Ibu dan Bapa/Penjaga\n3. Salinan Sijil Lahir Pemohon\n4. Salinan Sijil Lahir Ibu dan Bapa/Penjaga\n5. Salinan Slip Gaji / Pengesahan Pendapatan / Akuan Sumpah Pendapatan\n6. Salinan Surat Tawaran atau Pengesahan dari Pusat Pengajian\n7. Salinan Penyata Bank Pemohon (aktif)\n8. Salinan Sijil Memeluk Islam / Kad Mualaf (jika berkenaan)\n9. Salinan Sijil Nikah / Cerai / Kematian (jika berkenaan)\n\n**Dokumen Bantuan Am (tambahan):**\n• Surat Pengesahan dari Hospital / Kad Temujanji / Kad OKU (jika berkenaan)\n• Laporan Polis / Balai Bomba / Pengesahan JKM / Ketua Kampung (jika berkenaan)\n\nMohon di: **https://bantuanpbns.sabah.gov.my**",
+    "keywords": ["dokumen baitulmal", "dokumen bantuan baitulmal", "senarai dokumen baitulmal", "disahkan benar baitulmal"],
+    "followUps": ["baitulmal-how-to-apply", "baitulmal-eligibility", "baitulmal-allowance"]
+  },
+  {
+    "id": "baitulmal-allowance",
+    "category": "Baitulmal",
+    "question": "Apakah jumlah atau liputan bantuan Baitulmal?",
+    "answer": "**Liputan Bantuan Baitulmal:**\n\n**Bantuan Awal Pendidikan:**\n• Bantuan kewangan **sekali sahaja (one-off)** untuk menanggung kos awal pendaftaran di IPT\n• Merangkumi bantuan yuran dan kos permulaan pengajian\n• Jumlah tepat bantuan bergantung kepada keperluan pemohon dan peruntukan semasa\n\n**Bantuan Am:**\n• Bantuan kewangan mengikut keperluan dan keadaan pemohon\n\n**Syarat pendapatan untuk Bantuan Awal Pendidikan:**\n• Pendapatan kasar isi rumah di bawah **RM3,000/bulan** (layak penuh)\n• Pendapatan **RM3,001–RM6,000/bulan** dengan tanggungan 4 orang ke atas (boleh dipertimbangkan)\n\nUntuk maklumat jumlah bantuan terkini, hubungi terus Perbadanan Baitulmal Negeri Sabah melalui portal: **https://bantuanpbns.sabah.gov.my**",
+    "keywords": ["jumlah baitulmal", "elaun baitulmal", "berapa baitulmal", "nilai baitulmal", "liputan baitulmal", "wang baitulmal"],
+    "followUps": ["baitulmal-eligibility", "baitulmal-how-to-apply", "baitulmal-jenis-bantuan"]
   },
   {
     "id": "tsk-overview",
     "category": "TSK",
-    "question": "Apakah itu BUDI TSK?",
-    "answer": "**BUDI — Bantuan Tunai Pendaftaran IPT (One-Off)** adalah bantuan tunai sekali bayar yang diuruskan oleh **Pejabat Timbalan Setiausaha Kerajaan Negeri (Tugas-Tugas Khas), Jabatan Ketua Menteri Sabah**.\n\nBantuan ini diberikan kepada pelajar Bumiputera Sabah kategori B40/M40 yang memasuki IPT buat kali pertama.\n\n**Jumlah Bantuan:**\n• Diploma / Asasi / Matrikulasi: **RM1,500**\n• Ijazah Sarjana Muda: **RM2,000**\n\nPortal rasmi: **https://budi.sabah.gov.my**",
-    "keywords": ["tsk", "timbalan setiausaha kerajaan", "budi tsk", "pejabat tsk", "ptskn", "bantuan tsk"],
-    "followUps": ["budi-overview", "budi-eligibility", "budi-how-to-apply", "budi-documents"]
+    "question": "Apakah itu TSK?",
+    "answer": "**Pejabat Timbalan Setiausaha Kerajaan Negeri (Tugas-Tugas Khas) — TSK** ialah agensi di bawah Jabatan Ketua Menteri Sabah yang menguruskan program **BUDI (Bantuan Tunai Pendaftaran IPT)**.\n\nBUDI adalah bantuan tunai sekali bayar kepada pelajar **Bumiputera Sabah** kategori B40/M40 yang memasuki IPT buat kali pertama.\n\n**Jumlah Bantuan BUDI:**\n• Diploma / Asasi / Matrikulasi: **RM1,500**\n• Ijazah Sarjana Muda: **RM2,000**\n\n**Hubungi TSK:**\n• Telefon: 088-369872 / 088-369164 / 088-369897 / 088-369890\n• E-mel: **ptskn.ttk@sabah.gov.my**\n• Portal: **https://budi.sabah.gov.my**",
+    "keywords": ["tsk", "timbalan setiausaha kerajaan", "pejabat tsk", "ptskn", "tsk sabah", "jabatan ketua menteri budi"],
+    "followUps": ["tsk-jenis-tajaan", "tsk-eligibility", "tsk-how-to-apply", "tsk-documents", "tsk-allowance"]
+  },
+  {
+    "id": "tsk-jenis-tajaan",
+    "category": "TSK",
+    "question": "Apakah jenis tajaan di bawah TSK?",
+    "answer": "Di bawah **Pejabat TSK (Timbalan Setiausaha Kerajaan Negeri Tugas-Tugas Khas)**, program utama yang ditawarkan ialah:\n\n**BUDI — Bantuan Tunai Pendaftaran IPT (One-Off)**\n• Bantuan tunai sekali bayar untuk kemasukan kali pertama ke IPT\n• Peringkat yang layak: Diploma/Asasi/Matrikulasi dan Ijazah Sarjana Muda\n• Terbuka kepada IPTA dan IPTS di dalam negara dan luar negara\n• Kemasukan sepenuh masa sahaja\n\n**Jumlah Bantuan:**\n• Diploma / Asasi / Matrikulasi: **RM1,500**\n• Ijazah Sarjana Muda: **RM2,000**\n\nPortal: **https://budi.sabah.gov.my**",
+    "keywords": ["jenis tajaan tsk", "program tsk", "budi tsk", "tajaan timbalan setiausaha", "jenis bantuan tsk"],
+    "followUps": ["tsk-eligibility", "tsk-how-to-apply", "tsk-documents", "tsk-allowance"]
+  },
+  {
+    "id": "tsk-eligibility",
+    "category": "TSK",
+    "question": "Apakah kelayakan dan syarat untuk TSK (BUDI)?",
+    "answer": "**Syarat Kelayakan BUDI di bawah TSK:**\n\n• Warganegara Malaysia\n• **Bumiputera Sabah**\n• Kategori **B40 atau M40**\n• Kemasukan **kali pertama** ke IPTA/IPTS (Malaysia atau luar negara) secara sepenuh masa\n• Kemasukan bagi **tahun semasa 2026** sahaja\n\n**Peringkat pengajian yang layak:**\n• Diploma / Asasi / Matrikulasi\n• Ijazah Sarjana Muda\n\n**Nota:** Jika pemohon telah memohon di peringkat pengajian berbeza (kemasukan tahun 2026), sila hubungi pejabat TSK untuk reset semula permohonan:\n• Telefon: 088-369872 / 088-369164\n• E-mel: **ptskn.ttk@sabah.gov.my**",
+    "keywords": ["kelayakan tsk", "syarat tsk", "layak tsk", "kelayakan budi tsk", "bumiputera tsk", "b40 tsk", "m40 tsk"],
+    "followUps": ["tsk-jenis-tajaan", "tsk-how-to-apply", "tsk-documents", "tsk-allowance"]
+  },
+  {
+    "id": "tsk-how-to-apply",
+    "category": "TSK",
+    "question": "Bagaimana cara memohon TSK (BUDI)?",
+    "answer": "**Cara Memohon BUDI melalui Portal TSK:**\n\n1. Layari portal rasmi: **https://budi.sabah.gov.my**\n2. Klik **Daftar** untuk membuat akaun baru, atau **Log Masuk** jika sudah ada akaun\n3. Lengkapkan borang permohonan dalam talian\n4. Muat naik semua dokumen sokongan yang diperlukan\n5. Semak status permohonan melalui **Semakan Status Permohonan** di portal\n\n**Hubungi Pejabat TSK:**\n• Telefon: 088-369872 / 088-369164 / 088-369897 / 088-369890\n• E-mel: **ptskn.ttk@sabah.gov.my**\n\nAlamat:\nPejabat Timbalan Setiausaha Kerajaan Negeri (Tugas-Tugas Khas)\nTingkat 29, Blok A, Menara Kinabalu\nJalan Teluk Likas, 88400 Kota Kinabalu, Sabah",
+    "keywords": ["cara mohon tsk", "permohonan tsk", "apply tsk", "portal tsk", "budi.sabah.gov.my tsk", "hantar tsk", "daftar tsk"],
+    "followUps": ["tsk-documents", "tsk-eligibility", "tsk-allowance"]
+  },
+  {
+    "id": "tsk-documents",
+    "category": "TSK",
+    "question": "Dokumen apa yang diperlukan untuk TSK (BUDI)?",
+    "answer": "**Dokumen Sokongan BUDI (TSK):**\n\n1. **Surat Beranak** — Pemohon, Ibu dan Bapa\n2. **Salinan Kad Pengenalan** — Pemohon, Ibu dan Bapa\n   *(atau Sijil Cerai / Sijil Kematian jika berkenaan)*\n3. **Slip Gaji Ibu dan Bapa** / Surat Pengesahan Bekerja\n   *(atau pengesahan tidak bekerja dari pihak berkaitan)*\n4. **Surat Tawaran Kemasukan ke IPT**\n5. **Surat Pengesahan Telah Berdaftar** daripada IPT\n\nPastikan dokumen sokongan **lengkap** sebelum memohon.\n\nMuat naik semua dokumen melalui portal: **https://budi.sabah.gov.my**\n\nUntuk pertanyaan: **ptskn.ttk@sabah.gov.my** atau 088-369872 / 088-369164",
+    "keywords": ["dokumen tsk", "dokumen budi tsk", "senarai dokumen tsk", "dokumen diperlukan tsk", "tsk dokumen sokongan"],
+    "followUps": ["tsk-how-to-apply", "tsk-eligibility", "tsk-allowance"]
+  },
+  {
+    "id": "tsk-allowance",
+    "category": "TSK",
+    "question": "Berapakah jumlah bantuan TSK (BUDI)?",
+    "answer": "**Jumlah Bantuan Tunai BUDI (TSK) — One-Off:**\n\n| Peringkat Pengajian | Jumlah Bantuan |\n|---|---|\n| Diploma / Asasi / Matrikulasi | **RM1,500** |\n| Ijazah Sarjana Muda | **RM2,000** |\n\nBantuan ini adalah **sekali sahaja** dan hanya untuk kemasukan **kali pertama** ke IPTA/IPTS.\n\nBantuan ini tidak perlu dibayar balik — ia adalah **bantuan tunai**, bukan pinjaman.\n\nLayari **https://budi.sabah.gov.my** untuk memohon.",
+    "keywords": ["jumlah tsk", "elaun tsk", "berapa tsk", "nilai tsk", "rm1500 tsk", "rm2000 tsk", "wang tsk", "bantuan tsk berapa"],
+    "followUps": ["tsk-eligibility", "tsk-how-to-apply", "tsk-jenis-tajaan"]
   },
   {
     "id": "budi-overview",
@@ -173,6 +253,14 @@
     "question": "Apakah itu BUDI?",
     "answer": "**BUDI — Bantuan Tunai Pendaftaran IPT Secara One-Off** adalah bantuan tunai sekali bayar kepada pelajar yang memasuki Institusi Pengajian Tinggi (IPT) buat kali pertama.\n\n**Jumlah Bantuan:**\n• Diploma / Asasi / Matrikulasi: **RM1,500**\n• Ijazah Sarjana Muda: **RM2,000**\n\nBantuan ini diuruskan oleh:\n**Pejabat Timbalan Setiausaha Kerajaan Negeri (Tugas-Tugas Khas)**\nJabatan Ketua Menteri Sabah\nTingkat 29, Blok A, Menara Kinabalu, Jalan Teluk Likas, 88400 Kota Kinabalu\n\nPortal: **https://budi.sabah.gov.my**",
     "keywords": ["budi", "bantuan tunai pendaftaran ipt", "bantuan tunai ipt", "budi sabah", "pendaftaran ipt sabah", "one off ipt"],
+    "followUps": ["budi-jenis-tajaan", "budi-eligibility", "budi-how-to-apply", "budi-documents", "budi-allowance"]
+  },
+  {
+    "id": "budi-jenis-tajaan",
+    "category": "BUDI",
+    "question": "Apakah jenis bantuan yang ditawarkan oleh BUDI?",
+    "answer": "**Program BUDI menawarkan satu jenis bantuan:**\n\n**Bantuan Tunai Pendaftaran IPT (One-Off)**\n• Bantuan tunai sekali bayar — **bukan pinjaman**, tidak perlu dibayar balik\n• Diberikan kepada pelajar Bumiputera Sabah B40/M40 yang memasuki IPT buat kali pertama\n• Terbuka kepada IPTA dan IPTS di dalam negara dan luar negara\n• Kemasukan sepenuh masa sahaja\n\n**Peringkat dan Jumlah:**\n• Diploma / Asasi / Matrikulasi: **RM1,500**\n• Ijazah Sarjana Muda: **RM2,000**\n\nPortal: **https://budi.sabah.gov.my**",
+    "keywords": ["jenis bantuan budi", "jenis budi", "program budi", "budi one off", "budi bukan pinjaman"],
     "followUps": ["budi-eligibility", "budi-how-to-apply", "budi-documents", "budi-allowance"]
   },
   {
@@ -180,14 +268,14 @@
     "category": "BUDI",
     "question": "Apakah kelayakan dan syarat untuk BUDI?",
     "answer": "**Syarat Kelayakan BUDI:**\n\n• Warganegara Malaysia\n• **Bumiputera Sabah**\n• Kategori **B40 atau M40**\n• Kemasukan **kali pertama** ke IPTA/IPTS (Malaysia atau luar negara) secara sepenuh masa\n• Kemasukan bagi **tahun semasa 2026** sahaja\n\n**Peringkat pengajian yang layak:**\n• Diploma / Asasi / Matrikulasi — RM1,500\n• Ijazah Sarjana Muda — RM2,000\n\n*Jika pemohon telah memohon di peringkat pengajian yang berbeza (kemasukan tahun 2026), sila hubungi pejabat untuk reset semula permohonan.*",
-    "keywords": ["kelayakan budi", "syarat budi", "layak budi", "bumiputera budi", "b40 budi", "m40 budi", "kali pertama ipt"],
-    "followUps": ["budi-how-to-apply", "budi-documents", "budi-allowance"]
+    "keywords": ["kelayakan budi", "syarat budi", "layak budi", "bumiputera budi", "b40 budi", "m40 budi", "kali pertama ipt budi"],
+    "followUps": ["budi-jenis-tajaan", "budi-how-to-apply", "budi-documents", "budi-allowance"]
   },
   {
     "id": "budi-how-to-apply",
     "category": "BUDI",
     "question": "Bagaimana cara memohon BUDI?",
-    "answer": "**Cara Memohon BUDI:**\n\n1. Layari portal rasmi: **https://budi.sabah.gov.my**\n2. Klik **Permohonan / Log Masuk** atau **Daftar** (bagi pemohon baru)\n3. Lengkapkan borang permohonan dalam talian\n4. Muat naik dokumen sokongan yang diperlukan\n5. Semak status permohonan melalui **Semakan Status Permohonan** di portal\n\n**Hubungi Kami:**\n• Telefon: 088-369872 / 088-369164 / 088-369897 / 088-369890\n• E-mel: **ptskn.ttk@sabah.gov.my**\n\nPejabat Timbalan Setiausaha Kerajaan Negeri (Tugas-Tugas Khas)\nTingkat 29, Blok A, Menara Kinabalu, Jalan Teluk Likas, 88400 Kota Kinabalu, Sabah",
+    "answer": "**Cara Memohon BUDI:**\n\n1. Layari portal rasmi: **https://budi.sabah.gov.my**\n2. Klik **Daftar** untuk membuat akaun baru\n   atau **Permohonan / Log Masuk** jika sudah ada akaun\n3. Lengkapkan borang permohonan dalam talian\n4. Muat naik dokumen sokongan yang diperlukan\n5. Semak status permohonan melalui **Semakan Status Permohonan** di portal\n\n**Hubungi Pejabat TSK:**\n• Telefon: 088-369872 / 088-369164 / 088-369897 / 088-369890\n• E-mel: **ptskn.ttk@sabah.gov.my**\n\nPejabat Timbalan Setiausaha Kerajaan Negeri (Tugas-Tugas Khas)\nTingkat 29, Blok A, Menara Kinabalu, Jalan Teluk Likas, 88400 Kota Kinabalu, Sabah",
     "keywords": ["cara mohon budi", "permohonan budi", "apply budi", "portal budi", "budi.sabah.gov.my", "hantar budi", "daftar budi"],
     "followUps": ["budi-documents", "budi-eligibility", "budi-allowance"]
   },
@@ -195,15 +283,15 @@
     "id": "budi-documents",
     "category": "BUDI",
     "question": "Dokumen apa yang diperlukan untuk BUDI?",
-    "answer": "**Dokumen Sokongan BUDI:**\n\n1. Surat Beranak — Pemohon, Ibu dan Bapa\n2. Salinan Kad Pengenalan / Sijil Cerai / Sijil Kematian — Pemohon, Ibu dan Bapa\n3. Slip Gaji Ibu dan Bapa / Surat Pengesahan Bekerja\n   *(atau pengesahan tidak bekerja)*\n4. Surat Tawaran Kemasukan ke IPT\n5. Surat Pengesahan Telah Berdaftar daripada IPT\n\nPastikan dokumen sokongan **lengkap** sebelum memohon.\n\nMuat naik semua dokumen melalui portal: **https://budi.sabah.gov.my**",
+    "answer": "**Dokumen Sokongan BUDI:**\n\n1. **Surat Beranak** — Pemohon, Ibu dan Bapa\n2. **Salinan Kad Pengenalan** — Pemohon, Ibu dan Bapa\n   *(atau Sijil Cerai / Sijil Kematian jika berkenaan)*\n3. **Slip Gaji Ibu dan Bapa** / Surat Pengesahan Bekerja\n   *(atau pengesahan tidak bekerja)*\n4. **Surat Tawaran Kemasukan ke IPT**\n5. **Surat Pengesahan Telah Berdaftar** daripada IPT\n\nPastikan dokumen sokongan **lengkap** sebelum memohon.\n\nMuat naik semua dokumen melalui portal: **https://budi.sabah.gov.my**",
     "keywords": ["dokumen budi", "dokumen diperlukan budi", "senarai dokumen budi", "budi dokumen sokongan", "surat tawaran budi"],
-    "followUps": ["budi-how-to-apply", "budi-eligibility"]
+    "followUps": ["budi-how-to-apply", "budi-eligibility", "budi-allowance"]
   },
   {
     "id": "budi-allowance",
     "category": "BUDI",
     "question": "Berapakah jumlah bantuan BUDI?",
-    "answer": "**Jumlah Bantuan Tunai BUDI (One-Off):**\n\n| Peringkat Pengajian | Jumlah Bantuan |\n|---|---|\n| Diploma / Asasi / Matrikulasi | **RM1,500** |\n| Ijazah Sarjana Muda | **RM2,000** |\n\nBantuan ini adalah **sekali sahaja** dan hanya untuk kemasukan **kali pertama** ke IPTA/IPTS.\n\nLayari **https://budi.sabah.gov.my** untuk memohon.",
+    "answer": "**Jumlah Bantuan Tunai BUDI (One-Off):**\n\n| Peringkat Pengajian | Jumlah Bantuan |\n|---|---|\n| Diploma / Asasi / Matrikulasi | **RM1,500** |\n| Ijazah Sarjana Muda | **RM2,000** |\n\nBantuan ini adalah **sekali sahaja**, **tidak perlu dibayar balik** dan hanya untuk kemasukan **kali pertama** ke IPTA/IPTS.\n\nLayari **https://budi.sabah.gov.my** untuk memohon.",
     "keywords": ["jumlah budi", "berapa budi", "nilai budi", "rm1500 budi", "rm2000 budi", "elaun budi", "wang budi"],
     "followUps": ["budi-eligibility", "budi-how-to-apply", "budi-documents"]
   }
