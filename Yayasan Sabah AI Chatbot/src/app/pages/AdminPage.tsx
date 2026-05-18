@@ -1,94 +1,291 @@
-import { useState, useRef, useCallback, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Upload, FileText, Trash2, CheckCircle, XCircle, Loader2, ArrowLeft, Database, RefreshCw } from "lucide-react";
+import {
+  Plus, Trash2, Pencil, X, Check, ArrowLeft,
+  MessageSquare, Loader2, RefreshCw, ChevronDown, ChevronUp,
+} from "lucide-react";
 import { useNavigate } from "react-router";
 
 const BACKEND_URL = "http://localhost:3001";
 
-interface UploadResult {
-  filename: string;
-  status: "success" | "error";
-  chunks?: number;
-  error?: string;
+const CATEGORIES = ["BKNS", "KYS", "MUIS", "Baitulmal", "TSK", "BUDI", "Umum"];
+
+interface QAEntry {
+  id: string;
+  category: string;
+  question: string;
+  answer: string;
+  keywords: string[];
+  followUps: string[];
 }
 
-interface Document {
-  metadata: { filename: string };
-  created_at: string;
+const emptyForm = (): Omit<QAEntry, "id"> => ({
+  category: "BKNS",
+  question: "",
+  answer: "",
+  keywords: [],
+  followUps: [],
+});
+
+// ── Keyword tag input ─────────────────────────────────────────────────────────
+function TagInput({
+  label,
+  tags,
+  onChange,
+}: {
+  label: string;
+  tags: string[];
+  onChange: (t: string[]) => void;
+}) {
+  const [draft, setDraft] = useState("");
+
+  const add = () => {
+    const v = draft.trim().toLowerCase();
+    if (v && !tags.includes(v)) onChange([...tags, v]);
+    setDraft("");
+  };
+
+  return (
+    <div>
+      <label className="block text-white/50 text-xs mb-1.5">{label}</label>
+      <div className="flex flex-wrap gap-1.5 mb-2">
+        {tags.map((t) => (
+          <span
+            key={t}
+            className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-[#1a56db]/20 border border-[#1a56db]/30 text-[#6b9cf7] text-xs"
+          >
+            {t}
+            <button
+              type="button"
+              onClick={() => onChange(tags.filter((x) => x !== t))}
+              className="hover:text-red-400 transition-colors"
+            >
+              <X className="w-2.5 h-2.5" />
+            </button>
+          </span>
+        ))}
+      </div>
+      <div className="flex gap-2">
+        <input
+          type="text"
+          value={draft}
+          onChange={(e) => setDraft(e.target.value)}
+          onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); add(); } }}
+          placeholder="Taip dan tekan Enter..."
+          className="flex-1 bg-white/5 border border-white/15 rounded-lg px-3 py-1.5 text-white text-xs placeholder:text-white/30 focus:outline-none focus:border-white/30"
+        />
+        <button
+          type="button"
+          onClick={add}
+          className="px-3 py-1.5 bg-white/10 hover:bg-white/15 border border-white/15 rounded-lg text-white/60 text-xs transition-all"
+        >
+          Tambah
+        </button>
+      </div>
+    </div>
+  );
 }
 
+// ── Form modal ────────────────────────────────────────────────────────────────
+function QAForm({
+  initial,
+  allIds,
+  onSave,
+  onCancel,
+  saving,
+}: {
+  initial: Omit<QAEntry, "id"> & { id?: string };
+  allIds: { id: string; question: string }[];
+  onSave: (data: Omit<QAEntry, "id">) => void;
+  onCancel: () => void;
+  saving: boolean;
+}) {
+  const [form, setForm] = useState<Omit<QAEntry, "id">>({
+    category: initial.category,
+    question: initial.question,
+    answer: initial.answer,
+    keywords: [...initial.keywords],
+    followUps: [...initial.followUps],
+  });
+
+  const set = (k: keyof typeof form, v: unknown) =>
+    setForm((f) => ({ ...f, [k]: v }));
+
+  return (
+    <form
+      onSubmit={(e) => { e.preventDefault(); onSave(form); }}
+      className="space-y-4"
+    >
+      {/* Category */}
+      <div>
+        <label className="block text-white/50 text-xs mb-1.5">Kategori</label>
+        <select
+          value={form.category}
+          onChange={(e) => set("category", e.target.value)}
+          className="w-full bg-white/5 border border-white/15 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-white/30"
+        >
+          {CATEGORIES.map((c) => (
+            <option key={c} value={c} className="bg-[#0a1628]">{c}</option>
+          ))}
+        </select>
+      </div>
+
+      {/* Question */}
+      <div>
+        <label className="block text-white/50 text-xs mb-1.5">Soalan</label>
+        <input
+          required
+          type="text"
+          value={form.question}
+          onChange={(e) => set("question", e.target.value)}
+          placeholder="Contoh: Apakah kelayakan untuk BKNS?"
+          className="w-full bg-white/5 border border-white/15 rounded-lg px-3 py-2 text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-white/30"
+        />
+      </div>
+
+      {/* Answer */}
+      <div>
+        <label className="block text-white/50 text-xs mb-1.5">Jawapan</label>
+        <textarea
+          required
+          rows={5}
+          value={form.answer}
+          onChange={(e) => set("answer", e.target.value)}
+          placeholder="Tulis jawapan lengkap di sini. Gunakan **teks** untuk huruf tebal."
+          className="w-full bg-white/5 border border-white/15 rounded-lg px-3 py-2 text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-white/30 resize-none"
+        />
+      </div>
+
+      {/* Keywords */}
+      <TagInput
+        label="Kata kunci (untuk carian teks)"
+        tags={form.keywords}
+        onChange={(t) => set("keywords", t)}
+      />
+
+      {/* Follow-ups */}
+      <div>
+        <label className="block text-white/50 text-xs mb-1.5">ID Soalan Susulan</label>
+        <div className="space-y-1 max-h-36 overflow-y-auto pr-1">
+          {allIds
+            .filter((e) => e.id !== (initial as QAEntry).id)
+            .map((e) => (
+              <label key={e.id} className="flex items-start gap-2 cursor-pointer group">
+                <input
+                  type="checkbox"
+                  checked={form.followUps.includes(e.id)}
+                  onChange={(ev) =>
+                    set(
+                      "followUps",
+                      ev.target.checked
+                        ? [...form.followUps, e.id]
+                        : form.followUps.filter((x) => x !== e.id)
+                    )
+                  }
+                  className="mt-0.5 accent-[#1a56db]"
+                />
+                <span className="text-white/50 text-xs group-hover:text-white/70 transition-colors line-clamp-1">
+                  {e.question}
+                </span>
+              </label>
+            ))}
+        </div>
+      </div>
+
+      {/* Actions */}
+      <div className="flex gap-2 pt-1">
+        <button
+          type="submit"
+          disabled={saving}
+          className="flex items-center gap-2 px-4 py-2 bg-[#1a56db] hover:bg-[#1a56db]/80 rounded-lg text-white text-sm font-medium transition-all disabled:opacity-50"
+        >
+          {saving ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Check className="w-3.5 h-3.5" />}
+          Simpan
+        </button>
+        <button
+          type="button"
+          onClick={onCancel}
+          className="px-4 py-2 bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg text-white/60 text-sm transition-all"
+        >
+          Batal
+        </button>
+      </div>
+    </form>
+  );
+}
+
+// ── Main page ─────────────────────────────────────────────────────────────────
 export default function AdminPage() {
   const navigate = useNavigate();
-  const [isDragging, setIsDragging] = useState(false);
-  const [uploading, setUploading] = useState(false);
-  const [results, setResults] = useState<UploadResult[]>([]);
-  const [documents, setDocuments] = useState<Document[]>([]);
-  const [loadingDocs, setLoadingDocs] = useState(false);
-  const [deletingFile, setDeletingFile] = useState<string | null>(null);
-  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [entries, setEntries] = useState<QAEntry[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
+  const [deletingId, setDeletingId] = useState<string | null>(null);
+  const [expandedId, setExpandedId] = useState<string | null>(null);
+  const [editingId, setEditingId] = useState<string | null>(null);
+  const [showAddForm, setShowAddForm] = useState(false);
+  const [filterCat, setFilterCat] = useState("Semua");
 
-  useEffect(() => {
-    loadDocuments();
-  }, []);
-
-  const loadDocuments = async () => {
-    setLoadingDocs(true);
+  const load = async () => {
+    setLoading(true);
     try {
-      const res = await fetch(`${BACKEND_URL}/api/upload/documents`);
-      const data = await res.json();
-      setDocuments(data.documents || []);
+      const res = await fetch(`${BACKEND_URL}/api/admin/qa`);
+      setEntries(await res.json());
     } catch {
-      console.error("Failed to load documents");
+      console.error("Failed to load Q&A");
     } finally {
-      setLoadingDocs(false);
+      setLoading(false);
     }
   };
 
-  const uploadFiles = async (files: FileList) => {
-    if (!files.length) return;
-    setUploading(true);
-    setResults([]);
+  useEffect(() => { load(); }, []);
 
-    const formData = new FormData();
-    Array.from(files).forEach((f) => formData.append("files", f));
-
+  const createEntry = async (data: Omit<QAEntry, "id">) => {
+    setSaving(true);
     try {
-      const res = await fetch(`${BACKEND_URL}/api/upload`, {
+      const res = await fetch(`${BACKEND_URL}/api/admin/qa`, {
         method: "POST",
-        body: formData,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
       });
-      const data = await res.json();
-      setResults(data.results || []);
-      loadDocuments();
-    } catch {
-      setResults([{ filename: "Muat naik gagal", status: "error", error: "Tidak dapat menyambung ke pelayan. Sila semak sambungan anda." }]);
+      const created = await res.json();
+      setEntries((prev) => [...prev, created]);
+      setShowAddForm(false);
     } finally {
-      setUploading(false);
+      setSaving(false);
     }
   };
 
-  const deleteDocument = async (filename: string) => {
-    setDeletingFile(filename);
+  const updateEntry = async (id: string, data: Omit<QAEntry, "id">) => {
+    setSaving(true);
     try {
-      await fetch(`${BACKEND_URL}/api/upload/documents/${encodeURIComponent(filename)}`, {
-        method: "DELETE",
+      const res = await fetch(`${BACKEND_URL}/api/admin/qa/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
       });
-      loadDocuments();
-    } catch {
-      console.error("Failed to delete document");
+      const updated = await res.json();
+      setEntries((prev) => prev.map((e) => (e.id === id ? updated : e)));
+      setEditingId(null);
     } finally {
-      setDeletingFile(null);
+      setSaving(false);
     }
   };
 
-  const onDrop = useCallback((e: React.DragEvent) => {
-    e.preventDefault();
-    setIsDragging(false);
-    uploadFiles(e.dataTransfer.files);
-  }, []);
+  const deleteEntry = async (id: string) => {
+    setDeletingId(id);
+    try {
+      await fetch(`${BACKEND_URL}/api/admin/qa/${id}`, { method: "DELETE" });
+      setEntries((prev) => prev.filter((e) => e.id !== id));
+      if (expandedId === id) setExpandedId(null);
+    } finally {
+      setDeletingId(null);
+    }
+  };
 
-  const successCount = results.filter((r) => r.status === "success").length;
-  const errorCount = results.filter((r) => r.status === "error").length;
+  const allIds = entries.map((e) => ({ id: e.id, question: e.question }));
+  const cats = ["Semua", ...CATEGORIES];
+  const filtered = filterCat === "Semua" ? entries : entries.filter((e) => e.category === filterCat);
 
   return (
     <div className="min-h-screen" style={{ background: "linear-gradient(135deg, #0a1628 0%, #1a0a08 50%, #0a1628 100%)" }}>
@@ -98,7 +295,7 @@ export default function AdminPage() {
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="flex items-center gap-4 mb-10"
+          className="flex items-center gap-4 mb-8"
         >
           <button
             onClick={() => navigate("/")}
@@ -108,188 +305,178 @@ export default function AdminPage() {
           </button>
           <div className="flex-1">
             <h1 className="text-2xl font-bold text-white">Panel Pentadbir</h1>
-            <p className="text-white/40 text-sm mt-0.5">Urus pangkalan pengetahuan chatbot</p>
+            <p className="text-white/40 text-sm mt-0.5">Urus soal-jawab chatbot</p>
           </div>
-          {documents.length > 0 && (
+          <div className="flex items-center gap-2">
             <div className="flex items-center gap-2 px-3 py-1.5 bg-[#1a56db]/15 border border-[#1a56db]/25 rounded-lg">
-              <Database className="w-3.5 h-3.5 text-[#1a56db]" />
-              <span className="text-[#1a56db] text-sm font-medium">{documents.length} dokumen</span>
+              <MessageSquare className="w-3.5 h-3.5 text-[#1a56db]" />
+              <span className="text-[#1a56db] text-sm font-medium">{entries.length} entri</span>
             </div>
-          )}
-        </motion.div>
-
-        {/* Upload zone */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.05 }}
-          className={`border-2 border-dashed rounded-2xl p-12 text-center mb-6 transition-all cursor-pointer ${
-            isDragging
-              ? "border-[#1a56db] bg-[#1a56db]/10 scale-[1.01]"
-              : "border-white/15 hover:border-white/30 bg-white/[0.03] hover:bg-white/[0.05]"
-          }`}
-          onDrop={onDrop}
-          onDragOver={(e) => { e.preventDefault(); setIsDragging(true); }}
-          onDragLeave={() => setIsDragging(false)}
-          onClick={() => !uploading && fileInputRef.current?.click()}
-        >
-          <input
-            ref={fileInputRef}
-            type="file"
-            accept=".pdf"
-            multiple
-            className="hidden"
-            onChange={(e) => e.target.files && uploadFiles(e.target.files)}
-          />
-
-          {uploading ? (
-            <div className="flex flex-col items-center gap-4">
-              <div className="w-16 h-16 rounded-full bg-[#1a56db]/10 flex items-center justify-center">
-                <Loader2 className="w-8 h-8 text-[#1a56db] animate-spin" />
-              </div>
-              <div>
-                <p className="text-white text-lg font-semibold">Memproses dokumen...</p>
-                <p className="text-white/40 text-sm mt-1">
-                  Mengekstrak teks, menjana embeddings dan menyimpan ke pangkalan data
-                </p>
-              </div>
-            </div>
-          ) : (
-            <div className="flex flex-col items-center gap-4">
-              <div className={`w-16 h-16 rounded-full flex items-center justify-center transition-all ${isDragging ? "bg-[#1a56db]/20" : "bg-white/5"}`}>
-                <Upload className={`w-7 h-7 transition-colors ${isDragging ? "text-[#1a56db]" : "text-white/30"}`} />
-              </div>
-              <div>
-                <p className="text-white text-lg font-semibold">
-                  {isDragging ? "Lepaskan fail di sini" : "Seret & lepas fail PDF ke sini"}
-                </p>
-                <p className="text-white/40 text-sm mt-1">
-                  atau klik untuk memilih fail &nbsp;·&nbsp; Boleh muat naik banyak fail serentak
-                </p>
-              </div>
-              <button
-                className="mt-1 px-5 py-2 bg-[#1a56db] hover:bg-[#1a56db]/80 rounded-full text-white text-sm font-medium transition-colors"
-                onClick={(e) => { e.stopPropagation(); fileInputRef.current?.click(); }}
-              >
-                Pilih PDF
-              </button>
-            </div>
-          )}
-        </motion.div>
-
-        {/* Upload results */}
-        <AnimatePresence>
-          {results.length > 0 && (
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              className="mb-8"
-            >
-              <div className="flex items-center justify-between mb-3">
-                <h3 className="text-white font-semibold">Keputusan Muat Naik</h3>
-                <div className="flex items-center gap-3 text-sm">
-                  {successCount > 0 && (
-                    <span className="text-green-400 font-medium">{successCount} berjaya</span>
-                  )}
-                  {errorCount > 0 && (
-                    <span className="text-red-400 font-medium">{errorCount} gagal</span>
-                  )}
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                {results.map((r, i) => (
-                  <motion.div
-                    key={i}
-                    initial={{ opacity: 0, x: -8 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: i * 0.05 }}
-                    className={`flex items-start gap-3 p-4 rounded-xl border ${
-                      r.status === "success"
-                        ? "bg-green-500/8 border-green-500/20"
-                        : "bg-red-500/8 border-red-500/20"
-                    }`}
-                  >
-                    {r.status === "success"
-                      ? <CheckCircle className="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" />
-                      : <XCircle className="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5" />}
-                    <div className="flex-1 min-w-0">
-                      <p className="text-white text-sm font-medium truncate">{r.filename}</p>
-                      {r.status === "success"
-                        ? <p className="text-green-400 text-xs mt-0.5">{r.chunks} bahagian teks berjaya disimpan</p>
-                        : <p className="text-red-400 text-xs mt-0.5">{r.error}</p>}
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {/* Document list */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
-        >
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="text-white font-semibold">Dokumen Tersimpan</h3>
             <button
-              onClick={loadDocuments}
-              disabled={loadingDocs}
-              className="flex items-center gap-1.5 text-white/40 hover:text-white/70 text-sm transition-colors disabled:opacity-40"
+              onClick={load}
+              disabled={loading}
+              className="flex items-center gap-1.5 px-3 py-1.5 bg-white/5 border border-white/10 rounded-lg text-white/40 hover:text-white/70 text-sm transition-colors disabled:opacity-40"
             >
-              <RefreshCw className={`w-3.5 h-3.5 ${loadingDocs ? "animate-spin" : ""}`} />
-              Muat semula
+              <RefreshCw className={`w-3.5 h-3.5 ${loading ? "animate-spin" : ""}`} />
             </button>
           </div>
-
-          {loadingDocs && documents.length === 0 ? (
-            <div className="flex items-center justify-center py-14 text-white/30">
-              <Loader2 className="w-5 h-5 animate-spin mr-2" />
-              <span className="text-sm">Memuatkan dokumen...</span>
-            </div>
-          ) : documents.length === 0 ? (
-            <div className="text-center py-14 border border-dashed border-white/10 rounded-2xl">
-              <FileText className="w-10 h-10 mx-auto mb-3 text-white/20" />
-              <p className="text-white/40 text-sm font-medium">Tiada dokumen lagi</p>
-              <p className="text-white/25 text-xs mt-1">Muat naik fail PDF di atas untuk memulakan</p>
-            </div>
-          ) : (
-            <div className="space-y-2">
-              {documents.map((doc, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: i * 0.04 }}
-                  className="group flex items-center gap-3 p-4 bg-white/[0.03] hover:bg-white/[0.06] border border-white/8 hover:border-white/15 rounded-xl transition-all"
-                >
-                  <div className="w-9 h-9 rounded-lg bg-[#1a56db]/15 flex items-center justify-center flex-shrink-0">
-                    <FileText className="w-4 h-4 text-[#1a56db]" />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="text-white text-sm font-medium truncate">{doc.metadata?.filename}</p>
-                    <p className="text-white/35 text-xs mt-0.5">
-                      Dimuat naik pada {new Date(doc.created_at).toLocaleDateString("ms-MY", { day: "numeric", month: "long", year: "numeric" })}
-                    </p>
-                  </div>
-                  <button
-                    onClick={() => deleteDocument(doc.metadata?.filename)}
-                    disabled={deletingFile === doc.metadata?.filename}
-                    className="opacity-0 group-hover:opacity-100 flex items-center justify-center w-8 h-8 rounded-lg text-white/30 hover:text-red-400 hover:bg-red-400/10 transition-all disabled:opacity-40"
-                    title="Padam dokumen"
-                  >
-                    {deletingFile === doc.metadata?.filename
-                      ? <Loader2 className="w-4 h-4 animate-spin" />
-                      : <Trash2 className="w-4 h-4" />}
-                  </button>
-                </motion.div>
-              ))}
-            </div>
-          )}
         </motion.div>
+
+        {/* Add new button */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.05 }}
+          className="mb-6"
+        >
+          <AnimatePresence>
+            {showAddForm ? (
+              <motion.div
+                initial={{ opacity: 0, y: -8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                className="bg-white/[0.03] border border-white/10 rounded-2xl p-6"
+              >
+                <h3 className="text-white font-semibold mb-4">Tambah Entri Baharu</h3>
+                <QAForm
+                  initial={emptyForm()}
+                  allIds={allIds}
+                  onSave={createEntry}
+                  onCancel={() => setShowAddForm(false)}
+                  saving={saving}
+                />
+              </motion.div>
+            ) : (
+              <button
+                onClick={() => setShowAddForm(true)}
+                className="flex items-center gap-2 px-5 py-2.5 bg-[#1a56db] hover:bg-[#1a56db]/80 rounded-xl text-white text-sm font-medium transition-all active:scale-95"
+              >
+                <Plus className="w-4 h-4" />
+                Tambah Soal-Jawab Baharu
+              </button>
+            )}
+          </AnimatePresence>
+        </motion.div>
+
+        {/* Category filter */}
+        <div className="flex flex-wrap gap-2 mb-5">
+          {cats.map((c) => (
+            <button
+              key={c}
+              onClick={() => setFilterCat(c)}
+              className={`px-3 py-1 rounded-full text-xs font-medium transition-all ${
+                filterCat === c
+                  ? "bg-[#1a56db] text-white"
+                  : "bg-white/5 border border-white/10 text-white/50 hover:text-white/80"
+              }`}
+            >
+              {c}
+            </button>
+          ))}
+        </div>
+
+        {/* Entry list */}
+        {loading && entries.length === 0 ? (
+          <div className="flex items-center justify-center py-20 text-white/30">
+            <Loader2 className="w-5 h-5 animate-spin mr-2" />
+            <span className="text-sm">Memuatkan entri...</span>
+          </div>
+        ) : filtered.length === 0 ? (
+          <div className="text-center py-16 border border-dashed border-white/10 rounded-2xl">
+            <MessageSquare className="w-10 h-10 mx-auto mb-3 text-white/20" />
+            <p className="text-white/40 text-sm font-medium">Tiada entri dalam kategori ini</p>
+          </div>
+        ) : (
+          <div className="space-y-2">
+            {filtered.map((entry, i) => (
+              <motion.div
+                key={entry.id}
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.03 }}
+                className="bg-white/[0.03] hover:bg-white/[0.05] border border-white/8 hover:border-white/15 rounded-xl transition-all overflow-hidden"
+              >
+                {editingId === entry.id ? (
+                  <div className="p-5">
+                    <h3 className="text-white font-semibold text-sm mb-4">Edit Entri</h3>
+                    <QAForm
+                      initial={entry}
+                      allIds={allIds}
+                      onSave={(data) => updateEntry(entry.id, data)}
+                      onCancel={() => setEditingId(null)}
+                      saving={saving}
+                    />
+                  </div>
+                ) : (
+                  <>
+                    {/* Row header */}
+                    <div
+                      className="flex items-center gap-3 px-4 py-3 cursor-pointer"
+                      onClick={() => setExpandedId(expandedId === entry.id ? null : entry.id)}
+                    >
+                      <span className="px-2 py-0.5 rounded-full bg-[#1a56db]/15 border border-[#1a56db]/25 text-[#6b9cf7] text-[10px] font-medium flex-shrink-0">
+                        {entry.category}
+                      </span>
+                      <p className="flex-1 text-white text-sm font-medium truncate">
+                        {entry.question}
+                      </p>
+                      <div className="flex items-center gap-1.5 flex-shrink-0">
+                        <button
+                          onClick={(e) => { e.stopPropagation(); setEditingId(entry.id); setExpandedId(null); }}
+                          className="w-7 h-7 flex items-center justify-center rounded-lg text-white/30 hover:text-white hover:bg-white/10 transition-all"
+                          title="Edit"
+                        >
+                          <Pencil className="w-3.5 h-3.5" />
+                        </button>
+                        <button
+                          onClick={(e) => { e.stopPropagation(); deleteEntry(entry.id); }}
+                          disabled={deletingId === entry.id}
+                          className="w-7 h-7 flex items-center justify-center rounded-lg text-white/30 hover:text-red-400 hover:bg-red-400/10 transition-all disabled:opacity-40"
+                          title="Padam"
+                        >
+                          {deletingId === entry.id
+                            ? <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                            : <Trash2 className="w-3.5 h-3.5" />}
+                        </button>
+                        {expandedId === entry.id
+                          ? <ChevronUp className="w-3.5 h-3.5 text-white/30" />
+                          : <ChevronDown className="w-3.5 h-3.5 text-white/30" />}
+                      </div>
+                    </div>
+
+                    {/* Expanded answer */}
+                    <AnimatePresence>
+                      {expandedId === entry.id && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.2 }}
+                          className="overflow-hidden"
+                        >
+                          <div className="px-4 pb-4 border-t border-white/8 pt-3 space-y-3">
+                            <p className="text-white/60 text-xs whitespace-pre-wrap leading-relaxed">
+                              {entry.answer}
+                            </p>
+                            {entry.keywords.length > 0 && (
+                              <div className="flex flex-wrap gap-1.5">
+                                {entry.keywords.map((kw) => (
+                                  <span key={kw} className="px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-white/40 text-[10px]">
+                                    {kw}
+                                  </span>
+                                ))}
+                              </div>
+                            )}
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </>
+                )}
+              </motion.div>
+            ))}
+          </div>
+        )}
 
       </div>
     </div>

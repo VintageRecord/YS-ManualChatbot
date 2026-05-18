@@ -1,73 +1,21 @@
 import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Send, X, User, ChevronRight, Sparkles, MessageCircle } from "lucide-react";
+import { Send, X, User, ChevronRight, MessageCircle } from "lucide-react";
 import logoImg from "../../imports/image.png";
 
 const BACKEND_URL = "http://localhost:3001";
 
-// ── Badan Penaja ──────────────────────────────────────────────────────────────
+// ── Badan Penaja menu buttons ─────────────────────────────────────────────────
 const BADAN_PENAJA = [
-  {
-    label: "BKNS",
-    full: "Biasiswa Kerajaan Negeri Sabah",
-    keywords: ["bkns", "biasiswa kerajaan negeri"],
-    query: "Terangkan mengenai Biasiswa Kerajaan Negeri Sabah (BKNS) — jenis tajaan, kelayakan umum dan cara permohonan.",
-  },
-  {
-    label: "KYS",
-    full: "Kumpulan Yayasan Sabah",
-    keywords: ["kys", "kumpulan yayasan", "yayasan sabah"],
-    query: "Terangkan mengenai Biasiswa Kumpulan Yayasan Sabah (KYS) — jenis tajaan, kelayakan umum dan cara permohonan.",
-  },
-  {
-    label: "MUIS",
-    full: "Majlis Ugama Islam Sabah",
-    keywords: ["muis", "dermasiswa", "ugama islam sabah"],
-    query: "Terangkan mengenai Dermasiswa Majlis Ugama Islam Sabah (MUIS) — jenis tajaan, kelayakan umum dan cara permohonan.",
-  },
-  {
-    label: "Baitulmal",
-    full: "Perbadanan Baitulmal Negeri Sabah",
-    keywords: ["baitulmal"],
-    query: "Terangkan mengenai Biasiswa Perbadanan Baitulmal Negeri Sabah — jenis tajaan, kelayakan umum dan cara permohonan.",
-  },
-  {
-    label: "TSK",
-    full: "Timbalan Setiausaha Kerajaan",
-    keywords: ["tsk", "timbalan setiausaha"],
-    query: "Terangkan mengenai Tajaan Timbalan Setiausaha Kerajaan Negeri Sabah (TSK) — jenis tajaan, kelayakan umum dan cara permohonan.",
-  },
-  {
-    label: "BUDI",
-    full: "Bantuan Tunai Pendaftaran IPT",
-    keywords: ["budi", "bantuan tunai", "pendaftaran ipt"],
-    query: "Terangkan mengenai BUDI — Bantuan Tunai Pendaftaran IPT, termasuk kelayakan dan cara permohonan.",
-  },
+  { label: "BKNS",      full: "Biasiswa Kerajaan Negeri Sabah",      query: "Apakah itu BKNS?" },
+  { label: "KYS",       full: "Kumpulan Yayasan Sabah",              query: "Apakah itu KYS?" },
+  { label: "MUIS",      full: "Majlis Ugama Islam Sabah",            query: "Apakah itu MUIS?" },
+  { label: "Baitulmal", full: "Perbadanan Baitulmal Negeri Sabah",   query: "Apakah itu Biasiswa Baitulmal?" },
+  { label: "TSK",       full: "Timbalan Setiausaha Kerajaan",        query: "Apakah itu TSK?" },
+  { label: "BUDI",      full: "Bantuan Tunai Pendaftaran IPT",       query: "Apakah itu BUDI?" },
 ];
 
-const PILIH_PENAJA_LAIN = "__PILIH_PENAJA_LAIN__";
-
-// Detect which Badan Penaja is being discussed from the message text
-function detectBPFromText(text: string): typeof BADAN_PENAJA[0] | null {
-  const lower = text.toLowerCase();
-  for (const bp of BADAN_PENAJA) {
-    const terms = [bp.full, bp.label, ...bp.keywords];
-    if (terms.some((t) => lower.includes(t.toLowerCase()))) return bp;
-  }
-  return null;
-}
-
-function getTopicChips(bp: typeof BADAN_PENAJA[0]): QuickReply[] {
-  return [
-    { label: "Kelayakan & Syarat",   query: `Apakah kelayakan dan syarat untuk ${bp.full}?` },
-    { label: "Cara Mohon",           query: `Bagaimana cara memohon ${bp.full}? Terangkan langkah-langkah permohonan.` },
-    { label: "Dokumen Diperlukan",   query: `Apakah dokumen yang diperlukan untuk memohon ${bp.full}?` },
-    { label: "Jumlah Elaun / Nilai", query: `Berapakah jumlah elaun atau nilai tajaan ${bp.full}?` },
-    { label: "Tarikh Permohonan",    query: `Bilakah tarikh permohonan ${bp.full} dibuka dan ditutup?` },
-    { label: "Semak Kelayakan Saya", query: `Saya ingin semak sama ada saya layak untuk ${bp.full}. Sila tanya saya tentang status akademik dan keputusan semasa saya supaya anda boleh bantu menentukan kelayakan saya.` },
-    { label: "↩ Pilih Penaja Lain",  query: PILIH_PENAJA_LAIN },
-  ];
-}
+const BACK_TO_MENU = "__BACK_TO_MENU__";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 interface QuickReply {
@@ -83,16 +31,11 @@ interface Message {
   quickReplies?: QuickReply[];
 }
 
-interface ChatHistoryEntry {
-  role: "user" | "assistant";
-  content: string;
-}
-
 // ── Welcome message ───────────────────────────────────────────────────────────
 const makeWelcomeMessage = (): Message => ({
   id: "welcome",
   role: "bot",
-  text: "Selamat datang ke YS Chatbot! 👋\n\nSaya pembantu AI untuk maklumat tajaan dan pinjaman pendidikan di Sabah.\n\nSila pilih **Badan Penaja** yang ingin anda ketahui:",
+  text: "Selamat datang ke YS Chatbot! 👋\n\nSaya pembantu untuk maklumat tajaan dan pinjaman pendidikan di Sabah.\n\nSila pilih **Badan Penaja** yang ingin anda ketahui:",
   timestamp: new Date(),
   quickReplies: BADAN_PENAJA.map((bp) => ({ label: bp.full, query: bp.query })),
 });
@@ -132,14 +75,12 @@ function formatText(text: string) {
   });
 }
 
-// ── Main widget component ──────────────────────────────────────────────────────
+// ── Main widget component ─────────────────────────────────────────────────────
 export function ChatWidget() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>(() => [makeWelcomeMessage()]);
-  const [chatHistory, setChatHistory] = useState<ChatHistoryEntry[]>([]);
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
-  const [activeBP, setActiveBP] = useState<typeof BADAN_PENAJA[0] | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () =>
@@ -148,34 +89,30 @@ export function ChatWidget() {
   const sendMessage = async (text: string) => {
     if (!text.trim() || isTyping) return;
 
-    // Handle "Pilih Penaja Lain" client-side
-    if (text === PILIH_PENAJA_LAIN) {
-      const otherBPs = BADAN_PENAJA.filter((bp) => bp !== activeBP);
-      setActiveBP(null);
+    // Handle "Back to menu" client-side
+    if (text === BACK_TO_MENU) {
       setMessages((prev) => [
         ...prev,
-        { id: Date.now().toString(), role: "user", text: "Pilih Penaja Lain", timestamp: new Date() },
+        { id: Date.now().toString(), role: "user", text: "↩ Menu Utama", timestamp: new Date() },
         {
           id: (Date.now() + 1).toString(),
           role: "bot",
-          text: "Baik! Sila pilih Badan Penaja lain yang ingin anda ketahui:",
+          text: "Baik! Sila pilih Badan Penaja yang ingin anda ketahui:",
           timestamp: new Date(),
-          quickReplies: otherBPs.map((bp) => ({ label: bp.full, query: bp.query })),
+          quickReplies: BADAN_PENAJA.map((bp) => ({ label: bp.full, query: bp.query })),
         },
       ]);
       return;
     }
 
-    // Detect which BP is relevant to this message from the text itself —
-    // this prevents stale activeBP state from polluting the topic chips.
-    const matchedBP = BADAN_PENAJA.find((bp) => bp.query === text);
-    const currentBP = matchedBP ?? detectBPFromText(text);
-    if (currentBP) setActiveBP(currentBP);
+    // Find if this is a Badan Penaja button click (display short label)
+    const bpMatch = BADAN_PENAJA.find((bp) => bp.query === text);
+    const displayText = bpMatch ? bpMatch.full : text.trim();
 
     const userMsg: Message = {
       id: Date.now().toString(),
       role: "user",
-      text: matchedBP ? matchedBP.full : text.trim(),
+      text: displayText,
       timestamp: new Date(),
     };
 
@@ -188,35 +125,44 @@ export function ChatWidget() {
       const res = await fetch(`${BACKEND_URL}/api/chat`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: text.trim(), history: chatHistory }),
+        body: JSON.stringify({ message: text.trim() }),
       });
 
       if (!res.ok) throw new Error("Backend error");
       const data = await res.json();
+
+      // Build quick reply chips from follow-ups + back-to-menu
+      const followUpChips: QuickReply[] = (data.followUps || []).map(
+        (fu: { label: string; id: string }) => ({
+          label: fu.label,
+          query: fu.label,
+        })
+      );
+      const chips: QuickReply[] = [
+        ...followUpChips,
+        { label: "↩ Menu Utama", query: BACK_TO_MENU },
+      ];
 
       const botMsg: Message = {
         id: (Date.now() + 1).toString(),
         role: "bot",
         text: data.response,
         timestamp: new Date(),
-        quickReplies: currentBP ? getTopicChips(currentBP) : undefined,
+        quickReplies: chips,
       };
 
       setMessages((prev) => [...prev, botMsg]);
-      setChatHistory((prev) => [
-        ...prev,
-        { role: "user", content: text.trim() },
-        { role: "assistant", content: data.response },
-      ]);
     } catch {
-      const errMsg: Message = {
-        id: (Date.now() + 1).toString(),
-        role: "bot",
-        text: "Maaf, berlaku masalah sambungan. Sila pastikan pelayan berjalan dan cuba semula.",
-        timestamp: new Date(),
-        quickReplies: BADAN_PENAJA.map((bp) => ({ label: bp.full, query: bp.query })),
-      };
-      setMessages((prev) => [...prev, errMsg]);
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: (Date.now() + 1).toString(),
+          role: "bot",
+          text: "Maaf, berlaku masalah sambungan. Sila pastikan pelayan berjalan dan cuba semula.",
+          timestamp: new Date(),
+          quickReplies: BADAN_PENAJA.map((bp) => ({ label: bp.full, query: bp.query })),
+        },
+      ]);
     } finally {
       setIsTyping(false);
       setTimeout(scrollToBottom, 100);
@@ -259,18 +205,12 @@ export function ChatWidget() {
                   <span className="text-green-400 text-xs">Online</span>
                 </div>
               </div>
-              <div className="flex items-center gap-2">
-                <div className="flex items-center gap-1.5 bg-white/5 border border-white/10 rounded-full px-2.5 py-1">
-                  <Sparkles className="w-3 h-3 text-[#1a56db]" />
-                  <span className="text-white/60 text-xs">AI</span>
-                </div>
-                <button
-                  onClick={() => setIsOpen(false)}
-                  className="w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-all"
-                >
-                  <X className="w-3.5 h-3.5 text-white" />
-                </button>
-              </div>
+              <button
+                onClick={() => setIsOpen(false)}
+                className="w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-all"
+              >
+                <X className="w-3.5 h-3.5 text-white" />
+              </button>
             </div>
 
             {/* Messages */}
@@ -364,7 +304,7 @@ export function ChatWidget() {
                 </button>
               </form>
               <p className="text-center text-white/20 text-[10px] mt-1.5">
-                Dikuasakan oleh AI — Semak portal rasmi untuk maklumat terkini.
+                Semak portal rasmi untuk maklumat terkini.
               </p>
             </div>
           </motion.div>
@@ -401,7 +341,6 @@ export function ChatWidget() {
             </motion.span>
           )}
         </AnimatePresence>
-        {/* Pulse ring when closed */}
         {!isOpen && (
           <span className="absolute inset-0 rounded-full border-2 border-[#1a56db]/60 animate-ping" />
         )}
