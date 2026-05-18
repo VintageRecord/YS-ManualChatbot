@@ -60,6 +60,7 @@ function buildResponse(match, qaList) {
     .map((q) => ({ label: q.question, id: q.id }));
 
   return {
+    id: match.id,
     response: match.answer,
     matched: true,
     category: match.category,
