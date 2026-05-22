@@ -34,6 +34,7 @@ function detectBPFromText(text: string, bpList: BPEntry[]): BPEntry | null {
 }
 
 const PILIH_PENAJA_LAIN = "__PILIH_PENAJA_LAIN__";
+const LIHAT_LAIN       = "__LIHAT_LAIN__";
 
 const JENIS_ID_MAP: Record<string, string> = {
   bkns:      "bkns-jenis-tajaan",
@@ -67,7 +68,7 @@ function getTopicChips(bp: BPEntry, extras: QuickReply[] = []): QuickReply[] {
     { label: "Dokumen Diperlukan",     id: `${p}-documents`,          query: `Apakah dokumen yang diperlukan untuk memohon ${bp.full}?` },
     { label: "Jumlah Elaun / Nilai",   id: `${p}-allowance`,          query: `Berapakah jumlah elaun atau nilai tajaan ${bp.full}?` },
     { label: "Tarikh Permohonan",      id: `${p}-tarikh-permohonan`,  query: `Bilakah tarikh permohonan ${bp.full} dibuka dan ditutup?` },
-    ...extras,
+    ...(extras.length > 0 ? [{ label: "📋 Lihat Soalan Lain", query: LIHAT_LAIN, subChips: extras }] : []),
     { label: "↩ Pilih Penaja Lain",                                    query: PILIH_PENAJA_LAIN },
   ];
 }
@@ -77,6 +78,7 @@ interface QuickReply {
   label: string;
   query: string;
   id?: string;
+  subChips?: QuickReply[];  // used by "Lihat Soalan Lain" to expand extras inline
 }
 
 interface Message {
@@ -394,7 +396,23 @@ export default function ChatbotPage() {
                           setMessages((prev) =>
                             prev.map((m) => m.id === msg.id ? { ...m, quickReplies: undefined } : m)
                           );
-                          sendMessage(qr.query, qr.id);
+                          if (qr.query === LIHAT_LAIN && qr.subChips) {
+                            setMessages((prev) => [
+                              ...prev,
+                              {
+                                id: Date.now().toString(),
+                                role: "bot" as const,
+                                text: "Soalan lain yang tersedia:",
+                                timestamp: new Date(),
+                                quickReplies: [
+                                  ...qr.subChips!,
+                                  { label: "↩ Pilih Penaja Lain", query: PILIH_PENAJA_LAIN },
+                                ],
+                              },
+                            ]);
+                          } else {
+                            sendMessage(qr.query, qr.id);
+                          }
                         }}
                         disabled={isTyping}
                         className="flex items-center gap-1 px-3 py-1.5 rounded-full bg-white/5 hover:bg-[#1a56db]/25 border border-white/20 hover:border-[#1a56db]/50 text-white text-xs font-medium transition-all active:scale-95 disabled:opacity-40"
