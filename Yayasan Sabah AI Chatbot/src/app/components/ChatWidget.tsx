@@ -132,6 +132,7 @@ export function ChatWidget() {
   const [activeBP, setActiveBP] = useState<BPEntry | null>(null);
   const [bpList, setBpList] = useState<BPEntry[]>(BADAN_PENAJA);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const lihatLainExtrasRef = useRef<Chip[] | null>(null);
 
   const scrollToBottom = () =>
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -161,6 +162,7 @@ export function ChatWidget() {
   const resetChat = () => {
     setMessages([makeWelcomeMessage(bpList)]);
     setActiveBP(null);
+    lihatLainExtrasRef.current = null;
   };
 
   const handleChipClick = async (chip: Chip, sourceMessageId: string) => {
@@ -171,6 +173,7 @@ export function ChatWidget() {
     );
 
     if (chip.action === BACK_TO_MENU) {
+      lihatLainExtrasRef.current = null;
       setActiveBP(null);
       setMessages((prev) => [
         ...prev,
@@ -187,6 +190,7 @@ export function ChatWidget() {
     }
 
     if (chip.action === LIHAT_LAIN && chip.subChips) {
+      lihatLainExtrasRef.current = chip.subChips;
       setMessages((prev) => [
         ...prev,
         { id: Date.now().toString(), role: "user", text: "Lihat Soalan Lain", timestamp: new Date() },
@@ -205,6 +209,7 @@ export function ChatWidget() {
     }
 
     if (chip.action === KEMBALI_TOPIK) {
+      lihatLainExtrasRef.current = null;
       const extras = chip.subChips ?? [];
       setMessages((prev) => [
         ...prev,
@@ -257,6 +262,7 @@ export function ChatWidget() {
         } catch { /* ignore */ }
       }
 
+      const lihatLainExtras = lihatLainExtrasRef.current;
       setMessages((prev) => [
         ...prev,
         {
@@ -264,9 +270,11 @@ export function ChatWidget() {
           role: "bot",
           text: data.response,
           timestamp: new Date(),
-          chips: currentBP
-            ? getTopicChips(currentBP, extraChips)
-            : bpList.map((bp) => ({ label: bp.full, qaId: bp.overviewId })),
+          chips: lihatLainExtras
+            ? [...lihatLainExtras, { label: "↩ Kembali", action: KEMBALI_TOPIK, subChips: lihatLainExtras }]
+            : currentBP
+              ? getTopicChips(currentBP, extraChips)
+              : bpList.map((bp) => ({ label: bp.full, qaId: bp.overviewId })),
         },
       ]);
     } catch {

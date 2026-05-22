@@ -152,6 +152,9 @@ export default function ChatbotPage() {
   const [activeBP, setActiveBP] = useState<BPEntry | null>(null);
   const [bpList, setBpList] = useState<BPEntry[]>(BADAN_PENAJA);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  // Tracks whether the user is inside the "Lihat Soalan Lain" view so
+  // responses keep showing that sub-list until "Kembali" is clicked.
+  const lihatLainExtrasRef = useRef<QuickReply[] | null>(null);
 
   const scrollToBottom = () =>
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -198,6 +201,7 @@ export default function ChatbotPage() {
     // Handle "Pilih Penaja Lain" client-side — no backend call needed
     if (text === PILIH_PENAJA_LAIN) {
       const otherBPs = bpList.filter((bp) => bp.label !== activeBP?.label);
+      lihatLainExtrasRef.current = null;
       setActiveBP(null);
       setMessages((prev) => [
         ...prev,
@@ -257,12 +261,15 @@ export default function ChatbotPage() {
         } catch { /* ignore */ }
       }
 
+      const lihatLainExtras = lihatLainExtrasRef.current;
       const botMsg: Message = {
         id: (Date.now() + 1).toString(),
         role: "bot",
         text: data.response,
         timestamp: new Date(),
-        quickReplies: effectiveBP ? getTopicChips(effectiveBP, extraChips) : undefined,
+        quickReplies: lihatLainExtras
+          ? [...lihatLainExtras, { label: "↩ Kembali", query: KEMBALI_TOPIK, subChips: lihatLainExtras }]
+          : effectiveBP ? getTopicChips(effectiveBP, extraChips) : undefined,
       };
 
       setMessages((prev) => [...prev, botMsg]);
@@ -403,6 +410,7 @@ export default function ChatbotPage() {
                             prev.map((m) => m.id === msg.id ? { ...m, quickReplies: undefined } : m)
                           );
                           if (qr.query === LIHAT_LAIN && qr.subChips) {
+                            lihatLainExtrasRef.current = qr.subChips;
                             setMessages((prev) => [
                               ...prev,
                               {
@@ -417,6 +425,7 @@ export default function ChatbotPage() {
                               },
                             ]);
                           } else if (qr.query === KEMBALI_TOPIK) {
+                            lihatLainExtrasRef.current = null;
                             const extras = qr.subChips ?? [];
                             setMessages((prev) => [
                               ...prev,
