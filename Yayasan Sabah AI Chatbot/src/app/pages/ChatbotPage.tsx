@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import { useNavigate } from "react-router";
 import { motion, AnimatePresence } from "motion/react";
-import { Send, ArrowLeft, User, ChevronRight, Sparkles } from "lucide-react";
+import { Send, ArrowLeft, User, ChevronRight } from "lucide-react";
 import logoImg from "../../imports/image.png";
 
 const BACKEND_URL = "http://localhost:3001";
@@ -36,7 +36,7 @@ function getTopicChips(bp: typeof BADAN_PENAJA[0]): QuickReply[] {
     { label: "Cara Mohon",           id: `${p}-how-to-apply`, query: `Bagaimana cara memohon ${bp.full}? Terangkan langkah-langkah permohonan.` },
     { label: "Dokumen Diperlukan",   id: `${p}-documents`,    query: `Apakah dokumen yang diperlukan untuk memohon ${bp.full}?` },
     { label: "Jumlah Elaun / Nilai", id: `${p}-allowance`,    query: `Berapakah jumlah elaun atau nilai tajaan ${bp.full}?` },
-    { label: "Tarikh Permohonan",                              query: `Bilakah tarikh permohonan ${bp.full} dibuka dan ditutup?` },
+    { label: "Tarikh Permohonan",  id: `${p}-tarikh-permohonan`, query: `Bilakah tarikh permohonan ${bp.full} dibuka dan ditutup?` },
     { label: "↩ Pilih Penaja Lain",                            query: PILIH_PENAJA_LAIN },
   ];
 }
@@ -65,7 +65,7 @@ interface ChatHistoryEntry {
 const INITIAL_MESSAGE: Message = {
   id: "welcome",
   role: "bot",
-  text: "Selamat datang ke YS Chatbot! 👋\n\nSaya pembantu AI untuk maklumat tajaan dan pinjaman pendidikan di Sabah.\n\nSila pilih **Badan Penaja** yang ingin anda ketahui:",
+  text: "Selamat datang ke YS Chatbot! 👋\n\nSaya pembantu untuk maklumat tajaan dan pinjaman pendidikan di Sabah.\n\nSila pilih **Badan Penaja** yang ingin anda ketahui:",
   timestamp: new Date(),
   quickReplies: BADAN_PENAJA.map((bp) => ({ label: bp.full, query: bp.query })),
 };
@@ -258,10 +258,6 @@ export default function ChatbotPage() {
           </div>
         </div>
 
-        <div className="flex items-center gap-2 bg-white/5 border border-white/10 rounded-full px-3 py-1.5">
-          <Sparkles className="w-3.5 h-3.5 text-[#1a56db]" />
-          <span className="text-white/70 text-xs">AI Powered</span>
-        </div>
       </motion.header>
 
       {/* Messages */}
@@ -317,7 +313,12 @@ export default function ChatbotPage() {
                     {msg.quickReplies.map((qr) => (
                       <button
                         key={qr.label}
-                        onClick={() => sendMessage(qr.query, qr.id)}
+                        onClick={() => {
+                          setMessages((prev) =>
+                            prev.map((m) => m.id === msg.id ? { ...m, quickReplies: undefined } : m)
+                          );
+                          sendMessage(qr.query, qr.id);
+                        }}
                         disabled={isTyping}
                         className="flex items-center gap-1 px-3 py-1.5 rounded-full bg-white/5 hover:bg-[#1a56db]/25 border border-white/20 hover:border-[#1a56db]/50 text-white text-xs font-medium transition-all active:scale-95 disabled:opacity-40"
                       >
@@ -360,7 +361,7 @@ export default function ChatbotPage() {
           </button>
         </form>
         <p className="text-center text-white/25 text-xs mt-2">
-          Dikuasakan oleh AI — Maklumat untuk panduan sahaja. Sila semak portal rasmi untuk maklumat terkini.
+          Maklumat untuk panduan sahaja. Sila semak portal rasmi untuk maklumat terkini.
         </p>
       </motion.div>
     </div>

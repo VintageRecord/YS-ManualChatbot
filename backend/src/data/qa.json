@@ -40,6 +40,14 @@
     "followUps": ["bkns-how-to-apply", "bkns-eligibility", "bkns-allowance"]
   },
   {
+    "id": "bkns-tarikh-permohonan",
+    "category": "BKNS",
+    "question": "Bilakah tarikh permohonan BKNS dibuka dan ditutup?",
+    "answer": "**Tarikh Permohonan BKNS:**\n\n**Sesi 2025 (Rujukan):**\n• Permohonan dibuka: Sekitar Januari–Februari 2025\n• Tarikh tutup: Sekitar April–Mei 2025\n\n**Sesi 2026:**\n• Tarikh tutup permohonan akan dimaklumkan kelak\n• Keputusan dimaklumkan melalui **e-mel pemohon**\n• Permohonan dianggap tidak berjaya jika tiada maklum balas selepas **30 November 2026**\n\nSemak portal rasmi untuk tarikh terkini:\n**https://ptps.sabah.gov.my**",
+    "keywords": ["tarikh bkns", "tarikh permohonan bkns", "bila mohon bkns", "tarikh tutup bkns", "bila bkns buka", "buka permohonan bkns"],
+    "followUps": ["bkns-eligibility", "bkns-how-to-apply", "bkns-documents"]
+  },
+  {
     "id": "bkns-allowance",
     "category": "BKNS",
     "question": "Apakah elaun atau liputan tajaan BKNS?",
@@ -96,6 +104,14 @@
     "followUps": ["kys-how-to-apply", "kys-eligibility", "kys-allowance"]
   },
   {
+    "id": "kys-tarikh-permohonan",
+    "category": "KYS",
+    "question": "Bilakah tarikh permohonan KYS dibuka dan ditutup?",
+    "answer": "**Tarikh Permohonan Yayasan Sabah (KYS):**\n\n**Sesi 2025 (Rujukan):**\n• Permohonan dibuka: Sekitar Januari–Februari 2025\n• Tarikh tutup: Sekitar awal Mei 2025\n\n**Sesi 2026:**\n• Tarikh tutup: **6 Mei 2026 (Rabu)**\n• Permohonan dibuat di portal: **https://ptps.sabah.gov.my**\n• Borang yang telah dicetak & dokumen sokongan dihantar ke:\n  Bahagian Pembangunan Pendidikan, Kumpulan Yayasan Sabah\n  Aras 5, Menara Tun Mustapha, Teluk Likas, Kota Kinabalu\n\nPermohonan dianggap tidak berjaya jika tiada jawapan selepas **30 September 2026**.",
+    "keywords": ["tarikh kys", "tarikh permohonan kys", "bila mohon kys", "tarikh tutup kys", "bila kys buka", "buka permohonan kys", "tarikh yayasan sabah"],
+    "followUps": ["kys-eligibility", "kys-how-to-apply", "kys-documents"]
+  },
+  {
     "id": "kys-allowance",
     "category": "KYS",
     "question": "Apakah elaun atau liputan tajaan KYS?",
@@ -142,6 +158,14 @@
     "answer": "**Dokumen untuk Dermasiswa Pengajian Tinggi MUIS:**\n1. Gambar berukuran passport\n2. Salinan surat tawaran\n3. Surat pengesahan pelajar terkini dari kolej/universiti\n4. Salinan Kad Pengenalan pemohon + Sijil Lahir\n5. Salinan Kad Pengenalan ibu & bapa/penjaga + Sijil Lahir\n6. Sijil persekolahan: SPM / STPM / STAM / O-Levels / Diploma\n7. Slip gaji ibu & bapa terkini (atau baucer gaji)\n8. Surat pengesahan pendapatan (bekerja sendiri/tidak bekerja) dari Ketua Kampung/JKKK/KAN/WKAN\n9. Surat pengesahan dari kolej/universiti bahawa pemohon **tidak mendapat tajaan lain**\n10. Salinan akaun bank yang dikemaskini dan masih aktif\n11. Alamat email pelajar yang aktif\n\n**Dokumen tambahan untuk Bantuan Yuran/Tiket (One-Off):**\n1. Salinan KP pemohon, ibu dan bapa\n2. Surat tawaran kursus/pengajian\n3. Slip gaji ibu & bapa (atau pengesahan dari Ketua Daerah/JKKK/Ketua Kampung)\n4. Salinan tiket penerbangan yang lengkap beserta **harga pembelian tiket**\n5. Salinan buku akaun bank pemohon yang masih aktif",
     "keywords": ["dokumen muis", "dokumen dermasiswa muis", "senarai dokumen muis", "appszakat dokumen", "muis dokumen sokongan"],
     "followUps": ["muis-how-to-apply", "muis-eligibility", "muis-allowance"]
+  },
+  {
+    "id": "muis-tarikh-permohonan",
+    "category": "MUIS",
+    "question": "Bilakah tarikh permohonan MUIS dibuka dan ditutup?",
+    "answer": "**Tarikh Permohonan Dermasiswa MUIS:**\n\n**Dermasiswa Pengajian Tinggi (Islam & Bukan Islam):**\n• Sesi 2025 (Rujukan): Permohonan dibuka sekitar Februari–April 2025\n• Permohonan diproses mengikut Mesyuarat Jawatankuasa Dermasiswa MUIS\n\n**Bantuan Yuran Pendaftaran Awal & Tiket Penerbangan (One-Off):**\n• Permohonan mestilah dikemukakan **dalam tempoh 6 bulan** dari tarikh pendaftaran Semester 1\n• Sesi 2025 (Rujukan): Semester 1 bermula sekitar Julai–September 2025; mohon sebelum Januari–Mac 2026\n\nHubungi terus untuk tarikh terkini:\n• E-mel Dermasiswa: **dermasiswa.zakatsabah@gmail.com**\n• Portal: **appszakat.sabah.gov.my**",
+    "keywords": ["tarikh muis", "tarikh permohonan muis", "bila mohon muis", "tarikh tutup muis", "bila muis buka", "buka permohonan muis"],
+    "followUps": ["muis-eligibility", "muis-how-to-apply", "muis-documents"]
   },
   {
     "id": "muis-allowance",
@@ -192,6 +216,14 @@
     "followUps": ["baitulmal-how-to-apply", "baitulmal-eligibility", "baitulmal-allowance"]
   },
   {
+    "id": "baitulmal-tarikh-permohonan",
+    "category": "Baitulmal",
+    "question": "Bilakah tarikh permohonan Baitulmal dibuka dan ditutup?",
+    "answer": "**Tarikh Permohonan Bantuan Baitulmal:**\n\n**Bantuan Awal Pendidikan:**\n• Tiada tarikh tutup tetap — permohonan boleh dikemukakan **sepanjang tahun**\n• Walau bagaimanapun, permohonan **mestilah dikemukakan dalam tempoh 2 bulan** dari tarikh surat tawaran belajar dikeluarkan\n• Sesi 2025: Mohon segera selepas menerima surat tawaran (Julai–September 2025 untuk kemasukan September)\n\n**Bantuan Am:**\n• Permohonan boleh dibuat pada bila-bila masa mengikut keperluan\n\nMohon melalui portal: **https://bantuanpbns.sabah.gov.my**\n\n⚠️ Jangan tangguh — permohonan lewat melebihi 2 bulan **tidak akan dilayan**.",
+    "keywords": ["tarikh baitulmal", "tarikh permohonan baitulmal", "bila mohon baitulmal", "tarikh tutup baitulmal", "bila baitulmal buka", "buka permohonan baitulmal"],
+    "followUps": ["baitulmal-eligibility", "baitulmal-how-to-apply", "baitulmal-documents"]
+  },
+  {
     "id": "baitulmal-allowance",
     "category": "Baitulmal",
     "question": "Apakah jumlah atau liputan bantuan Baitulmal?",
@@ -240,6 +272,14 @@
     "followUps": ["tsk-how-to-apply", "tsk-eligibility", "tsk-allowance"]
   },
   {
+    "id": "tsk-tarikh-permohonan",
+    "category": "TSK",
+    "question": "Bilakah tarikh permohonan TSK (BUDI) dibuka dan ditutup?",
+    "answer": "**Tarikh Permohonan BUDI (TSK):**\n\n**Sesi 2025 (Rujukan):**\n• Permohonan dibuka untuk pelajar yang mendaftar ke IPT pada tahun 2025\n• Kemasukan Semester 1: Sekitar Julai–September 2025\n• Disyorkan mohon sebaik sahaja menerima **Surat Pengesahan Berdaftar** dari IPT\n\n**Penting:**\n• Bantuan ini hanya untuk kemasukan **kali pertama** pada **tahun semasa** sahaja\n• Tiada tarikh tutup khusus dinyatakan secara rasmi — mohon segera selepas mendaftar\n\nSemak status & mohon di: **https://budi.sabah.gov.my**\nHubungi: **ptskn.ttk@sabah.gov.my** | 088-369872 / 088-369164",
+    "keywords": ["tarikh tsk", "tarikh permohonan tsk", "bila mohon tsk", "tarikh tutup tsk", "bila tsk buka", "tarikh budi tsk"],
+    "followUps": ["tsk-eligibility", "tsk-how-to-apply", "tsk-documents"]
+  },
+  {
     "id": "tsk-allowance",
     "category": "TSK",
     "question": "Berapakah jumlah bantuan TSK (BUDI)?",
@@ -286,6 +326,14 @@
     "answer": "**Dokumen Sokongan BUDI:**\n\n1. **Surat Beranak** — Pemohon, Ibu dan Bapa\n2. **Salinan Kad Pengenalan** — Pemohon, Ibu dan Bapa\n   *(atau Sijil Cerai / Sijil Kematian jika berkenaan)*\n3. **Slip Gaji Ibu dan Bapa** / Surat Pengesahan Bekerja\n   *(atau pengesahan tidak bekerja)*\n4. **Surat Tawaran Kemasukan ke IPT**\n5. **Surat Pengesahan Telah Berdaftar** daripada IPT\n\nPastikan dokumen sokongan **lengkap** sebelum memohon.\n\nMuat naik semua dokumen melalui portal: **https://budi.sabah.gov.my**",
     "keywords": ["dokumen budi", "dokumen diperlukan budi", "senarai dokumen budi", "budi dokumen sokongan", "surat tawaran budi"],
     "followUps": ["budi-how-to-apply", "budi-eligibility", "budi-allowance"]
+  },
+  {
+    "id": "budi-tarikh-permohonan",
+    "category": "BUDI",
+    "question": "Bilakah tarikh permohonan BUDI dibuka dan ditutup?",
+    "answer": "**Tarikh Permohonan BUDI:**\n\n**Sesi 2025 (Rujukan):**\n• Permohonan dibuka untuk pelajar yang mendaftar ke IPT pada tahun 2025\n• Kemasukan Semester 1: Sekitar Julai–September 2025\n• Disyorkan mohon sebaik sahaja menerima **Surat Pengesahan Berdaftar** dari IPT\n\n**Penting:**\n• Bantuan ini hanya untuk kemasukan **kali pertama** pada **tahun semasa** sahaja\n• Tiada tarikh tutup khusus dinyatakan secara rasmi — mohon segera selepas mendaftar\n\nSemak status & mohon di: **https://budi.sabah.gov.my**\nHubungi: **ptskn.ttk@sabah.gov.my** | 088-369872 / 088-369164",
+    "keywords": ["tarikh budi", "tarikh permohonan budi", "bila mohon budi", "tarikh tutup budi", "bila budi buka", "buka permohonan budi"],
+    "followUps": ["budi-eligibility", "budi-how-to-apply", "budi-documents"]
   },
   {
     "id": "budi-allowance",
