@@ -1,11 +1,12 @@
 import express from "express";
-import { readFileSync, writeFileSync } from "fs";
+import { readFileSync, writeFileSync, existsSync } from "fs";
 import { fileURLToPath } from "url";
 import path from "path";
 import { randomUUID } from "crypto";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const QA_PATH = path.join(__dirname, "../data/qa.json");
+const QA_PATH  = path.join(__dirname, "../data/qa.json");
+const LOG_PATH = path.join(__dirname, "../data/log.json");
 
 const router = express.Router();
 
@@ -17,9 +18,32 @@ function saveQA(data) {
   writeFileSync(QA_PATH, JSON.stringify(data, null, 2), "utf-8");
 }
 
+function loadLog() {
+  if (!existsSync(LOG_PATH)) return [];
+  return JSON.parse(readFileSync(LOG_PATH, "utf-8"));
+}
+
+function appendLog(action, entry) {
+  const log = loadLog();
+  log.unshift({
+    id: randomUUID(),
+    timestamp: new Date().toISOString(),
+    action,
+    entryId: entry.id,
+    question: entry.question,
+    category: entry.category,
+  });
+  writeFileSync(LOG_PATH, JSON.stringify(log.slice(0, 200), null, 2), "utf-8");
+}
+
 // GET /api/admin/qa — list all entries
 router.get("/qa", (req, res) => {
   res.json(loadQA());
+});
+
+// GET /api/admin/log — action history
+router.get("/log", (req, res) => {
+  res.json(loadLog());
 });
 
 // POST /api/admin/qa — create new entry
@@ -41,6 +65,7 @@ router.post("/qa", (req, res) => {
 
   qa.push(entry);
   saveQA(qa);
+  appendLog("create", entry);
   res.status(201).json(entry);
 });
 
@@ -62,6 +87,7 @@ router.put("/qa/:id", (req, res) => {
   };
 
   saveQA(qa);
+  appendLog("edit", qa[idx]);
   res.json(qa[idx]);
 });
 
@@ -72,8 +98,10 @@ router.delete("/qa/:id", (req, res) => {
 
   if (idx === -1) return res.status(404).json({ error: "Entry not found" });
 
+  const deleted = qa[idx];
   qa.splice(idx, 1);
   saveQA(qa);
+  appendLog("delete", deleted);
   res.json({ success: true });
 });
 
