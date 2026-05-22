@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Send, X, User, ChevronRight, MessageCircle, RotateCcw } from "lucide-react";
+import { X, User, ChevronRight, MessageCircle, RotateCcw } from "lucide-react";
 import logoImg from "../../imports/image.png";
 
 const BACKEND_URL = "http://localhost:3001";
@@ -16,6 +16,18 @@ const BADAN_PENAJA = [
 ];
 
 const BACK_TO_MENU = "__BACK_TO_MENU__";
+
+function getTopicChips(bp: typeof BADAN_PENAJA[0]): Chip[] {
+  const p = bp.label.toLowerCase();
+  return [
+    { label: "Kelayakan & Syarat",   qaId: `${p}-eligibility` },
+    { label: "Cara Mohon",           qaId: `${p}-how-to-apply` },
+    { label: "Dokumen Diperlukan",   qaId: `${p}-documents` },
+    { label: "Jumlah Elaun / Nilai", qaId: `${p}-allowance` },
+    { label: "Tarikh Permohonan",    qaId: `${p}-tarikh-permohonan` },
+    { label: "↩ Menu Utama",         action: BACK_TO_MENU },
+  ];
+}
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 interface Chip {
@@ -83,8 +95,8 @@ function TypingIndicator() {
 export function ChatWidget() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>(() => [makeWelcomeMessage()]);
-  const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
+  const [activeBP, setActiveBP] = useState<typeof BADAN_PENAJA[0] | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () =>
@@ -96,23 +108,27 @@ export function ChatWidget() {
 
   const resetChat = () => {
     setMessages([makeWelcomeMessage()]);
-    setInput("");
+    setActiveBP(null);
   };
 
-  // Send by direct Q&A id (chip click) or free text (typed input)
-  const sendMessage = async (opts: { text: string; qaId?: string }) => {
-    const { text, qaId } = opts;
-    if (!text.trim() || isTyping) return;
+  const handleChipClick = (chip: Chip, sourceMessageId: string) => {
+    if (isTyping) return;
 
-    // Back-to-menu chip — handled client-side
-    if (qaId === BACK_TO_MENU) {
+    // Clear chips from the source message immediately
+    setMessages((prev) =>
+      prev.map((m) => m.id === sourceMessageId ? { ...m, chips: undefined } : m)
+    );
+
+    // Back-to-menu — handled client-side
+    if (chip.action === BACK_TO_MENU) {
+      setActiveBP(null);
       setMessages((prev) => [
         ...prev,
         { id: Date.now().toString(), role: "user", text: "↩ Menu Utama", timestamp: new Date() },
         {
           id: (Date.now() + 1).toString(),
           role: "bot",
-          text: "Baik! Sila pilih Badan Penaja atau taip soalan anda:",
+          text: "Baik! Sila pilih Badan Penaja yang ingin anda ketahui:",
           timestamp: new Date(),
           chips: BADAN_PENAJA.map((bp) => ({ label: bp.full, qaId: bp.id })),
         },
@@ -120,68 +136,55 @@ export function ChatWidget() {
       return;
     }
 
+    if (!chip.qaId) return;
+
     const userMsg: Message = {
       id: Date.now().toString(),
       role: "user",
-      text: text.trim(),
+      text: chip.label,
       timestamp: new Date(),
     };
     setMessages((prev) => [...prev, userMsg]);
-    setInput("");
     setIsTyping(true);
 
-    try {
-      const body = qaId
-        ? { id: qaId }
-        : { message: text.trim() };
+    fetch(`${BACKEND_URL}/api/chat`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id: chip.qaId }),
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error("Backend error");
+        return res.json();
+      })
+      .then((data) => {
+        const matchedBP = BADAN_PENAJA.find((bp) => bp.label === data.category) ?? null;
+        if (matchedBP) setActiveBP(matchedBP);
+        const currentBP = matchedBP ?? activeBP;
 
-      const res = await fetch(`${BACKEND_URL}/api/chat`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body),
-      });
-
-      if (!res.ok) throw new Error("Backend error");
-      const data = await res.json();
-
-      const followUpChips: Chip[] = (data.followUps || [])
-        .filter((fu: { label: string; id: string }) => fu.id !== data.id)
-        .map((fu: { label: string; id: string }) => ({ label: fu.label, qaId: fu.id }));
-
-      const botMsg: Message = {
-        id: (Date.now() + 1).toString(),
-        role: "bot",
-        text: data.response,
-        timestamp: new Date(),
-        chips: [
-          ...followUpChips,
-          { label: "↩ Menu Utama", qaId: BACK_TO_MENU },
-        ],
-      };
-      setMessages((prev) => [...prev, botMsg]);
-    } catch {
-      setMessages((prev) => [
-        ...prev,
-        {
+        const botMsg: Message = {
           id: (Date.now() + 1).toString(),
           role: "bot",
-          text: "Maaf, berlaku masalah sambungan. Sila cuba sebentar lagi.",
+          text: data.response,
           timestamp: new Date(),
-          chips: BADAN_PENAJA.map((bp) => ({ label: bp.full, qaId: bp.id })),
-        },
-      ]);
-    } finally {
-      setIsTyping(false);
-    }
-  };
-
-  const handleChipClick = (chip: Chip) => {
-    sendMessage({ text: chip.label, qaId: chip.qaId ?? chip.action });
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    sendMessage({ text: input });
+          chips: currentBP
+            ? getTopicChips(currentBP)
+            : BADAN_PENAJA.map((bp) => ({ label: bp.full, qaId: bp.id })),
+        };
+        setMessages((prev) => [...prev, botMsg]);
+      })
+      .catch(() => {
+        setMessages((prev) => [
+          ...prev,
+          {
+            id: (Date.now() + 1).toString(),
+            role: "bot",
+            text: "Maaf, berlaku masalah sambungan. Sila cuba sebentar lagi.",
+            timestamp: new Date(),
+            chips: BADAN_PENAJA.map((bp) => ({ label: bp.full, qaId: bp.id })),
+          },
+        ]);
+      })
+      .finally(() => setIsTyping(false));
   };
 
   return (
@@ -269,7 +272,7 @@ export function ChatWidget() {
                           {msg.chips.map((chip) => (
                             <button
                               key={chip.label}
-                              onClick={() => handleChipClick(chip)}
+                              onClick={() => handleChipClick(chip, msg.id)}
                               disabled={isTyping}
                               className="flex items-center gap-1 px-2.5 py-1 rounded-full border border-blue-200 bg-white hover:bg-blue-50 hover:border-blue-400 text-blue-700 text-[10px] font-medium transition-all active:scale-95 disabled:opacity-40 shadow-sm"
                             >
@@ -288,26 +291,9 @@ export function ChatWidget() {
               <div ref={messagesEndRef} />
             </div>
 
-            {/* Input */}
-            <div className="px-3 py-3 bg-white border-t border-gray-100 flex-shrink-0">
-              <form onSubmit={handleSubmit} className="flex gap-2 items-center">
-                <input
-                  type="text"
-                  value={input}
-                  onChange={(e) => setInput(e.target.value)}
-                  placeholder="Taip soalan anda di sini..."
-                  className="flex-1 bg-gray-50 border border-gray-200 rounded-full px-4 py-2 text-gray-800 text-xs placeholder:text-gray-400 focus:outline-none focus:border-blue-400 focus:bg-white transition-all"
-                />
-                <button
-                  type="submit"
-                  disabled={!input.trim() || isTyping}
-                  className="w-9 h-9 rounded-full flex items-center justify-center hover:opacity-90 active:scale-95 transition-all disabled:opacity-40 disabled:cursor-not-allowed flex-shrink-0 shadow"
-                  style={{ background: "linear-gradient(135deg, #1a56db, #1e3a8a)" }}
-                >
-                  <Send className="w-3.5 h-3.5 text-white" />
-                </button>
-              </form>
-              <p className="text-center text-gray-400 text-[10px] mt-1.5">
+            {/* Footer */}
+            <div className="px-3 py-2 bg-white border-t border-gray-100 flex-shrink-0">
+              <p className="text-center text-gray-400 text-[10px]">
                 Semak portal rasmi untuk maklumat dan tarikh terkini.
               </p>
             </div>

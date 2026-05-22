@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import { useNavigate } from "react-router";
 import { motion, AnimatePresence } from "motion/react";
-import { Send, ArrowLeft, User, ChevronRight, Sparkles } from "lucide-react";
+import { ArrowLeft, User, ChevronRight } from "lucide-react";
 import logoImg from "../../imports/image.png";
 
 const BACKEND_URL = "http://localhost:3001";
@@ -36,7 +36,7 @@ function getTopicChips(bp: typeof BADAN_PENAJA[0]): QuickReply[] {
     { label: "Cara Mohon",           id: `${p}-how-to-apply`, query: `Bagaimana cara memohon ${bp.full}? Terangkan langkah-langkah permohonan.` },
     { label: "Dokumen Diperlukan",   id: `${p}-documents`,    query: `Apakah dokumen yang diperlukan untuk memohon ${bp.full}?` },
     { label: "Jumlah Elaun / Nilai", id: `${p}-allowance`,    query: `Berapakah jumlah elaun atau nilai tajaan ${bp.full}?` },
-    { label: "Tarikh Permohonan",                              query: `Bilakah tarikh permohonan ${bp.full} dibuka dan ditutup?` },
+    { label: "Tarikh Permohonan",  id: `${p}-tarikh-permohonan`, query: `Bilakah tarikh permohonan ${bp.full} dibuka dan ditutup?` },
     { label: "↩ Pilih Penaja Lain",                            query: PILIH_PENAJA_LAIN },
   ];
 }
@@ -65,7 +65,7 @@ interface ChatHistoryEntry {
 const INITIAL_MESSAGE: Message = {
   id: "welcome",
   role: "bot",
-  text: "Selamat datang ke YS Chatbot! 👋\n\nSaya pembantu AI untuk maklumat tajaan dan pinjaman pendidikan di Sabah.\n\nSila pilih **Badan Penaja** yang ingin anda ketahui:",
+  text: "Selamat datang ke YS Chatbot! 👋\n\nSaya pembantu untuk maklumat tajaan dan pinjaman pendidikan di Sabah.\n\nSila pilih **Badan Penaja** yang ingin anda ketahui:",
   timestamp: new Date(),
   quickReplies: BADAN_PENAJA.map((bp) => ({ label: bp.full, query: bp.query })),
 };
@@ -110,7 +110,6 @@ export default function ChatbotPage() {
   const navigate = useNavigate();
   const [messages, setMessages] = useState<Message[]>([INITIAL_MESSAGE]);
   const [chatHistory, setChatHistory] = useState<ChatHistoryEntry[]>([]);
-  const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const [activeBP, setActiveBP] = useState<typeof BADAN_PENAJA[0] | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -153,7 +152,6 @@ export default function ChatbotPage() {
     };
 
     setMessages((prev) => [...prev, userMsg]);
-    setInput("");
     setIsTyping(true);
     setTimeout(scrollToBottom, 50);
 
@@ -194,11 +192,6 @@ export default function ChatbotPage() {
       setIsTyping(false);
       setTimeout(scrollToBottom, 100);
     }
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    sendMessage(input);
   };
 
   return (
@@ -258,10 +251,6 @@ export default function ChatbotPage() {
           </div>
         </div>
 
-        <div className="flex items-center gap-2 bg-white/5 border border-white/10 rounded-full px-3 py-1.5">
-          <Sparkles className="w-3.5 h-3.5 text-[#1a56db]" />
-          <span className="text-white/70 text-xs">AI Powered</span>
-        </div>
       </motion.header>
 
       {/* Messages */}
@@ -317,7 +306,12 @@ export default function ChatbotPage() {
                     {msg.quickReplies.map((qr) => (
                       <button
                         key={qr.label}
-                        onClick={() => sendMessage(qr.query, qr.id)}
+                        onClick={() => {
+                          setMessages((prev) =>
+                            prev.map((m) => m.id === msg.id ? { ...m, quickReplies: undefined } : m)
+                          );
+                          sendMessage(qr.query, qr.id);
+                        }}
                         disabled={isTyping}
                         className="flex items-center gap-1 px-3 py-1.5 rounded-full bg-white/5 hover:bg-[#1a56db]/25 border border-white/20 hover:border-[#1a56db]/50 text-white text-xs font-medium transition-all active:scale-95 disabled:opacity-40"
                       >
@@ -336,33 +330,12 @@ export default function ChatbotPage() {
         <div ref={messagesEndRef} />
       </div>
 
-      {/* Input */}
-      <motion.div
-        initial={{ y: 60, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 0.3 }}
-        className="relative z-10 px-4 md:px-8 py-4 backdrop-blur-xl bg-black/30 border-t border-white/10"
-      >
-        <form onSubmit={handleSubmit} className="flex gap-3 items-center">
-          <input
-            type="text"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            placeholder="Taip soalan anda di sini..."
-            className="flex-1 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-5 py-3 text-white text-sm placeholder:text-white/40 focus:outline-none focus:border-white/40 focus:bg-white/15 transition-all"
-          />
-          <button
-            type="submit"
-            disabled={!input.trim() || isTyping}
-            className="w-11 h-11 rounded-full bg-gradient-to-br from-[#1a56db] to-[#1e3a8a] text-white flex items-center justify-center hover:opacity-90 active:scale-95 transition-all disabled:opacity-40 disabled:cursor-not-allowed flex-shrink-0"
-          >
-            <Send className="w-4 h-4" />
-          </button>
-        </form>
-        <p className="text-center text-white/25 text-xs mt-2">
-          Dikuasakan oleh AI — Maklumat untuk panduan sahaja. Sila semak portal rasmi untuk maklumat terkini.
+      {/* Footer */}
+      <div className="relative z-10 px-4 md:px-8 py-3 backdrop-blur-xl bg-black/30 border-t border-white/10">
+        <p className="text-center text-white/25 text-xs">
+          Maklumat untuk panduan sahaja. Sila semak portal rasmi untuk maklumat terkini.
         </p>
-      </motion.div>
+      </div>
     </div>
   );
 }
