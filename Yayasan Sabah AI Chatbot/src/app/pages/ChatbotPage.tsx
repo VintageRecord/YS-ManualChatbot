@@ -31,13 +31,22 @@ const PILIH_PENAJA_LAIN = "__PILIH_PENAJA_LAIN__";
 // Topic chips shown after a Badan Penaja is selected
 function getTopicChips(bp: typeof BADAN_PENAJA[0]): QuickReply[] {
   const p = bp.label.toLowerCase();
+  const jenisIdMap: Record<string, string> = {
+    bkns:      "bkns-jenis-tajaan",
+    kys:       "kys-jenis-biasiswa",
+    muis:      "muis-jenis-dermasiswa",
+    baitulmal: "baitulmal-jenis-bantuan",
+    tsk:       "tsk-jenis-tajaan",
+    budi:      "budi-jenis-tajaan",
+  };
   return [
-    { label: "Kelayakan & Syarat",   id: `${p}-eligibility`,  query: `Apakah kelayakan dan syarat untuk ${bp.full}?` },
-    { label: "Cara Mohon",           id: `${p}-how-to-apply`, query: `Bagaimana cara memohon ${bp.full}? Terangkan langkah-langkah permohonan.` },
-    { label: "Dokumen Diperlukan",   id: `${p}-documents`,    query: `Apakah dokumen yang diperlukan untuk memohon ${bp.full}?` },
-    { label: "Jumlah Elaun / Nilai", id: `${p}-allowance`,    query: `Berapakah jumlah elaun atau nilai tajaan ${bp.full}?` },
-    { label: "Tarikh Permohonan",  id: `${p}-tarikh-permohonan`, query: `Bilakah tarikh permohonan ${bp.full} dibuka dan ditutup?` },
-    { label: "↩ Pilih Penaja Lain",                            query: PILIH_PENAJA_LAIN },
+    { label: "Jenis Tajaan / Bantuan", id: jenisIdMap[p],             query: `Apakah jenis-jenis tajaan atau bantuan untuk ${bp.full}?` },
+    { label: "Kelayakan & Syarat",     id: `${p}-eligibility`,        query: `Apakah kelayakan dan syarat untuk ${bp.full}?` },
+    { label: "Cara Mohon",             id: `${p}-how-to-apply`,       query: `Bagaimana cara memohon ${bp.full}? Terangkan langkah-langkah permohonan.` },
+    { label: "Dokumen Diperlukan",     id: `${p}-documents`,          query: `Apakah dokumen yang diperlukan untuk memohon ${bp.full}?` },
+    { label: "Jumlah Elaun / Nilai",   id: `${p}-allowance`,          query: `Berapakah jumlah elaun atau nilai tajaan ${bp.full}?` },
+    { label: "Tarikh Permohonan",      id: `${p}-tarikh-permohonan`,  query: `Bilakah tarikh permohonan ${bp.full} dibuka dan ditutup?` },
+    { label: "↩ Pilih Penaja Lain",                                    query: PILIH_PENAJA_LAIN },
   ];
 }
 
