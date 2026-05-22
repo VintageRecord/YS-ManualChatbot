@@ -21,8 +21,9 @@ const BADAN_PENAJA: BPEntry[] = [
   { label: "BUDI",      full: "Bantuan Tunai Pendaftaran IPT",     overviewId: "budi-overview" },
 ];
 
-const BACK_TO_MENU = "__BACK_TO_MENU__";
-const LIHAT_LAIN   = "__LIHAT_LAIN__";
+const BACK_TO_MENU  = "__BACK_TO_MENU__";
+const LIHAT_LAIN    = "__LIHAT_LAIN__";
+const KEMBALI_TOPIK = "__KEMBALI_TOPIK__";
 
 const JENIS_ID_MAP: Record<string, string> = {
   bkns:      "bkns-jenis-tajaan",
@@ -194,7 +195,28 @@ export function ChatWidget() {
           role: "bot",
           text: "Soalan lain yang tersedia:",
           timestamp: new Date(),
-          chips: [...chip.subChips!, { label: "↩ Menu Utama", action: BACK_TO_MENU }],
+          chips: [
+            ...chip.subChips!,
+            { label: "↩ Kembali", action: KEMBALI_TOPIK, subChips: chip.subChips },
+          ],
+        },
+      ]);
+      return;
+    }
+
+    if (chip.action === KEMBALI_TOPIK) {
+      const extras = chip.subChips ?? [];
+      setMessages((prev) => [
+        ...prev,
+        { id: Date.now().toString(), role: "user", text: "↩ Kembali", timestamp: new Date() },
+        {
+          id: (Date.now() + 1).toString(),
+          role: "bot",
+          text: "Pilihan topik:",
+          timestamp: new Date(),
+          chips: activeBP
+            ? getTopicChips(activeBP, extras)
+            : bpList.map((bp) => ({ label: bp.full, qaId: bp.overviewId })),
         },
       ]);
       return;

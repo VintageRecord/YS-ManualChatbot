@@ -34,7 +34,8 @@ function detectBPFromText(text: string, bpList: BPEntry[]): BPEntry | null {
 }
 
 const PILIH_PENAJA_LAIN = "__PILIH_PENAJA_LAIN__";
-const LIHAT_LAIN       = "__LIHAT_LAIN__";
+const LIHAT_LAIN        = "__LIHAT_LAIN__";
+const KEMBALI_TOPIK     = "__KEMBALI_TOPIK__";
 
 const JENIS_ID_MAP: Record<string, string> = {
   bkns:      "bkns-jenis-tajaan",
@@ -237,13 +238,18 @@ export default function ChatbotPage() {
       if (!res.ok) throw new Error("Backend error");
       const data = await res.json();
 
+      // Resolve effective BP: text-match first, then API category, then last-known activeBP
+      const bpFromCategory = bpList.find((bp) => bp.label === data.category) ?? null;
+      const effectiveBP = currentBP ?? bpFromCategory ?? activeBP;
+      if (bpFromCategory && !currentBP) setActiveBP(bpFromCategory);
+
       let extraChips: QuickReply[] = [];
-      if (currentBP) {
+      if (effectiveBP) {
         try {
-          const faqRes = await fetch(`${BACKEND_URL}/api/chat/faq/${currentBP.label}`);
+          const faqRes = await fetch(`${BACKEND_URL}/api/chat/faq/${effectiveBP.label}`);
           if (faqRes.ok) {
             const allEntries: { id: string; question: string }[] = await faqRes.json();
-            const standardIds = new Set(getStandardChipIds(currentBP));
+            const standardIds = new Set(getStandardChipIds(effectiveBP));
             extraChips = allEntries
               .filter((e) => !standardIds.has(e.id))
               .map((e) => ({ label: e.question, id: e.id, query: e.question }));
@@ -256,7 +262,7 @@ export default function ChatbotPage() {
         role: "bot",
         text: data.response,
         timestamp: new Date(),
-        quickReplies: currentBP ? getTopicChips(currentBP, extraChips) : undefined,
+        quickReplies: effectiveBP ? getTopicChips(effectiveBP, extraChips) : undefined,
       };
 
       setMessages((prev) => [...prev, botMsg]);
@@ -406,8 +412,22 @@ export default function ChatbotPage() {
                                 timestamp: new Date(),
                                 quickReplies: [
                                   ...qr.subChips!,
-                                  { label: "↩ Pilih Penaja Lain", query: PILIH_PENAJA_LAIN },
+                                  { label: "↩ Kembali", query: KEMBALI_TOPIK, subChips: qr.subChips },
                                 ],
+                              },
+                            ]);
+                          } else if (qr.query === KEMBALI_TOPIK) {
+                            const extras = qr.subChips ?? [];
+                            setMessages((prev) => [
+                              ...prev,
+                              {
+                                id: Date.now().toString(),
+                                role: "bot" as const,
+                                text: "Pilihan topik:",
+                                timestamp: new Date(),
+                                quickReplies: activeBP
+                                  ? getTopicChips(activeBP, extras)
+                                  : [{ label: "↩ Pilih Penaja Lain", query: PILIH_PENAJA_LAIN }],
                               },
                             ]);
                           } else {
