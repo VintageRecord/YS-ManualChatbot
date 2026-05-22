@@ -48,7 +48,7 @@ interface Message {
 const makeWelcomeMessage = (): Message => ({
   id: "welcome",
   role: "bot",
-  text: "Selamat datang ke **Pusat Maklumat Tajaan YS**! 👋\n\nSaya sedia membantu anda mendapatkan maklumat mengenai tajaan dan pinjaman pendidikan di Sabah.\n\nSila pilih **Badan Penaja** di bawah atau taip soalan anda:",
+  text: "Selamat datang ke **Pusat Maklumat Tajaan YS**! 👋\n\nSaya sedia membantu anda mendapatkan maklumat mengenai tajaan dan pinjaman pendidikan di Sabah.\n\nSila pilih **Badan Penaja** di bawah:",
   timestamp: new Date(),
   chips: BADAN_PENAJA.map((bp) => ({ label: bp.full, qaId: bp.id })),
 });
