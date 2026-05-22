@@ -36,7 +36,6 @@ function getTopicChips(bp: typeof BADAN_PENAJA[0]): QuickReply[] {
     { label: "Dokumen Diperlukan",    query: `Apakah dokumen yang diperlukan untuk memohon ${bp.full}?` },
     { label: "Jumlah Elaun / Nilai",  query: `Berapakah jumlah elaun atau nilai tajaan ${bp.full}?` },
     { label: "Tarikh Permohonan",     query: `Bilakah tarikh permohonan ${bp.full} dibuka dan ditutup?` },
-    { label: "Semak Kelayakan Saya",  query: `Saya ingin semak sama ada saya layak untuk ${bp.full}. Sila tanya saya tentang status akademik dan keputusan semasa saya supaya anda boleh bantu menentukan kelayakan saya.` },
     { label: "↩ Pilih Penaja Lain",   query: PILIH_PENAJA_LAIN },
   ];
 }
