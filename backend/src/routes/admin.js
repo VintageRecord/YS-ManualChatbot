@@ -24,16 +24,20 @@ function loadLog() {
 }
 
 function appendLog(action, entry) {
-  const log = loadLog();
-  log.unshift({
-    id: randomUUID(),
-    timestamp: new Date().toISOString(),
-    action,
-    entryId: entry.id,
-    question: entry.question,
-    category: entry.category,
-  });
-  writeFileSync(LOG_PATH, JSON.stringify(log.slice(0, 200), null, 2), "utf-8");
+  try {
+    const log = loadLog();
+    log.unshift({
+      id: randomUUID(),
+      timestamp: new Date().toISOString(),
+      action,
+      entryId: entry.id,
+      question: entry.question,
+      category: entry.category,
+    });
+    writeFileSync(LOG_PATH, JSON.stringify(log.slice(0, 200), null, 2), "utf-8");
+  } catch (e) {
+    console.error("Failed to write log:", e);
+  }
 }
 
 // GET /api/admin/qa — list all entries
