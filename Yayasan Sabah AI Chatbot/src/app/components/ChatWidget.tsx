@@ -22,6 +22,7 @@ const BADAN_PENAJA: BPEntry[] = [
 ];
 
 const BACK_TO_MENU = "__BACK_TO_MENU__";
+const LIHAT_LAIN   = "__LIHAT_LAIN__";
 
 const JENIS_ID_MAP: Record<string, string> = {
   bkns:      "bkns-jenis-tajaan",
@@ -54,7 +55,7 @@ function getTopicChips(bp: typeof BADAN_PENAJA[0], extras: Chip[] = []): Chip[] 
     { label: "Dokumen Diperlukan",     qaId: `${p}-documents` },
     { label: "Jumlah Elaun / Nilai",   qaId: `${p}-allowance` },
     { label: "Tarikh Permohonan",      qaId: `${p}-tarikh-permohonan` },
-    ...extras,
+    ...(extras.length > 0 ? [{ label: "📋 Lihat Soalan Lain", action: LIHAT_LAIN, subChips: extras }] : []),
     { label: "↩ Menu Utama",           action: BACK_TO_MENU },
   ];
 }
@@ -62,8 +63,9 @@ function getTopicChips(bp: typeof BADAN_PENAJA[0], extras: Chip[] = []): Chip[] 
 // ── Types ─────────────────────────────────────────────────────────────────────
 interface Chip {
   label: string;
-  qaId?: string;       // direct Q&A entry ID — bypasses keyword matching
-  action?: string;     // special client-side action
+  qaId?: string;        // direct Q&A entry ID — bypasses keyword matching
+  action?: string;      // special client-side action
+  subChips?: Chip[];    // used by "Lihat Soalan Lain" to expand extras inline
 }
 
 interface Message {
@@ -178,6 +180,21 @@ export function ChatWidget() {
           text: "Baik! Sila pilih Badan Penaja yang ingin anda ketahui:",
           timestamp: new Date(),
           chips: bpList.map((bp) => ({ label: bp.full, qaId: bp.overviewId })),
+        },
+      ]);
+      return;
+    }
+
+    if (chip.action === LIHAT_LAIN && chip.subChips) {
+      setMessages((prev) => [
+        ...prev,
+        { id: Date.now().toString(), role: "user", text: "Lihat Soalan Lain", timestamp: new Date() },
+        {
+          id: (Date.now() + 1).toString(),
+          role: "bot",
+          text: "Soalan lain yang tersedia:",
+          timestamp: new Date(),
+          chips: [...chip.subChips!, { label: "↩ Menu Utama", action: BACK_TO_MENU }],
         },
       ]);
       return;
