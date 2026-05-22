@@ -28,24 +28,39 @@ function detectBPFromText(text: string): typeof BADAN_PENAJA[0] | null {
 
 const PILIH_PENAJA_LAIN = "__PILIH_PENAJA_LAIN__";
 
-// Topic chips shown after a Badan Penaja is selected
-function getTopicChips(bp: typeof BADAN_PENAJA[0]): QuickReply[] {
+const JENIS_ID_MAP: Record<string, string> = {
+  bkns:      "bkns-jenis-tajaan",
+  kys:       "kys-jenis-biasiswa",
+  muis:      "muis-jenis-dermasiswa",
+  baitulmal: "baitulmal-jenis-bantuan",
+  tsk:       "tsk-jenis-tajaan",
+  budi:      "budi-jenis-tajaan",
+};
+
+function getStandardChipIds(bp: typeof BADAN_PENAJA[0]): string[] {
   const p = bp.label.toLowerCase();
-  const jenisIdMap: Record<string, string> = {
-    bkns:      "bkns-jenis-tajaan",
-    kys:       "kys-jenis-biasiswa",
-    muis:      "muis-jenis-dermasiswa",
-    baitulmal: "baitulmal-jenis-bantuan",
-    tsk:       "tsk-jenis-tajaan",
-    budi:      "budi-jenis-tajaan",
-  };
   return [
-    { label: "Jenis Tajaan / Bantuan", id: jenisIdMap[p],             query: `Apakah jenis-jenis tajaan atau bantuan untuk ${bp.full}?` },
+    `${p}-overview`,
+    JENIS_ID_MAP[p] ?? `${p}-jenis-tajaan`,
+    `${p}-eligibility`,
+    `${p}-how-to-apply`,
+    `${p}-documents`,
+    `${p}-allowance`,
+    `${p}-tarikh-permohonan`,
+  ];
+}
+
+// Topic chips shown after a Badan Penaja is selected
+function getTopicChips(bp: typeof BADAN_PENAJA[0], extras: QuickReply[] = []): QuickReply[] {
+  const p = bp.label.toLowerCase();
+  return [
+    { label: "Jenis Tajaan / Bantuan", id: JENIS_ID_MAP[p],           query: `Apakah jenis-jenis tajaan atau bantuan untuk ${bp.full}?` },
     { label: "Kelayakan & Syarat",     id: `${p}-eligibility`,        query: `Apakah kelayakan dan syarat untuk ${bp.full}?` },
     { label: "Cara Mohon",             id: `${p}-how-to-apply`,       query: `Bagaimana cara memohon ${bp.full}? Terangkan langkah-langkah permohonan.` },
     { label: "Dokumen Diperlukan",     id: `${p}-documents`,          query: `Apakah dokumen yang diperlukan untuk memohon ${bp.full}?` },
     { label: "Jumlah Elaun / Nilai",   id: `${p}-allowance`,          query: `Berapakah jumlah elaun atau nilai tajaan ${bp.full}?` },
     { label: "Tarikh Permohonan",      id: `${p}-tarikh-permohonan`,  query: `Bilakah tarikh permohonan ${bp.full} dibuka dan ditutup?` },
+    ...extras,
     { label: "↩ Pilih Penaja Lain",                                    query: PILIH_PENAJA_LAIN },
   ];
 }
@@ -174,12 +189,26 @@ export default function ChatbotPage() {
       if (!res.ok) throw new Error("Backend error");
       const data = await res.json();
 
+      let extraChips: QuickReply[] = [];
+      if (currentBP) {
+        try {
+          const faqRes = await fetch(`${BACKEND_URL}/api/chat/faq/${currentBP.label}`);
+          if (faqRes.ok) {
+            const allEntries: { id: string; question: string }[] = await faqRes.json();
+            const standardIds = new Set(getStandardChipIds(currentBP));
+            extraChips = allEntries
+              .filter((e) => !standardIds.has(e.id))
+              .map((e) => ({ label: e.question, id: e.id, query: e.question }));
+          }
+        } catch { /* ignore */ }
+      }
+
       const botMsg: Message = {
         id: (Date.now() + 1).toString(),
         role: "bot",
         text: data.response,
         timestamp: new Date(),
-        quickReplies: currentBP ? getTopicChips(currentBP) : undefined,
+        quickReplies: currentBP ? getTopicChips(currentBP, extraChips) : undefined,
       };
 
       setMessages((prev) => [...prev, botMsg]);

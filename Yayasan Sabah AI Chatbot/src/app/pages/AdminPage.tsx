@@ -8,7 +8,6 @@ import { useNavigate } from "react-router";
 
 const BACKEND_URL = "http://localhost:3001";
 
-const CATEGORIES = ["BKNS", "KYS", "MUIS", "Baitulmal", "TSK", "BUDI", "Umum"];
 
 interface QAEntry {
   id: string;
@@ -29,7 +28,7 @@ interface LogEntry {
 }
 
 const emptyForm = (): Omit<QAEntry, "id"> => ({
-  category: "BKNS",
+  category: "",
   question: "",
   answer: "",
   keywords: [],
@@ -101,11 +100,13 @@ function QAForm({
   onSave,
   onCancel,
   saving,
+  categories,
 }: {
   initial: Omit<QAEntry, "id"> & { id?: string };
   onSave: (data: Omit<QAEntry, "id">) => void;
   onCancel: () => void;
   saving: boolean;
+  categories: string[];
 }) {
   const [form, setForm] = useState<Omit<QAEntry, "id">>({
     category: initial.category,
@@ -126,15 +127,20 @@ function QAForm({
       {/* Category */}
       <div>
         <label className="block text-white/50 text-xs mb-1.5">Kategori</label>
-        <select
+        <input
+          required
+          type="text"
+          list="cat-options"
           value={form.category}
           onChange={(e) => set("category", e.target.value)}
-          className="w-full bg-white/5 border border-white/15 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-white/30"
-        >
-          {CATEGORIES.map((c) => (
-            <option key={c} value={c} className="bg-[#0a1628]">{c}</option>
+          placeholder="Pilih atau taip kategori baharu..."
+          className="w-full bg-white/5 border border-white/15 rounded-lg px-3 py-2 text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-white/30"
+        />
+        <datalist id="cat-options">
+          {categories.map((c) => (
+            <option key={c} value={c} />
           ))}
-        </select>
+        </datalist>
       </div>
 
       {/* Question */}
@@ -277,7 +283,8 @@ export default function AdminPage() {
     }
   };
 
-  const cats = ["Semua", ...CATEGORIES];
+  const allCategories = [...new Set(entries.map((e) => e.category))].sort();
+  const cats = ["Semua", ...allCategories];
   const filtered = filterCat === "Semua" ? entries : entries.filter((e) => e.category === filterCat);
 
   return (
@@ -400,6 +407,7 @@ export default function AdminPage() {
                   onSave={createEntry}
                   onCancel={() => setShowAddForm(false)}
                   saving={saving}
+                  categories={allCategories}
                 />
               </motion.div>
             ) : (
@@ -460,6 +468,7 @@ export default function AdminPage() {
                       onSave={(data) => updateEntry(entry.id, data)}
                       onCancel={() => setEditingId(null)}
                       saving={saving}
+                      categories={allCategories}
                     />
                   </div>
                 ) : (

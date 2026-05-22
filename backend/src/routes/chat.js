@@ -96,4 +96,13 @@ router.post("/", (req, res) => {
   res.json(buildResponse(match, qaList));
 });
 
+// GET /api/chat/faq/:category — all Q&A entries for a category (id + question only)
+router.get("/faq/:category", (req, res) => {
+  const qaList = loadQA();
+  const items = qaList
+    .filter((qa) => qa.category === req.params.category)
+    .map((qa) => ({ id: qa.id, question: qa.question }));
+  res.json(items);
+});
+
 export default router;
