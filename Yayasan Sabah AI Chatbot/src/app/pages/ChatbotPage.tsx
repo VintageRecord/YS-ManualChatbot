@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import { useNavigate } from "react-router";
 import { motion, AnimatePresence } from "motion/react";
-import { Send, ArrowLeft, User, ChevronRight } from "lucide-react";
+import { ArrowLeft, User, ChevronRight } from "lucide-react";
 import logoImg from "../../imports/image.png";
 
 const BACKEND_URL = "http://localhost:3001";
@@ -110,7 +110,6 @@ export default function ChatbotPage() {
   const navigate = useNavigate();
   const [messages, setMessages] = useState<Message[]>([INITIAL_MESSAGE]);
   const [chatHistory, setChatHistory] = useState<ChatHistoryEntry[]>([]);
-  const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const [activeBP, setActiveBP] = useState<typeof BADAN_PENAJA[0] | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -153,7 +152,6 @@ export default function ChatbotPage() {
     };
 
     setMessages((prev) => [...prev, userMsg]);
-    setInput("");
     setIsTyping(true);
     setTimeout(scrollToBottom, 50);
 
@@ -194,11 +192,6 @@ export default function ChatbotPage() {
       setIsTyping(false);
       setTimeout(scrollToBottom, 100);
     }
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    sendMessage(input);
   };
 
   return (
@@ -337,33 +330,12 @@ export default function ChatbotPage() {
         <div ref={messagesEndRef} />
       </div>
 
-      {/* Input */}
-      <motion.div
-        initial={{ y: 60, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 0.3 }}
-        className="relative z-10 px-4 md:px-8 py-4 backdrop-blur-xl bg-black/30 border-t border-white/10"
-      >
-        <form onSubmit={handleSubmit} className="flex gap-3 items-center">
-          <input
-            type="text"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            placeholder="Taip soalan anda di sini..."
-            className="flex-1 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-5 py-3 text-white text-sm placeholder:text-white/40 focus:outline-none focus:border-white/40 focus:bg-white/15 transition-all"
-          />
-          <button
-            type="submit"
-            disabled={!input.trim() || isTyping}
-            className="w-11 h-11 rounded-full bg-gradient-to-br from-[#1a56db] to-[#1e3a8a] text-white flex items-center justify-center hover:opacity-90 active:scale-95 transition-all disabled:opacity-40 disabled:cursor-not-allowed flex-shrink-0"
-          >
-            <Send className="w-4 h-4" />
-          </button>
-        </form>
-        <p className="text-center text-white/25 text-xs mt-2">
+      {/* Footer */}
+      <div className="relative z-10 px-4 md:px-8 py-3 backdrop-blur-xl bg-black/30 border-t border-white/10">
+        <p className="text-center text-white/25 text-xs">
           Maklumat untuk panduan sahaja. Sila semak portal rasmi untuk maklumat terkini.
         </p>
-      </motion.div>
+      </div>
     </div>
   );
 }
