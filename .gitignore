@@ -3,3 +3,4 @@ dist/
 .env
 .env.local
 *.local
+backend/src/data/log.json
