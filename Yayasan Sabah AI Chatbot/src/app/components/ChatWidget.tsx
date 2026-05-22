@@ -19,13 +19,22 @@ const BACK_TO_MENU = "__BACK_TO_MENU__";
 
 function getTopicChips(bp: typeof BADAN_PENAJA[0]): Chip[] {
   const p = bp.label.toLowerCase();
+  const jenisIdMap: Record<string, string> = {
+    bkns:      "bkns-jenis-tajaan",
+    kys:       "kys-jenis-biasiswa",
+    muis:      "muis-jenis-dermasiswa",
+    baitulmal: "baitulmal-jenis-bantuan",
+    tsk:       "tsk-jenis-tajaan",
+    budi:      "budi-jenis-tajaan",
+  };
   return [
-    { label: "Kelayakan & Syarat",   qaId: `${p}-eligibility` },
-    { label: "Cara Mohon",           qaId: `${p}-how-to-apply` },
-    { label: "Dokumen Diperlukan",   qaId: `${p}-documents` },
-    { label: "Jumlah Elaun / Nilai", qaId: `${p}-allowance` },
-    { label: "Tarikh Permohonan",    qaId: `${p}-tarikh-permohonan` },
-    { label: "↩ Menu Utama",         action: BACK_TO_MENU },
+    { label: "Jenis Tajaan / Bantuan", qaId: jenisIdMap[p] },
+    { label: "Kelayakan & Syarat",     qaId: `${p}-eligibility` },
+    { label: "Cara Mohon",             qaId: `${p}-how-to-apply` },
+    { label: "Dokumen Diperlukan",     qaId: `${p}-documents` },
+    { label: "Jumlah Elaun / Nilai",   qaId: `${p}-allowance` },
+    { label: "Tarikh Permohonan",      qaId: `${p}-tarikh-permohonan` },
+    { label: "↩ Menu Utama",           action: BACK_TO_MENU },
   ];
 }
 
