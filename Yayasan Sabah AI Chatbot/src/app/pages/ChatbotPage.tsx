@@ -30,13 +30,14 @@ const PILIH_PENAJA_LAIN = "__PILIH_PENAJA_LAIN__";
 
 // Topic chips shown after a Badan Penaja is selected
 function getTopicChips(bp: typeof BADAN_PENAJA[0]): QuickReply[] {
+  const p = bp.label.toLowerCase();
   return [
-    { label: "Kelayakan & Syarat",    query: `Apakah kelayakan dan syarat untuk ${bp.full}?` },
-    { label: "Cara Mohon",            query: `Bagaimana cara memohon ${bp.full}? Terangkan langkah-langkah permohonan.` },
-    { label: "Dokumen Diperlukan",    query: `Apakah dokumen yang diperlukan untuk memohon ${bp.full}?` },
-    { label: "Jumlah Elaun / Nilai",  query: `Berapakah jumlah elaun atau nilai tajaan ${bp.full}?` },
-    { label: "Tarikh Permohonan",     query: `Bilakah tarikh permohonan ${bp.full} dibuka dan ditutup?` },
-    { label: "↩ Pilih Penaja Lain",   query: PILIH_PENAJA_LAIN },
+    { label: "Kelayakan & Syarat",   id: `${p}-eligibility`,  query: `Apakah kelayakan dan syarat untuk ${bp.full}?` },
+    { label: "Cara Mohon",           id: `${p}-how-to-apply`, query: `Bagaimana cara memohon ${bp.full}? Terangkan langkah-langkah permohonan.` },
+    { label: "Dokumen Diperlukan",   id: `${p}-documents`,    query: `Apakah dokumen yang diperlukan untuk memohon ${bp.full}?` },
+    { label: "Jumlah Elaun / Nilai", id: `${p}-allowance`,    query: `Berapakah jumlah elaun atau nilai tajaan ${bp.full}?` },
+    { label: "Tarikh Permohonan",                              query: `Bilakah tarikh permohonan ${bp.full} dibuka dan ditutup?` },
+    { label: "↩ Pilih Penaja Lain",                            query: PILIH_PENAJA_LAIN },
   ];
 }
 
@@ -44,6 +45,7 @@ function getTopicChips(bp: typeof BADAN_PENAJA[0]): QuickReply[] {
 interface QuickReply {
   label: string;
   query: string;
+  id?: string;
 }
 
 interface Message {
@@ -116,7 +118,7 @@ export default function ChatbotPage() {
   const scrollToBottom = () =>
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
 
-  const sendMessage = async (text: string) => {
+  const sendMessage = async (text: string, qaId?: string) => {
     if (!text.trim() || isTyping) return;
 
     // Handle "Pilih Penaja Lain" client-side — no backend call needed
@@ -159,7 +161,7 @@ export default function ChatbotPage() {
       const res = await fetch(`${BACKEND_URL}/api/chat`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: text.trim(), history: chatHistory }),
+        body: JSON.stringify({ message: text.trim(), history: chatHistory, ...(qaId && { id: qaId }) }),
       });
 
       if (!res.ok) throw new Error("Backend error");
@@ -315,7 +317,7 @@ export default function ChatbotPage() {
                     {msg.quickReplies.map((qr) => (
                       <button
                         key={qr.label}
-                        onClick={() => sendMessage(qr.query)}
+                        onClick={() => sendMessage(qr.query, qr.id)}
                         disabled={isTyping}
                         className="flex items-center gap-1 px-3 py-1.5 rounded-full bg-white/5 hover:bg-[#1a56db]/25 border border-white/20 hover:border-[#1a56db]/50 text-white text-xs font-medium transition-all active:scale-95 disabled:opacity-40"
                       >
