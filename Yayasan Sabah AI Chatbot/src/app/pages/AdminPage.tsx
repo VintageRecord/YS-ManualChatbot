@@ -222,8 +222,10 @@ export default function AdminPage() {
   const loadLog = async () => {
     try {
       const res = await fetch(`${BACKEND_URL}/api/admin/log`);
-      setLog(await res.json());
-    } catch { /* log is optional */ }
+      if (res.ok) setLog(await res.json());
+    } catch (e) {
+      console.error("Log fetch failed:", e);
+    }
   };
 
   useEffect(() => { load(); loadLog(); }, []);
@@ -328,11 +330,11 @@ export default function AdminPage() {
         <AnimatePresence>
           {showLog && (
             <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
+              initial={{ opacity: 0, y: -8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.2 }}
-              className="overflow-hidden mb-6"
+              className="mb-6"
             >
               <div className="bg-white/[0.03] border border-amber-500/20 rounded-2xl p-5">
                 <div className="flex items-center gap-2 mb-4">
