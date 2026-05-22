@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router";
 import { motion, AnimatePresence } from "motion/react";
 import { ArrowLeft, User, ChevronRight } from "lucide-react";
@@ -7,7 +7,15 @@ import logoImg from "../../imports/image.png";
 const BACKEND_URL = "http://localhost:3001";
 
 // ── Badan Penaja ──────────────────────────────────────────────────────────────
-const BADAN_PENAJA = [
+interface BPEntry {
+  label: string;
+  full: string;
+  keywords: string[];
+  query: string;
+  overviewId?: string;
+}
+
+const BADAN_PENAJA: BPEntry[] = [
   { label: "BKNS",      full: "Biasiswa Kerajaan Negeri Sabah",       keywords: ["bkns", "biasiswa kerajaan negeri"],         query: "Terangkan mengenai Biasiswa Kerajaan Negeri Sabah (BKNS) — jenis tajaan, kelayakan umum dan cara permohonan." },
   { label: "KYS",       full: "Kumpulan Yayasan Sabah",               keywords: ["kys", "kumpulan yayasan", "yayasan sabah"], query: "Terangkan mengenai Biasiswa Kumpulan Yayasan Sabah (KYS) — jenis tajaan, kelayakan umum dan cara permohonan." },
   { label: "MUIS",      full: "Majlis Ugama Islam Sabah",              keywords: ["muis", "dermasiswa", "ugama islam sabah"],  query: "Terangkan mengenai Dermasiswa Majlis Ugama Islam Sabah (MUIS) — jenis tajaan, kelayakan umum dan cara permohonan." },
@@ -16,10 +24,9 @@ const BADAN_PENAJA = [
   { label: "BUDI",      full: "Bantuan Tunai Pendaftaran IPT",         keywords: ["budi", "bantuan tunai", "pendaftaran ipt"], query: "Terangkan mengenai BUDI — Bantuan Tunai Pendaftaran IPT, termasuk kelayakan dan cara permohonan." },
 ];
 
-// Detect which Badan Penaja is referenced in a message using full name, label, or keywords
-function detectBPFromText(text: string): typeof BADAN_PENAJA[0] | null {
+function detectBPFromText(text: string, bpList: BPEntry[]): BPEntry | null {
   const lower = text.toLowerCase();
-  for (const bp of BADAN_PENAJA) {
+  for (const bp of bpList) {
     const terms = [bp.full, bp.label, ...bp.keywords];
     if (terms.some((t) => lower.includes(t.toLowerCase()))) return bp;
   }
@@ -28,24 +35,39 @@ function detectBPFromText(text: string): typeof BADAN_PENAJA[0] | null {
 
 const PILIH_PENAJA_LAIN = "__PILIH_PENAJA_LAIN__";
 
-// Topic chips shown after a Badan Penaja is selected
-function getTopicChips(bp: typeof BADAN_PENAJA[0]): QuickReply[] {
+const JENIS_ID_MAP: Record<string, string> = {
+  bkns:      "bkns-jenis-tajaan",
+  kys:       "kys-jenis-biasiswa",
+  muis:      "muis-jenis-dermasiswa",
+  baitulmal: "baitulmal-jenis-bantuan",
+  tsk:       "tsk-jenis-tajaan",
+  budi:      "budi-jenis-tajaan",
+};
+
+function getStandardChipIds(bp: BPEntry): string[] {
   const p = bp.label.toLowerCase();
-  const jenisIdMap: Record<string, string> = {
-    bkns:      "bkns-jenis-tajaan",
-    kys:       "kys-jenis-biasiswa",
-    muis:      "muis-jenis-dermasiswa",
-    baitulmal: "baitulmal-jenis-bantuan",
-    tsk:       "tsk-jenis-tajaan",
-    budi:      "budi-jenis-tajaan",
-  };
   return [
-    { label: "Jenis Tajaan / Bantuan", id: jenisIdMap[p],             query: `Apakah jenis-jenis tajaan atau bantuan untuk ${bp.full}?` },
+    `${p}-overview`,
+    JENIS_ID_MAP[p] ?? `${p}-jenis-tajaan`,
+    `${p}-eligibility`,
+    `${p}-how-to-apply`,
+    `${p}-documents`,
+    `${p}-allowance`,
+    `${p}-tarikh-permohonan`,
+  ];
+}
+
+// Topic chips shown after a Badan Penaja is selected
+function getTopicChips(bp: BPEntry, extras: QuickReply[] = []): QuickReply[] {
+  const p = bp.label.toLowerCase();
+  return [
+    { label: "Jenis Tajaan / Bantuan", id: JENIS_ID_MAP[p],           query: `Apakah jenis-jenis tajaan atau bantuan untuk ${bp.full}?` },
     { label: "Kelayakan & Syarat",     id: `${p}-eligibility`,        query: `Apakah kelayakan dan syarat untuk ${bp.full}?` },
     { label: "Cara Mohon",             id: `${p}-how-to-apply`,       query: `Bagaimana cara memohon ${bp.full}? Terangkan langkah-langkah permohonan.` },
     { label: "Dokumen Diperlukan",     id: `${p}-documents`,          query: `Apakah dokumen yang diperlukan untuk memohon ${bp.full}?` },
     { label: "Jumlah Elaun / Nilai",   id: `${p}-allowance`,          query: `Berapakah jumlah elaun atau nilai tajaan ${bp.full}?` },
     { label: "Tarikh Permohonan",      id: `${p}-tarikh-permohonan`,  query: `Bilakah tarikh permohonan ${bp.full} dibuka dan ditutup?` },
+    ...extras,
     { label: "↩ Pilih Penaja Lain",                                    query: PILIH_PENAJA_LAIN },
   ];
 }
@@ -76,7 +98,11 @@ const INITIAL_MESSAGE: Message = {
   role: "bot",
   text: "Selamat datang ke YS Chatbot! 👋\n\nSaya pembantu untuk maklumat tajaan dan pinjaman pendidikan di Sabah.\n\nSila pilih **Badan Penaja** yang ingin anda ketahui:",
   timestamp: new Date(),
-  quickReplies: BADAN_PENAJA.map((bp) => ({ label: bp.full, query: bp.query })),
+  quickReplies: BADAN_PENAJA.map((bp) => ({
+    label: bp.full,
+    query: bp.query,
+    id: `${bp.label.toLowerCase()}-overview`,
+  })),
 };
 
 // ── Sub-components ────────────────────────────────────────────────────────────
@@ -120,18 +146,55 @@ export default function ChatbotPage() {
   const [messages, setMessages] = useState<Message[]>([INITIAL_MESSAGE]);
   const [chatHistory, setChatHistory] = useState<ChatHistoryEntry[]>([]);
   const [isTyping, setIsTyping] = useState(false);
-  const [activeBP, setActiveBP] = useState<typeof BADAN_PENAJA[0] | null>(null);
+  const [activeBP, setActiveBP] = useState<BPEntry | null>(null);
+  const [bpList, setBpList] = useState<BPEntry[]>(BADAN_PENAJA);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () =>
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+
+  useEffect(() => {
+    fetch(`${BACKEND_URL}/api/chat/categories`)
+      .then((r) => (r.ok ? r.json() : Promise.reject()))
+      .then((cats: { category: string; overviewId: string | null }[]) => {
+        const merged: BPEntry[] = cats
+          .filter((c) => c.category)
+          .map(({ category, overviewId }) => {
+            const known = BADAN_PENAJA.find((bp) => bp.label === category);
+            if (known) return { ...known, overviewId: overviewId ?? `${known.label.toLowerCase()}-overview` };
+            return {
+              label: category,
+              full: category,
+              keywords: [category.toLowerCase()],
+              query: `Terangkan mengenai ${category} — jenis tajaan, kelayakan umum dan cara permohonan.`,
+              overviewId: overviewId ?? undefined,
+            };
+          });
+        setBpList(merged);
+        setMessages((prev) =>
+          prev.map((m) =>
+            m.id === "welcome"
+              ? {
+                  ...m,
+                  quickReplies: merged.map((bp) => ({
+                    label: bp.full,
+                    query: bp.query,
+                    id: bp.overviewId,
+                  })),
+                }
+              : m
+          )
+        );
+      })
+      .catch(() => {});
+  }, []);
 
   const sendMessage = async (text: string, qaId?: string) => {
     if (!text.trim() || isTyping) return;
 
     // Handle "Pilih Penaja Lain" client-side — no backend call needed
     if (text === PILIH_PENAJA_LAIN) {
-      const otherBPs = BADAN_PENAJA.filter((bp) => bp !== activeBP);
+      const otherBPs = bpList.filter((bp) => bp.label !== activeBP?.label);
       setActiveBP(null);
       setMessages((prev) => [
         ...prev,
@@ -141,16 +204,14 @@ export default function ChatbotPage() {
           role: "bot",
           text: "Baik! Sila pilih Badan Penaja lain yang ingin anda ketahui:",
           timestamp: new Date(),
-          quickReplies: otherBPs.map((bp) => ({ label: bp.full, query: bp.query })),
+          quickReplies: otherBPs.map((bp) => ({ label: bp.full, query: bp.query, id: bp.overviewId })),
         },
       ]);
       return;
     }
 
-    // Detect which BP this message is about from the text itself —
-    // avoids stale activeBP state polluting topic chips for free-text queries.
-    const matchedBP = BADAN_PENAJA.find((bp) => bp.query === text);
-    const currentBP = matchedBP ?? detectBPFromText(text);
+    const matchedBP = bpList.find((bp) => bp.query === text);
+    const currentBP = matchedBP ?? detectBPFromText(text, bpList);
     if (currentBP) setActiveBP(currentBP);
 
     const userMsg: Message = {
@@ -174,12 +235,26 @@ export default function ChatbotPage() {
       if (!res.ok) throw new Error("Backend error");
       const data = await res.json();
 
+      let extraChips: QuickReply[] = [];
+      if (currentBP) {
+        try {
+          const faqRes = await fetch(`${BACKEND_URL}/api/chat/faq/${currentBP.label}`);
+          if (faqRes.ok) {
+            const allEntries: { id: string; question: string }[] = await faqRes.json();
+            const standardIds = new Set(getStandardChipIds(currentBP));
+            extraChips = allEntries
+              .filter((e) => !standardIds.has(e.id))
+              .map((e) => ({ label: e.question, id: e.id, query: e.question }));
+          }
+        } catch { /* ignore */ }
+      }
+
       const botMsg: Message = {
         id: (Date.now() + 1).toString(),
         role: "bot",
         text: data.response,
         timestamp: new Date(),
-        quickReplies: currentBP ? getTopicChips(currentBP) : undefined,
+        quickReplies: currentBP ? getTopicChips(currentBP, extraChips) : undefined,
       };
 
       setMessages((prev) => [...prev, botMsg]);
@@ -194,7 +269,7 @@ export default function ChatbotPage() {
         role: "bot",
         text: "Maaf, berlaku masalah sambungan. Sila pastikan pelayan berjalan dan cuba semula.",
         timestamp: new Date(),
-        quickReplies: BADAN_PENAJA.map((bp) => ({ label: bp.full, query: bp.query })),
+        quickReplies: bpList.map((bp) => ({ label: bp.full, query: bp.query, id: bp.overviewId })),
       };
       setMessages((prev) => [...prev, errMsg]);
     } finally {

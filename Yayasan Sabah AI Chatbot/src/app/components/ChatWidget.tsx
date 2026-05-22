@@ -6,34 +6,55 @@ import logoImg from "../../imports/image.png";
 const BACKEND_URL = "http://localhost:3001";
 
 // ── Badan Penaja menu ─────────────────────────────────────────────────────────
-const BADAN_PENAJA = [
-  { label: "BKNS",      full: "Biasiswa Kerajaan Negeri Sabah",    id: "bkns-overview" },
-  { label: "KYS",       full: "Kumpulan Yayasan Sabah",            id: "kys-overview" },
-  { label: "MUIS",      full: "Majlis Ugama Islam Sabah",          id: "muis-overview" },
-  { label: "Baitulmal", full: "Perbadanan Baitulmal Negeri Sabah", id: "baitulmal-overview" },
-  { label: "TSK",       full: "Timbalan Setiausaha Kerajaan",      id: "tsk-overview" },
-  { label: "BUDI",      full: "Bantuan Tunai Pendaftaran IPT",     id: "budi-overview" },
+interface BPEntry {
+  label: string;
+  full: string;
+  overviewId: string;
+}
+
+const BADAN_PENAJA: BPEntry[] = [
+  { label: "BKNS",      full: "Biasiswa Kerajaan Negeri Sabah",    overviewId: "bkns-overview" },
+  { label: "KYS",       full: "Kumpulan Yayasan Sabah",            overviewId: "kys-overview" },
+  { label: "MUIS",      full: "Majlis Ugama Islam Sabah",          overviewId: "muis-overview" },
+  { label: "Baitulmal", full: "Perbadanan Baitulmal Negeri Sabah", overviewId: "baitulmal-overview" },
+  { label: "TSK",       full: "Timbalan Setiausaha Kerajaan",      overviewId: "tsk-overview" },
+  { label: "BUDI",      full: "Bantuan Tunai Pendaftaran IPT",     overviewId: "budi-overview" },
 ];
 
 const BACK_TO_MENU = "__BACK_TO_MENU__";
 
-function getTopicChips(bp: typeof BADAN_PENAJA[0]): Chip[] {
+const JENIS_ID_MAP: Record<string, string> = {
+  bkns:      "bkns-jenis-tajaan",
+  kys:       "kys-jenis-biasiswa",
+  muis:      "muis-jenis-dermasiswa",
+  baitulmal: "baitulmal-jenis-bantuan",
+  tsk:       "tsk-jenis-tajaan",
+  budi:      "budi-jenis-tajaan",
+};
+
+function getStandardChipIds(bp: typeof BADAN_PENAJA[0]): string[] {
   const p = bp.label.toLowerCase();
-  const jenisIdMap: Record<string, string> = {
-    bkns:      "bkns-jenis-tajaan",
-    kys:       "kys-jenis-biasiswa",
-    muis:      "muis-jenis-dermasiswa",
-    baitulmal: "baitulmal-jenis-bantuan",
-    tsk:       "tsk-jenis-tajaan",
-    budi:      "budi-jenis-tajaan",
-  };
   return [
-    { label: "Jenis Tajaan / Bantuan", qaId: jenisIdMap[p] },
+    `${p}-overview`,
+    JENIS_ID_MAP[p] ?? `${p}-jenis-tajaan`,
+    `${p}-eligibility`,
+    `${p}-how-to-apply`,
+    `${p}-documents`,
+    `${p}-allowance`,
+    `${p}-tarikh-permohonan`,
+  ];
+}
+
+function getTopicChips(bp: typeof BADAN_PENAJA[0], extras: Chip[] = []): Chip[] {
+  const p = bp.label.toLowerCase();
+  return [
+    { label: "Jenis Tajaan / Bantuan", qaId: JENIS_ID_MAP[p] },
     { label: "Kelayakan & Syarat",     qaId: `${p}-eligibility` },
     { label: "Cara Mohon",             qaId: `${p}-how-to-apply` },
     { label: "Dokumen Diperlukan",     qaId: `${p}-documents` },
     { label: "Jumlah Elaun / Nilai",   qaId: `${p}-allowance` },
     { label: "Tarikh Permohonan",      qaId: `${p}-tarikh-permohonan` },
+    ...extras,
     { label: "↩ Menu Utama",           action: BACK_TO_MENU },
   ];
 }
@@ -54,12 +75,12 @@ interface Message {
 }
 
 // ── Welcome message ───────────────────────────────────────────────────────────
-const makeWelcomeMessage = (): Message => ({
+const makeWelcomeMessage = (bpList: BPEntry[] = BADAN_PENAJA): Message => ({
   id: "welcome",
   role: "bot",
   text: "Selamat datang ke **Pusat Maklumat Tajaan YS**! 👋\n\nSaya sedia membantu anda mendapatkan maklumat mengenai tajaan dan pinjaman pendidikan di Sabah.\n\nSila pilih **Badan Penaja** di bawah:",
   timestamp: new Date(),
-  chips: BADAN_PENAJA.map((bp) => ({ label: bp.full, qaId: bp.id })),
+  chips: bpList.map((bp) => ({ label: bp.full, qaId: bp.overviewId })),
 });
 
 // ── Format markdown-style bold ────────────────────────────────────────────────
@@ -105,30 +126,47 @@ export function ChatWidget() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>(() => [makeWelcomeMessage()]);
   const [isTyping, setIsTyping] = useState(false);
-  const [activeBP, setActiveBP] = useState<typeof BADAN_PENAJA[0] | null>(null);
+  const [activeBP, setActiveBP] = useState<BPEntry | null>(null);
+  const [bpList, setBpList] = useState<BPEntry[]>(BADAN_PENAJA);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () =>
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
 
   useEffect(() => {
+    fetch(`${BACKEND_URL}/api/chat/categories`)
+      .then((r) => (r.ok ? r.json() : Promise.reject()))
+      .then((cats: { category: string; overviewId: string | null }[]) => {
+        const merged: BPEntry[] = cats
+          .filter((c) => c.category && c.overviewId)
+          .map(({ category, overviewId }) => {
+            const known = BADAN_PENAJA.find((bp) => bp.label === category);
+            return known ?? { label: category, full: category, overviewId: overviewId! };
+          });
+        setBpList(merged);
+        setMessages((prev) =>
+          prev.map((m) => (m.id === "welcome" ? makeWelcomeMessage(merged) : m))
+        );
+      })
+      .catch(() => {});
+  }, []);
+
+  useEffect(() => {
     if (isOpen) setTimeout(scrollToBottom, 100);
   }, [messages, isOpen]);
 
   const resetChat = () => {
-    setMessages([makeWelcomeMessage()]);
+    setMessages([makeWelcomeMessage(bpList)]);
     setActiveBP(null);
   };
 
-  const handleChipClick = (chip: Chip, sourceMessageId: string) => {
+  const handleChipClick = async (chip: Chip, sourceMessageId: string) => {
     if (isTyping) return;
 
-    // Clear chips from the source message immediately
     setMessages((prev) =>
       prev.map((m) => m.id === sourceMessageId ? { ...m, chips: undefined } : m)
     );
 
-    // Back-to-menu — handled client-side
     if (chip.action === BACK_TO_MENU) {
       setActiveBP(null);
       setMessages((prev) => [
@@ -139,7 +177,7 @@ export function ChatWidget() {
           role: "bot",
           text: "Baik! Sila pilih Badan Penaja yang ingin anda ketahui:",
           timestamp: new Date(),
-          chips: BADAN_PENAJA.map((bp) => ({ label: bp.full, qaId: bp.id })),
+          chips: bpList.map((bp) => ({ label: bp.full, qaId: bp.overviewId })),
         },
       ]);
       return;
@@ -147,53 +185,65 @@ export function ChatWidget() {
 
     if (!chip.qaId) return;
 
-    const userMsg: Message = {
-      id: Date.now().toString(),
-      role: "user",
-      text: chip.label,
-      timestamp: new Date(),
-    };
-    setMessages((prev) => [...prev, userMsg]);
+    setMessages((prev) => [
+      ...prev,
+      { id: Date.now().toString(), role: "user", text: chip.label, timestamp: new Date() },
+    ]);
     setIsTyping(true);
 
-    fetch(`${BACKEND_URL}/api/chat`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ id: chip.qaId }),
-    })
-      .then((res) => {
-        if (!res.ok) throw new Error("Backend error");
-        return res.json();
-      })
-      .then((data) => {
-        const matchedBP = BADAN_PENAJA.find((bp) => bp.label === data.category) ?? null;
-        if (matchedBP) setActiveBP(matchedBP);
-        const currentBP = matchedBP ?? activeBP;
+    try {
+      const res = await fetch(`${BACKEND_URL}/api/chat`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: chip.qaId }),
+      });
+      if (!res.ok) throw new Error("Backend error");
+      const data = await res.json();
 
-        const botMsg: Message = {
+      const matchedBP = bpList.find((bp) => bp.label === data.category) ?? null;
+      if (matchedBP) setActiveBP(matchedBP);
+      const currentBP = matchedBP ?? activeBP;
+
+      let extraChips: Chip[] = [];
+      if (currentBP) {
+        try {
+          const faqRes = await fetch(`${BACKEND_URL}/api/chat/faq/${currentBP.label}`);
+          if (faqRes.ok) {
+            const allEntries: { id: string; question: string }[] = await faqRes.json();
+            const standardIds = new Set(getStandardChipIds(currentBP));
+            extraChips = allEntries
+              .filter((e) => !standardIds.has(e.id))
+              .map((e) => ({ label: e.question, qaId: e.id }));
+          }
+        } catch { /* ignore */ }
+      }
+
+      setMessages((prev) => [
+        ...prev,
+        {
           id: (Date.now() + 1).toString(),
           role: "bot",
           text: data.response,
           timestamp: new Date(),
           chips: currentBP
-            ? getTopicChips(currentBP)
-            : BADAN_PENAJA.map((bp) => ({ label: bp.full, qaId: bp.id })),
-        };
-        setMessages((prev) => [...prev, botMsg]);
-      })
-      .catch(() => {
-        setMessages((prev) => [
-          ...prev,
-          {
-            id: (Date.now() + 1).toString(),
-            role: "bot",
-            text: "Maaf, berlaku masalah sambungan. Sila cuba sebentar lagi.",
-            timestamp: new Date(),
-            chips: BADAN_PENAJA.map((bp) => ({ label: bp.full, qaId: bp.id })),
-          },
-        ]);
-      })
-      .finally(() => setIsTyping(false));
+            ? getTopicChips(currentBP, extraChips)
+            : bpList.map((bp) => ({ label: bp.full, qaId: bp.overviewId })),
+        },
+      ]);
+    } catch {
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: (Date.now() + 1).toString(),
+          role: "bot",
+          text: "Maaf, berlaku masalah sambungan. Sila cuba sebentar lagi.",
+          timestamp: new Date(),
+          chips: bpList.map((bp) => ({ label: bp.full, qaId: bp.overviewId })),
+        },
+      ]);
+    } finally {
+      setIsTyping(false);
+    }
   };
 
   return (
