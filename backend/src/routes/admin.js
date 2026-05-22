@@ -1,12 +1,17 @@
 import express from "express";
-import { readFileSync, writeFileSync, existsSync } from "fs";
+import {
+  readFileSync, writeFileSync, existsSync,
+  copyFileSync, mkdirSync, readdirSync, unlinkSync,
+} from "fs";
 import { fileURLToPath } from "url";
 import path from "path";
 import { randomUUID } from "crypto";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const QA_PATH  = path.join(__dirname, "../data/qa.json");
-const LOG_PATH = path.join(__dirname, "../data/log.json");
+const QA_PATH       = path.join(__dirname, "../data/qa.json");
+const LOG_PATH      = path.join(__dirname, "../data/log.json");
+const SNAPSHOT_DIR  = path.join(__dirname, "../data/snapshots");
+const MAX_SNAPSHOTS = 20;
 
 const router = express.Router();
 
@@ -14,7 +19,26 @@ function loadQA() {
   return JSON.parse(readFileSync(QA_PATH, "utf-8"));
 }
 
+function saveSnapshot() {
+  try {
+    if (!existsSync(SNAPSHOT_DIR)) mkdirSync(SNAPSHOT_DIR, { recursive: true });
+    const filename = `qa.${Date.now()}.json`;
+    copyFileSync(QA_PATH, path.join(SNAPSHOT_DIR, filename));
+
+    // Prune oldest snapshots beyond MAX_SNAPSHOTS
+    const files = readdirSync(SNAPSHOT_DIR)
+      .filter((f) => f.startsWith("qa.") && f.endsWith(".json"))
+      .sort();
+    for (const old of files.slice(0, Math.max(0, files.length - MAX_SNAPSHOTS))) {
+      unlinkSync(path.join(SNAPSHOT_DIR, old));
+    }
+  } catch (e) {
+    console.error("Failed to save snapshot:", e);
+  }
+}
+
 function saveQA(data) {
+  saveSnapshot();
   writeFileSync(QA_PATH, JSON.stringify(data, null, 2), "utf-8");
 }
 
@@ -48,6 +72,49 @@ router.get("/qa", (req, res) => {
 // GET /api/admin/log — action history
 router.get("/log", (req, res) => {
   res.json(loadLog());
+});
+
+// GET /api/admin/snapshots — list available snapshots (newest first)
+router.get("/snapshots", (req, res) => {
+  try {
+    if (!existsSync(SNAPSHOT_DIR)) return res.json([]);
+    const files = readdirSync(SNAPSHOT_DIR)
+      .filter((f) => f.startsWith("qa.") && f.endsWith(".json"))
+      .sort()
+      .reverse();
+
+    const snapshots = files.map((filename) => {
+      const ts = parseInt(filename.replace("qa.", "").replace(".json", ""), 10);
+      const data = JSON.parse(readFileSync(path.join(SNAPSHOT_DIR, filename), "utf-8"));
+      return {
+        filename,
+        timestamp: new Date(ts).toISOString(),
+        entryCount: data.length,
+      };
+    });
+    res.json(snapshots);
+  } catch (e) {
+    res.status(500).json({ error: "Failed to read snapshots" });
+  }
+});
+
+// POST /api/admin/snapshots/:filename/restore — restore a snapshot
+router.post("/snapshots/:filename/restore", (req, res) => {
+  const { filename } = req.params;
+  if (!filename.startsWith("qa.") || !filename.endsWith(".json") || filename.includes("/")) {
+    return res.status(400).json({ error: "Invalid snapshot filename" });
+  }
+  const src = path.join(SNAPSHOT_DIR, filename);
+  if (!existsSync(src)) return res.status(404).json({ error: "Snapshot not found" });
+
+  try {
+    saveSnapshot(); // snapshot current state before overwriting
+    copyFileSync(src, QA_PATH);
+    const restored = loadQA();
+    res.json({ success: true, entryCount: restored.length });
+  } catch (e) {
+    res.status(500).json({ error: "Failed to restore snapshot" });
+  }
 });
 
 // POST /api/admin/qa — create new entry

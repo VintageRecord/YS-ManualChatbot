@@ -4,3 +4,4 @@ dist/
 .env.local
 *.local
 backend/src/data/log.json
+backend/src/data/snapshots/
