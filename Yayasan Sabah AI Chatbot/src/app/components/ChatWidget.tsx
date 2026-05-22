@@ -6,13 +6,19 @@ import logoImg from "../../imports/image.png";
 const BACKEND_URL = "http://localhost:3001";
 
 // ── Badan Penaja menu ─────────────────────────────────────────────────────────
-const BADAN_PENAJA = [
-  { label: "BKNS",      full: "Biasiswa Kerajaan Negeri Sabah",    id: "bkns-overview" },
-  { label: "KYS",       full: "Kumpulan Yayasan Sabah",            id: "kys-overview" },
-  { label: "MUIS",      full: "Majlis Ugama Islam Sabah",          id: "muis-overview" },
-  { label: "Baitulmal", full: "Perbadanan Baitulmal Negeri Sabah", id: "baitulmal-overview" },
-  { label: "TSK",       full: "Timbalan Setiausaha Kerajaan",      id: "tsk-overview" },
-  { label: "BUDI",      full: "Bantuan Tunai Pendaftaran IPT",     id: "budi-overview" },
+interface BPEntry {
+  label: string;
+  full: string;
+  overviewId: string;
+}
+
+const BADAN_PENAJA: BPEntry[] = [
+  { label: "BKNS",      full: "Biasiswa Kerajaan Negeri Sabah",    overviewId: "bkns-overview" },
+  { label: "KYS",       full: "Kumpulan Yayasan Sabah",            overviewId: "kys-overview" },
+  { label: "MUIS",      full: "Majlis Ugama Islam Sabah",          overviewId: "muis-overview" },
+  { label: "Baitulmal", full: "Perbadanan Baitulmal Negeri Sabah", overviewId: "baitulmal-overview" },
+  { label: "TSK",       full: "Timbalan Setiausaha Kerajaan",      overviewId: "tsk-overview" },
+  { label: "BUDI",      full: "Bantuan Tunai Pendaftaran IPT",     overviewId: "budi-overview" },
 ];
 
 const BACK_TO_MENU = "__BACK_TO_MENU__";
@@ -69,12 +75,12 @@ interface Message {
 }
 
 // ── Welcome message ───────────────────────────────────────────────────────────
-const makeWelcomeMessage = (): Message => ({
+const makeWelcomeMessage = (bpList: BPEntry[] = BADAN_PENAJA): Message => ({
   id: "welcome",
   role: "bot",
   text: "Selamat datang ke **Pusat Maklumat Tajaan YS**! 👋\n\nSaya sedia membantu anda mendapatkan maklumat mengenai tajaan dan pinjaman pendidikan di Sabah.\n\nSila pilih **Badan Penaja** di bawah:",
   timestamp: new Date(),
-  chips: BADAN_PENAJA.map((bp) => ({ label: bp.full, qaId: bp.id })),
+  chips: bpList.map((bp) => ({ label: bp.full, qaId: bp.overviewId })),
 });
 
 // ── Format markdown-style bold ────────────────────────────────────────────────
@@ -120,18 +126,37 @@ export function ChatWidget() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>(() => [makeWelcomeMessage()]);
   const [isTyping, setIsTyping] = useState(false);
-  const [activeBP, setActiveBP] = useState<typeof BADAN_PENAJA[0] | null>(null);
+  const [activeBP, setActiveBP] = useState<BPEntry | null>(null);
+  const [bpList, setBpList] = useState<BPEntry[]>(BADAN_PENAJA);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () =>
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
 
   useEffect(() => {
+    fetch(`${BACKEND_URL}/api/chat/categories`)
+      .then((r) => (r.ok ? r.json() : Promise.reject()))
+      .then((cats: { category: string; overviewId: string | null }[]) => {
+        const merged: BPEntry[] = cats
+          .filter((c) => c.category && c.overviewId)
+          .map(({ category, overviewId }) => {
+            const known = BADAN_PENAJA.find((bp) => bp.label === category);
+            return known ?? { label: category, full: category, overviewId: overviewId! };
+          });
+        setBpList(merged);
+        setMessages((prev) =>
+          prev.map((m) => (m.id === "welcome" ? makeWelcomeMessage(merged) : m))
+        );
+      })
+      .catch(() => {});
+  }, []);
+
+  useEffect(() => {
     if (isOpen) setTimeout(scrollToBottom, 100);
   }, [messages, isOpen]);
 
   const resetChat = () => {
-    setMessages([makeWelcomeMessage()]);
+    setMessages([makeWelcomeMessage(bpList)]);
     setActiveBP(null);
   };
 
@@ -152,7 +177,7 @@ export function ChatWidget() {
           role: "bot",
           text: "Baik! Sila pilih Badan Penaja yang ingin anda ketahui:",
           timestamp: new Date(),
-          chips: BADAN_PENAJA.map((bp) => ({ label: bp.full, qaId: bp.id })),
+          chips: bpList.map((bp) => ({ label: bp.full, qaId: bp.overviewId })),
         },
       ]);
       return;
@@ -175,7 +200,7 @@ export function ChatWidget() {
       if (!res.ok) throw new Error("Backend error");
       const data = await res.json();
 
-      const matchedBP = BADAN_PENAJA.find((bp) => bp.label === data.category) ?? null;
+      const matchedBP = bpList.find((bp) => bp.label === data.category) ?? null;
       if (matchedBP) setActiveBP(matchedBP);
       const currentBP = matchedBP ?? activeBP;
 
@@ -202,7 +227,7 @@ export function ChatWidget() {
           timestamp: new Date(),
           chips: currentBP
             ? getTopicChips(currentBP, extraChips)
-            : BADAN_PENAJA.map((bp) => ({ label: bp.full, qaId: bp.id })),
+            : bpList.map((bp) => ({ label: bp.full, qaId: bp.overviewId })),
         },
       ]);
     } catch {
@@ -213,7 +238,7 @@ export function ChatWidget() {
           role: "bot",
           text: "Maaf, berlaku masalah sambungan. Sila cuba sebentar lagi.",
           timestamp: new Date(),
-          chips: BADAN_PENAJA.map((bp) => ({ label: bp.full, qaId: bp.id })),
+          chips: bpList.map((bp) => ({ label: bp.full, qaId: bp.overviewId })),
         },
       ]);
     } finally {

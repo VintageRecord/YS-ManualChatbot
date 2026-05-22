@@ -105,4 +105,23 @@ router.get("/faq/:category", (req, res) => {
   res.json(items);
 });
 
+// GET /api/chat/categories — all distinct categories with their best entry ID
+router.get("/categories", (req, res) => {
+  const qaList = loadQA();
+  const seen = new Set();
+  const result = [];
+  for (const qa of qaList) {
+    if (!qa.category || seen.has(qa.category)) continue;
+    seen.add(qa.category);
+    const overviewId = `${qa.category.toLowerCase()}-overview`;
+    const overviewEntry = qaList.find((q) => q.category === qa.category && q.id === overviewId);
+    const firstEntry = qaList.find((q) => q.category === qa.category);
+    result.push({
+      category: qa.category,
+      overviewId: (overviewEntry ?? firstEntry)?.id ?? null,
+    });
+  }
+  res.json(result);
+});
+
 export default router;
