@@ -98,13 +98,11 @@ function TagInput({
 // ── Form modal ────────────────────────────────────────────────────────────────
 function QAForm({
   initial,
-  allIds,
   onSave,
   onCancel,
   saving,
 }: {
   initial: Omit<QAEntry, "id"> & { id?: string };
-  allIds: { id: string; question: string }[];
   onSave: (data: Omit<QAEntry, "id">) => void;
   onCancel: () => void;
   saving: boolean;
@@ -171,35 +169,6 @@ function QAForm({
         tags={form.keywords}
         onChange={(t) => set("keywords", t)}
       />
-
-      {/* Follow-ups */}
-      <div>
-        <label className="block text-white/50 text-xs mb-1.5">ID Soalan Susulan</label>
-        <div className="space-y-1 max-h-36 overflow-y-auto pr-1">
-          {allIds
-            .filter((e) => e.id !== (initial as QAEntry).id)
-            .map((e) => (
-              <label key={e.id} className="flex items-start gap-2 cursor-pointer group">
-                <input
-                  type="checkbox"
-                  checked={form.followUps.includes(e.id)}
-                  onChange={(ev) =>
-                    set(
-                      "followUps",
-                      ev.target.checked
-                        ? [...form.followUps, e.id]
-                        : form.followUps.filter((x) => x !== e.id)
-                    )
-                  }
-                  className="mt-0.5 accent-[#1a56db]"
-                />
-                <span className="text-white/50 text-xs group-hover:text-white/70 transition-colors line-clamp-1">
-                  {e.question}
-                </span>
-              </label>
-            ))}
-        </div>
-      </div>
 
       {/* Actions */}
       <div className="flex gap-2 pt-1">
@@ -306,7 +275,6 @@ export default function AdminPage() {
     }
   };
 
-  const allIds = entries.map((e) => ({ id: e.id, question: e.question }));
   const cats = ["Semua", ...CATEGORIES];
   const filtered = filterCat === "Semua" ? entries : entries.filter((e) => e.category === filterCat);
 
@@ -427,7 +395,6 @@ export default function AdminPage() {
                 <h3 className="text-white font-semibold mb-4">Tambah Entri Baharu</h3>
                 <QAForm
                   initial={emptyForm()}
-                  allIds={allIds}
                   onSave={createEntry}
                   onCancel={() => setShowAddForm(false)}
                   saving={saving}
@@ -488,7 +455,6 @@ export default function AdminPage() {
                     <h3 className="text-white font-semibold text-sm mb-4">Edit Entri</h3>
                     <QAForm
                       initial={entry}
-                      allIds={allIds}
                       onSave={(data) => updateEntry(entry.id, data)}
                       onCancel={() => setEditingId(null)}
                       saving={saving}
