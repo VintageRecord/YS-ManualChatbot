@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "motion/react";
 import {
   Plus, Trash2, Pencil, X, Check, ArrowLeft,
   MessageSquare, Loader2, RefreshCw, ChevronDown, ChevronUp, Clock,
+  History, RotateCcw,
 } from "lucide-react";
 import { useNavigate } from "react-router";
 
@@ -25,6 +26,12 @@ interface LogEntry {
   entryId: string;
   question: string;
   category: string;
+}
+
+interface SnapshotEntry {
+  filename: string;
+  timestamp: string;
+  entryCount: number;
 }
 
 const emptyForm = (): Omit<QAEntry, "id"> => ({
@@ -212,6 +219,10 @@ export default function AdminPage() {
   const [confirmDeleteId, setConfirmDeleteId] = useState<string | null>(null);
   const [log, setLog] = useState<LogEntry[]>([]);
   const [showLog, setShowLog] = useState(false);
+  const [snapshots, setSnapshots] = useState<SnapshotEntry[]>([]);
+  const [showSnapshots, setShowSnapshots] = useState(false);
+  const [confirmRestoreFile, setConfirmRestoreFile] = useState<string | null>(null);
+  const [restoring, setRestoring] = useState(false);
 
   const load = async () => {
     setLoading(true);
@@ -234,7 +245,33 @@ export default function AdminPage() {
     }
   };
 
-  useEffect(() => { load(); loadLog(); }, []);
+  const loadSnapshots = async () => {
+    try {
+      const res = await fetch(`${BACKEND_URL}/api/admin/snapshots`);
+      if (res.ok) setSnapshots(await res.json());
+    } catch (e) {
+      console.error("Snapshots fetch failed:", e);
+    }
+  };
+
+  const restoreSnapshot = async (filename: string) => {
+    setRestoring(true);
+    setConfirmRestoreFile(null);
+    try {
+      const res = await fetch(`${BACKEND_URL}/api/admin/snapshots/${filename}/restore`, {
+        method: "POST",
+      });
+      if (res.ok) {
+        await load();
+        await loadSnapshots();
+        await loadLog();
+      }
+    } finally {
+      setRestoring(false);
+    }
+  };
+
+  useEffect(() => { load(); loadLog(); loadSnapshots(); }, []);
 
   const createEntry = async (data: Omit<QAEntry, "id">) => {
     setSaving(true);
@@ -324,6 +361,17 @@ export default function AdminPage() {
               <span className="hidden sm:inline">Sejarah</span>
             </button>
             <button
+              onClick={() => setShowSnapshots((v) => !v)}
+              className={`flex items-center gap-1.5 px-3 py-1.5 border rounded-lg text-sm transition-colors ${
+                showSnapshots
+                  ? "bg-violet-500/15 border-violet-500/30 text-violet-400"
+                  : "bg-white/5 border border-white/10 text-white/40 hover:text-white/70"
+              }`}
+            >
+              <History className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">Snapshot</span>
+            </button>
+            <button
               onClick={load}
               disabled={loading}
               className="flex items-center gap-1.5 px-3 py-1.5 bg-white/5 border border-white/10 rounded-lg text-white/40 hover:text-white/70 text-sm transition-colors disabled:opacity-40"
@@ -376,6 +424,75 @@ export default function AdminPage() {
                             <p className="text-white/30 text-[10px]">{dateStr}</p>
                             <p className="text-white/20 text-[10px]">{timeStr}</p>
                           </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Snapshot panel */}
+        <AnimatePresence>
+          {showSnapshots && (
+            <motion.div
+              initial={{ opacity: 0, y: -8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.2 }}
+              className="mb-6"
+            >
+              <div className="bg-white/[0.03] border border-violet-500/20 rounded-2xl p-5">
+                <div className="flex items-center gap-2 mb-4">
+                  <History className="w-4 h-4 text-violet-400" />
+                  <h3 className="text-white font-semibold text-sm">Snapshot Data</h3>
+                  <span className="ml-auto text-white/30 text-xs">{snapshots.length} / 20 snapshot</span>
+                </div>
+                <p className="text-white/30 text-xs mb-4">
+                  Snapshot disimpan secara automatik sebelum setiap perubahan. Klik <strong className="text-white/50">Pulihkan</strong> untuk kembali ke versi tersebut.
+                </p>
+                {snapshots.length === 0 ? (
+                  <p className="text-white/30 text-xs text-center py-4">Tiada snapshot lagi — buat atau edit entri untuk menjana snapshot pertama</p>
+                ) : (
+                  <div className="space-y-2 max-h-72 overflow-y-auto pr-1">
+                    {snapshots.map((snap) => {
+                      const dt = new Date(snap.timestamp);
+                      const dateStr = dt.toLocaleDateString("ms-MY", { day: "2-digit", month: "short", year: "numeric" });
+                      const timeStr = dt.toLocaleTimeString("ms-MY", { hour: "2-digit", minute: "2-digit", second: "2-digit" });
+                      return (
+                        <div key={snap.filename} className="flex items-center gap-3 py-2 border-b border-white/5 last:border-0">
+                          <div className="flex-1 min-w-0">
+                            <p className="text-white/70 text-xs">{dateStr} · {timeStr}</p>
+                            <p className="text-white/30 text-[10px] mt-0.5">{snap.entryCount} entri</p>
+                          </div>
+                          {confirmRestoreFile === snap.filename ? (
+                            <div className="flex items-center gap-1.5 flex-shrink-0">
+                              <span className="text-white/40 text-xs">Pulihkan?</span>
+                              <button
+                                onClick={() => restoreSnapshot(snap.filename)}
+                                disabled={restoring}
+                                className="px-2 py-0.5 rounded bg-violet-500/20 hover:bg-violet-500/35 border border-violet-500/40 text-violet-400 text-xs transition-all disabled:opacity-50"
+                              >
+                                {restoring ? <Loader2 className="w-3 h-3 animate-spin" /> : "Ya"}
+                              </button>
+                              <button
+                                onClick={() => setConfirmRestoreFile(null)}
+                                className="px-2 py-0.5 rounded bg-white/5 hover:bg-white/10 border border-white/10 text-white/50 text-xs transition-all"
+                              >
+                                Tidak
+                              </button>
+                            </div>
+                          ) : (
+                            <button
+                              onClick={() => setConfirmRestoreFile(snap.filename)}
+                              className="flex items-center gap-1 px-2.5 py-1 rounded-lg bg-white/5 hover:bg-violet-500/15 border border-white/10 hover:border-violet-500/30 text-white/40 hover:text-violet-400 text-xs transition-all flex-shrink-0"
+                            >
+                              <RotateCcw className="w-3 h-3" />
+                              Pulihkan
+                            </button>
+                          )}
                         </div>
                       );
                     })}
